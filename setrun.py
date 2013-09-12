@@ -11,6 +11,7 @@ import os
 import numpy
 
 import clawpack.clawutil.data as data
+import clawpack.geoclaw.surge as surge
 
 #------------------------------
 def setrun(claw_pkg='geoclaw'):
@@ -84,7 +85,7 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.num_eqn = 3
 
     # Number of auxiliary variables in the aux array (initialized in setaux)
-    clawdata.num_aux = 3
+    clawdata.num_aux = 4
 
     # Index of aux array corresponding to capacity function, if there is one:
     clawdata.capa_index = 2
@@ -140,7 +141,7 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.output_format == 'ascii'      # 'ascii' or 'netcdf' 
 
     clawdata.output_q_components = 'all'   # need all
-    clawdata.output_aux_components = 'none'  # eta=h+B is in q
+    clawdata.output_aux_components = 4  # eta=h+B is in q
     clawdata.output_aux_onlyonce = False    # output aux arrays each frame
 
 
@@ -394,18 +395,19 @@ def setgeo(rundata):
     topo_data = rundata.topo_data
     # for topography, append lines of the form
     #   [topotype, minlevel, maxlevel, t1, t2, fname]
-    topodir = os.path.expandvars('$SRC/tohoku2011-paper1/')
-    topo_data.topofiles.append([3, 1, 1, 0., 1.e10, \
-                              topodir+'etopo1min139E147E34N41N.asc'])
-    topo_data.topofiles.append([3, 1, 1, 0., 1.e10, \
-                              topodir+'etopo4min120E72W40S60N.asc'])
+    topodir = os.path.expandvars('$SRC/tohoku2011-paper1/topo')
+    topo_data.topofiles.append([3, 1, 1, 0., 1.e10,
+                           os.path.join(topodir,'etopo1min139E147E34N41N.asc')])
+    topo_data.topofiles.append([3, 1, 1, 0., 1.e10,
+                            os.path.join(topodir,'etopo4min120E72W40S60N.asc')])
 
     # == setdtopo.data values ==
     dtopo_data = rundata.dtopo_data
     # for moving topography, append lines of the form:  (<= 1 allowed for now!)
     #   [topotype, minlevel,maxlevel,fname]
     dtopodir = os.path.expandvars('$SRC/tohoku2011-paper1/sources/')
-    dtopo_data.dtopofiles.append([1,4,4,dtopodir+'pmelWei.txydz'])
+    dtopo_data.dtopofiles.append([1, 4, 4,
+                                       os.path.join(dtopodir, 'Ammon.txydz')])
 
 
     # == setqinit.data values ==
@@ -425,6 +427,22 @@ def setgeo(rundata):
     # ----------------------
 
 
+def set_friction(rundata):
+
+    data = rundata.frictiondata
+
+    # Variable friction
+    data.variable_friction = True
+
+    # Region based friction
+    # Entire domain
+    data.friction_regions.append([rundata.clawdata.lower, 
+                                  rundata.clawdata.upper,
+                                  [numpy.infty,0.0,-numpy.infty],
+                                  [0.030, 0.022]])
+
+    return data
+
 
 if __name__ == '__main__':
     # Set up run-time parameters and write all data files.
@@ -433,6 +451,9 @@ if __name__ == '__main__':
 	rundata = setrun(sys.argv[1])
     else:
 	rundata = setrun()
+
+    rundata.add_data(surge.data.FrictionData(),'frictiondata')
+    set_friction(rundata)
 
     rundata.write()
 

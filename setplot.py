@@ -7,19 +7,24 @@ function setplot is called to set the plot parameters.
     
 """ 
 
-from pyclaw.geotools import topotools
-from pyclaw.data import Data
-import pylab
+import os
 import glob
 
-import os
+import numpy
 
-outdir2 = None
-#outdir2 = os.path.abspath('_output_t1')
+import clawpack.visclaw.colormaps as colormaps
+import clawpack.visclaw.geoplot as geoplot
+import clawpack.visclaw.gaugetools as gaugetools
+
+import clawpack.clawutil.data as data
+import clawpack.geoclaw.surge as surge
+
+# Grab dart data
+dart_data_path = os.path.expandvars("$SRC/tohoku2011-paper1/dart/")
 
 dartdata = {}
 for gaugeno in [21401, 21413, 21414, 21415,  21418, 21419, 51407, 52402]:
-    files = glob.glob('../%s*_notide.txt' % gaugeno)
+    files = glob.glob(os.path.join(dart_data_path, '%s*_notide.txt' % gaugeno))
     if len(files) != 1:
         print "*** Warning: found %s files for gauge number %s" \
                    % (len(files),gaugeno)
@@ -27,7 +32,7 @@ for gaugeno in [21401, 21413, 21414, 21415,  21418, 21419, 51407, 52402]:
         #           % (len(files),gaugeno)   )
     try:
         fname = files[0]
-        dartdata[gaugeno] = pylab.loadtxt(fname)
+        dartdata[gaugeno] = numpy.loadtxt(fname)
     except:
         pass
 
@@ -53,18 +58,19 @@ def setplot(plotdata):
     
     """ 
 
-
-    from pyclaw.plotters import colormaps, geoplot
-    from numpy import linspace
-
     plotdata.clearfigures()  # clear any old figures,axes,items data
+
+    # Import useful run data
+    clawdata = data.ClawInputData(2)
+    clawdata.read(os.path.join(plotdata.outdir, 'claw.data'))
+    friction_data = surge.data.FrictionData()
+    friction_data.read(os.path.join(plotdata.outdir, 'friction.data'))
 
 
     # To plot gauge locations on pcolor or contour plot, use this as
     # an afteraxis function:
 
     def addgauges(current_data):
-        from pyclaw.plotters import gaugetools
         gaugetools.plot_gauge_locations(current_data.plotdata, \
              gaugenos='all', format_string='ko', add_labels=True)
     
@@ -103,8 +109,8 @@ def setplot(plotdata):
     plotitem.pcolor_cmin = -0.1
     plotitem.pcolor_cmax = 0.1
     plotitem.add_colorbar = True
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.gridedges_show = 0
+    plotitem.amr_celledges_show = [0,0,0]
+    plotitem.patchedges_show = 0
 
     # Land
     plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
@@ -113,8 +119,8 @@ def setplot(plotdata):
     plotitem.pcolor_cmin = 0.0
     plotitem.pcolor_cmax = 100.0
     plotitem.add_colorbar = False
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.gridedges_show = 0
+    plotitem.amr_celledges_show = [0,0,0]
+    plotitem.patchedges_show = 0
     #plotaxes.xlimits = [138,155]
     #plotaxes.ylimits = [25,42]
 
@@ -122,12 +128,12 @@ def setplot(plotdata):
     plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
     plotitem.show = False
     plotitem.plot_var = geoplot.topo
-    plotitem.contour_levels = linspace(-5000,-100,6)
+    plotitem.contour_levels = numpy.linspace(-5000,-100,6)
     plotitem.amr_contour_colors = ['y']  # color on each level
     plotitem.kwargs = {'linestyles':'solid','linewidths':2}
     plotitem.amr_contour_show = [1,0,0]  
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
+    plotitem.celledges_show = 0
+    plotitem.patchedges_show = 0
 
 
     #-----------------------------------------
@@ -152,8 +158,8 @@ def setplot(plotdata):
     plotitem.pcolor_cmin = -10.0
     plotitem.pcolor_cmax = 10.0
     plotitem.add_colorbar = True
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.gridedges_show = 0
+    plotitem.amr_celledges_show = [0,0,0]
+    plotitem.patchedges_show = 0
 
     # Land
     plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
@@ -162,29 +168,29 @@ def setplot(plotdata):
     plotitem.pcolor_cmin = 0.0
     plotitem.pcolor_cmax = 100.0
     plotitem.add_colorbar = False
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.gridedges_show = 0
+    plotitem.amr_celledges_show = [0,0,0]
+    plotitem.patchedges_show = 0
 
     plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
     #plotitem.show = False
     plotitem.plot_var = geoplot.surface
-    plotitem.contour_levels = linspace(-13,13,14)
+    plotitem.contour_levels = numpy.linspace(-13,13,14)
     plotitem.amr_contour_colors = ['k']  # color on each level
     #plotitem.kwargs = {'linestyles':'solid','linewidths':2}
     plotitem.amr_contour_show = [0,0,0,1]  
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
+    plotitem.celledges_show = 0
+    plotitem.patchedges_show = 0
 
     # add contour lines of bathy if desired:
     plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
     plotitem.show = False
     plotitem.plot_var = geoplot.topo
-    plotitem.contour_levels = linspace(-6,6,13)
+    plotitem.contour_levels = numpy.linspace(-6,6,13)
     plotitem.amr_contour_colors = ['k']  # color on each level
     #plotitem.kwargs = {'linestyles':'solid','linewidths':2}
     plotitem.amr_contour_show = [0,0,0,1]  
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
+    plotitem.celledges_show = 0
+    plotitem.patchedges_show = 0
 
 
     #-----------------------------------------
@@ -208,8 +214,8 @@ def setplot(plotdata):
 
     # Plot comparison as red curve:
     plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    plotitem.show = (outdir2 is not None)
-    plotitem.outdir = outdir2
+    plotitem.show = (dart_data_path is not None)
+    # plotitem.outdir = dart_data_path
     plotitem.plot_var = 3
     plotitem.plotstyle = 'r-'
     plotitem.kwargs = {'linewidth':2}
@@ -242,15 +248,15 @@ def setplot(plotdata):
         try:
             dart = dartdata[gaugeno]
             pylab.plot(dart[:,0],dart[:,1],'k')
-            if outdir2 is None:
+            if dart_data_path is None:
                 pylab.legend(['GeoClaw','DART data'])
             else:
-                pylab.legend(['GeoClaw','outdir2','DART data'])
+                pylab.legend(['GeoClaw','dart_data_path','DART data'])
         except:
-            if outdir2 is None:
+            if dart_data_path is None:
                 pylab.legend(['GeoClaw'])
             else:
-                pylab.legend(['GeoClaw','outdir2'])
+                pylab.legend(['GeoClaw','dart_data_path'])
         add_zeroline(current_data)
         try:
             pylab.xlim(tlimits[gaugeno])
@@ -261,6 +267,21 @@ def setplot(plotdata):
     plotaxes.afteraxes = plot_dart
 
 
+    # =====================
+    #  Plot Friction Field
+    # =====================
+    plotfigure = plotdata.new_plotfigure('Friction')
+    plotfigure.show = friction_data.variable_friction and True
+
+    plotaxes = plotfigure.new_plotaxes()
+    plotaxes.xlimits = 'auto'
+    plotaxes.ylimits = 'auto'
+    plotaxes.title = r"Manning's $N$ Coefficient"
+    plotaxes.scaled = True
+
+    surge.plot.add_friction(plotaxes, bounds=[0.01,0.04], shrink=0.9)
+    plotaxes.plotitem_dict['friction'].amr_patchedges_show = [0,0,0,0,0,0,0]
+    plotaxes.plotitem_dict['friction'].colorbar_label = ""
 
     #-----------------------------------------
     
