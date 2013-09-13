@@ -37,7 +37,7 @@ def setrun(claw_pkg='geoclaw'):
     # Problem-specific parameters to be written to setprob.data:
     #------------------------------------------------------------------
 
-    #probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
+    rundata.add_data(surge.data.FrictionData(),'friction_data')
 
     #------------------------------------------------------------------
     # GeoClaw specific parameters:
@@ -349,6 +349,10 @@ def setrun(claw_pkg='geoclaw'):
     # rundata.gaugedata.gauges.append([51407, 203.484, 19.642, 22000., 1.e10])
     # rundata.gaugedata.gauges.append([52402, 154.116, 11.883, 10000., 1.e10])
 
+    # =====================
+    #  Set friction values
+    # =====================
+    set_friction(rundata)
 
     return rundata
     # end of function setrun
@@ -429,17 +433,10 @@ def setgeo(rundata):
 
 def set_friction(rundata):
 
-    data = rundata.frictiondata
+    data = rundata.friction_data
 
     # Variable friction
-    data.variable_friction = True
-
-    # Region based friction
-    # Entire domain
-    data.friction_regions.append([rundata.clawdata.lower, 
-                                  rundata.clawdata.upper,
-                                  [numpy.infty,0.0,-numpy.infty],
-                                  [0.030, 0.022]])
+    data.variable_friction = False
 
     return data
 
@@ -451,9 +448,6 @@ if __name__ == '__main__':
 	rundata = setrun(sys.argv[1])
     else:
 	rundata = setrun()
-
-    rundata.add_data(surge.data.FrictionData(),'frictiondata')
-    set_friction(rundata)
 
     rundata.write()
 
