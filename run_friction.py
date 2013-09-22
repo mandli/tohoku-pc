@@ -53,10 +53,8 @@ if __name__ == '__main__':
 
     # Create all tests
     tests = []
-    count = 0
     for n in xrange(friction_values.shape[0]):
         tests.append(FrictionTest(n, friction_values[n,:]))
     
     controller = clawtests.TestController(tests)
-    controller.tar = True
     controller.run()
