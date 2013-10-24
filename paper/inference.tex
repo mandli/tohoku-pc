@@ -1,0 +1,139 @@
+\section{Bayesian Inference}
+ \label{sec:inference}
+
+%Inferring optimal values for the uncertain parameters is performed by solving an inverse problem 
+%using observations. Specifically, the AXBT temperature data obtained during typhoon Fanapi,
+%which were 
+%shown to be correlated to the typhoon wind speed, are used to sharpen 
+%initial estimates of the uncertain drag parameters indicated in 
+%Equations (\ref{eq:prior1}-\ref{eq:prior3}). 
+
+The key idea in the Bayesian approach is to express the 
+forward problem (response surface/model)
+as a product of conditional probability densities. Bayes theorem 
+is then used to reverse the conditioning as explained below.  
+Let the observation data (AXBTs) be denoted by \{$T_i = T_i(x_i,y_i,z_i,t_i)\}_{i=1}^N$;
+their model predicted counterparts by \{$M_i= M_i(x_i,y_i,z_i,t_i)\}_{i=1}^N$
+($N$ is the number of observations) and $H$ the set of control parameters ; 
+according to the Bayes' theorem we have:
+\begin{equation}
+ p(H| \{T_i\}_{i=1}^N) \propto 
+ p(\{T_i\}_{i=1}^N | H) \ p(H)  
+\label{eq:bayes}
+\end{equation}
+where $p(H)$ is the prior of $H$, representing the \emph{a priori} knowledge
+about $H$ (before considering the observations data); 
+$p(\{T_i\}_{i=1}^N | H)$ is the likelihood function representing
+the probability of obtaining the data given the set of parameters $H$;
+and finally $p(H| \{ T_i \}_{i=1}^N)$ is the posterior,
+representing the probability that $H$ is true given the data $( \{ T_i \}_{i=1}^N )$.
+In our current inference problem the set of parameters will
+be taken as $H = \{ \alpha, V_{\max}, m\}$. Thus, Equation~(\ref{eq:bayes}) can be rewritten as:
+\begin{equation}
+p(\{ \alpha, V_{\max}, m\} | \{ T_i \}_{i=1}^N)
+\propto 
+p(\{T_i\}_{i=1}^N | \{ \alpha, V_{\max}, m\}) \ p(\alpha)p(V_{\max}) p(m)  
+\end{equation}
+The key point in the Bayesian inference is to define the likelihood function and 
+prior \citep{sivia}. For this purpose, we define
+\begin{equation} 
+	 \epsilon_i = T_i - M_i \ ,
+\end{equation}
+where $\epsilon_i$ represents the discrepancy between the model and observations. 
+We assume
+that the observations are independent
+and that $\epsilon_i$ is normally distributed with mean
+zero and variance $\sigma^2$, i.e. 
+$\epsilon_i \sim N(0,\sigma^2)$. In this 
+case the likelihood function can be written as:
+\begin{equation} 
+p(\{T_i\}_{i=1}^N | \{ \alpha, V_{\max}, m\}) 
+= 
+\prod_{i=1}^N  \frac{1}{\sqrt{2 \pi \sigma^2}} 
+\exp \left( \frac{-(T_i - M_i)^2}{2 \sigma^2} \right)  	
+\label{eq:likelihood}
+\end{equation}
+
+The variance $\sigma^2$ is unknown \emph{a priori}; thus we treat it as a hyper-parameter.
+While in general $\sigma^2$ depends on the observations, in cases where the error
+amplitude is generally small and does not change throughout space and time, one may use
+a simplified model and assume single hyper-parameter $\sigma^2$. In our problem, 
+the typhoon wind forcing conditions vary significantly from one day to another
+and AXBT data collected on each day are exposed to different measurement errors.
+We thus consider different variance $\sigma^2$ for every set of AXBT data collected
+on different days as indicated in Section~\ref{sec:results}\ref{sec:inverse}.
+
+The next step is choosing the prior that should be based 
+on some \emph{a priori} knowledge about the parameters. In our case, a uniform
+prior for the model parameters is assumed:
+\begin{equation} 
+p(\{ \alpha, V_{\max}, m\}) = \begin{cases}
+		\displaystyle \frac{1}{b_i-a_i} &\text{for~} a_i < \{ \alpha, V_{\max}, m\} \leq b_i ,  \\
+		0 &\text{otherwise}  , 
+\end{cases}
+\end{equation}
+where $ [a_i,b_i]$ denote the parameter ranges defined in 
+Equations~(\ref{eq:prior1}--\ref{eq:prior3}).
+Regarding the variance, the only information we know 
+is that $\sigma^2$ is always positive.
+We thus assume a Jeffreys prior \citep{sivia}, expressed as:
+\begin{equation} 
+p(\sigma^2) =  \begin{cases}
+		\displaystyle \frac{1}{\sigma^2} &\text{for~} \sigma^2 > 0,  \\
+		0 &\text{otherwise}. 
+		\end{cases}
+\label{eq:var_pr}
+\end{equation}
+Consequently, Bayes' theorem gives:
+\begin{equation} 
+p(\{ \alpha, V_{\max}, m\},\sigma^2 | \{T_i\}_{i=1}^N) 
+\propto
+\left[ \prod_{i=1}^N  \frac{1}{\sqrt{2 \pi \sigma^2}} 
+\exp \left( \frac{-(T_i - M_i)^2}{2 \sigma^2} \right) \right] 
+\ p(\sigma^2)p(\alpha) p(V_{\max})p(m)
+\end{equation}
+where $p(\{ \alpha, V_{\max}, m\},\sigma^2 | \{T_i\}_{i=1}^N)$  is the joint posterior.
+
+Inferring the drag coefficient parameters requires 
+sampling the posterior. In general, when the space of the unknown 
+parameters is multidimensional, a suitable computational strategy is 
+the Markov Chain Monte  Carlo (MCMC) method. 
+We rely on an adaptive Metropolis MCMC \citep{Gareth2009,Haario2001} to
+sample the posterior distribution accurately and efficiently.
+This MCMC phase requires repeated (tens of
+thousands of)
+HYCOM simulations initialized with different values of the
+uncertain parameters; this step is prohibitively expensive. An
+alternative is to construct a surrogate model that requires a much
+smaller ensemble of HYCOM runs, and that can be used instead
+at a significantly reduced computational cost.  Here, we rely on
+PCEs to build the surrogate, which, in addition
+also provide statistical properties,  such as the mean, variance and sensitivities,
+efficiently.
+
+PCE methods \citep{LeMaitreKnio2010} are based on expressing the dependence 
+of a quantity of
+interest, $R$ say, as a truncated expansion of the form:
+\begin{equation}
+  R(\xbold,t,\xxi) \doteq \sum_{k = 0}^P \hat{R}_k(\xbold,t) \Psi_k(\xxi),
+\mbox{ with }
+ \hat{R}_k \approx \frac{\left< R, \Psi_k \right>_Q}{\left< \Psi_k, \Psi_k \right>} .
+\label{eq:stochseries}
+\end{equation}
+where $\hat{R}_k$ are unknown coefficients, $P$ is finite and depends on
+the truncation strategy adopted, and the functions $\Psi_k(\xxi)$ form
+an orthogonal basis of an underlying probability space, and $\left<
+R, \Psi_k \right>_Q$ denotes an appropriate numerical quadrature.
+The coefficients in the series are computed via a Non-Intrusive
+Spectral Projection (NISP) as it does not require any modification to
+the HYCOM code but only an ensemble of simulations. We have adopted an adaptive quadrature ~\citep{Constantine:2012,winokur:2012,conrad:2012}
+to minimize the errors incurred in evaluating the
+coefficients and to minimize the size of the HYCOM ensemble; furthermore
+it has the virtue of automatically identifying the important stochastic
+variables and steering the quadrature sampling along their directions.
+Appendix C provides more details about PCEs and the adaptive quadrature.
+Once the coefficients are known, the stochastic series in Equation~(\ref{eq:stochseries}) 
+becomes an attractive and
+faithfull surrogate for the model as it can be summed very efficiently
+and at tiny fraction of the cost of a full HYCOM simulation. We will
+use it to estimate the model counterparts $M_i$ of the AXBT temperatures.
