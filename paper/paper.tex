@@ -1,0 +1,66 @@
+
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{natbib}
+
+\oddsidemargin 0in
+\evensidemargin 0in
+\textwidth= 6.5in
+\topmargin -0.50in
+\textheight 9in
+
+
+\usepackage{latexsym,amssymb,amsmath,color}
+\newcommand{\revised}[1]{\textcolor{blue}{{#1}}}
+\newcommand{\comment}[1]{\textcolor{red}{{#1}}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\xxi}{\vec{\xi}}
+\newcommand{\xxii}{\xxi^{(\scriptscriptstyle{-}\scriptstyle{i})}}
+\newcommand{\var}[1]{{\mathrm{Var}}\left[ {#1} \right]}
+\newcommand{\ip}[2]{\left( {#1}, {#2} \right)}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\normim}[1]{\left\| {#1} \right\|_{\scriptscriptstyle L^{2}(\Omega^{*})}}
+\newcommand{\avemu}[1]{\mathrm{E}\left({#1}\right)}
+\newcommand{\ave}[1]{\left\langle {#1} \right\rangle}
+\newcommand{\prob}[1]{\mathrm{Prob}\left\{ {#1} \right\}}
+\newcommand{\ind}[1]{\mathrm{\chi}_{\scriptscriptstyle {#1} }}
+\newcommand{\NISP}{\mathcal{S}}
+\newcommand{\ipmu}[2]{\left( {#1}, {#2} \right)_\mu}
+\newcommand{\norm}[1]{\left\| {#1} \right\|_{\scriptscriptstyle L^{2}(\Omega)}}
+\newcommand{\pard}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\def\xbold{{\vec{x}}}
+\renewcommand{\vec}[1]{{\mathchoice
+                     {\mbox{\boldmath$\displaystyle{#1}$}}
+                     {\mbox{\boldmath$\textstyle{#1}$}}
+                     {\mbox{\boldmath$\scriptstyle{#1}$}}
+                     {\mbox{\boldmath$\scriptscriptstyle{#1}$}}}}
+                     %        
+        
+\begin{document}
+\begin{center}{\Large\bf Tsunami Uncertainty Quantification}\vskip 5pt
+        
+\bf Preliminary results
+\end{center}
+\vskip 15pt
+
+
+\input{intro}
+
+\input{tsunami}
+
+
+\clearpage
+%\input{inference}
+
+\input{uqpce}
+\input{results}
+
+             
+\clearpage
+
+\clearpage
+\bibliographystyle{plainnat}
+\bibliography{biblio}
+\end{document}
