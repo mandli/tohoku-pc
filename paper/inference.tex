@@ -1,74 +1,66 @@
-\section{Bayesian Inference}
+\subsection{Bayesian Inference}
  \label{sec:inference}
+Bayesian inference is a statistical approach to inverse problems
+that has recently gained much interest in different applications.
+The key idea in this approach is to express all forms of uncertainty
+in terms of probability. The first step in a Bayesian inference 
+is to formulate the forward problem (response surface/model) using 
+a suitable likelihood function and product of conditional probability densities. 
+We then formulate the prior distribution over the unknown parameters of the model
+using our best belief. Lastly, given some observation data, Bayes rule 
+is used to obtain a posterior distribution for these unknown
+\citep{sivia}. We review this approach briefly below.
 
-%Inferring optimal values for the uncertain parameters is performed by solving an inverse problem 
-%using observations. Specifically, the AXBT temperature data obtained during typhoon Fanapi,
-%which were 
-%shown to be correlated to the typhoon wind speed, are used to sharpen 
-%initial estimates of the uncertain drag parameters indicated in 
-%Equations (\ref{eq:prior1}-\ref{eq:prior3}). 
-
-The key idea in the Bayesian approach is to express the 
-forward problem (response surface/model)
-as a product of conditional probability densities. Bayes theorem 
-is then used to reverse the conditioning as explained below.  
-Let the observation data (AXBTs) be denoted by \{$T_i = T_i(x_i,y_i,z_i,t_i)\}_{i=1}^N$;
-their model predicted counterparts by \{$M_i= M_i(x_i,y_i,z_i,t_i)\}_{i=1}^N$
-($N$ is the number of observations) and $H$ the set of control parameters ; 
-according to the Bayes' theorem we have:
+Let the observation data (water surface elevation at the gauges) be denoted by \{$S_i = S_i(x_i,y_i,t_i)\}_{i=1}^m$;
+their model predicted counterparts by \{$M_i= M_i(x_i,y_i,t_i)\}_{i=1}^m$
+($m$ is the number of observations) and $\{N_i\}_{i=1}^3$ the set of 
+three Manning Friction coefficients treated as the unknown parameters. 
+Bayes' rule yields:
 \begin{equation}
- p(H| \{T_i\}_{i=1}^N) \propto 
- p(\{T_i\}_{i=1}^N | H) \ p(H)  
+ p(\{N_i\}_{i=1}^3| \{S_i\}_{i=1}^m) \propto 
+ p(\{S_i\}_{i=1}^m | \{N_i\}_{i=1}^3) \ p(\{N_i\}_{i=1}^3)  
 \label{eq:bayes}
 \end{equation}
-where $p(H)$ is the prior of $H$, representing the \emph{a priori} knowledge
-about $H$ (before considering the observations data); 
-$p(\{T_i\}_{i=1}^N | H)$ is the likelihood function representing
-the probability of obtaining the data given the set of parameters $H$;
-and finally $p(H| \{ T_i \}_{i=1}^N)$ is the posterior,
-representing the probability that $H$ is true given the data $( \{ T_i \}_{i=1}^N )$.
-In our current inference problem the set of parameters will
-be taken as $H = \{ \alpha, V_{\max}, m\}$. Thus, Equation~(\ref{eq:bayes}) can be rewritten as:
+where $p(\{N_i\}_{i=1}^3)$ is the prior of $\{N_i\}_{i=1}^3$, representing the \emph{a priori} knowledge
+about the manning coefficient; 
+$p(\{S_i\}_{i=1}^m | \{N_i\}_{i=1}^3)$ is the likelihood function representing
+the probability of obtaining the data given the set of parameters $\{N_i\}_{i=1}^3$;
+and finally $p(\{N_i\}_{i=1}^3| \{ S_i \}_{i=1}^m)$ is the posterior,
+representing the probability that $\{N_i\}_{i=1}^3$ is true given the data $( \{ S_i \}_{i=1}^m )$.
+
 \begin{equation}
-p(\{ \alpha, V_{\max}, m\} | \{ T_i \}_{i=1}^N)
+p(\{N_i\}_{i=1}^3 | \{ S_i \}_{i=1}^m)
 \propto 
-p(\{T_i\}_{i=1}^N | \{ \alpha, V_{\max}, m\}) \ p(\alpha)p(V_{\max}) p(m)  
+p(\{S_i\}_{i=1}^m | \{N_i\}_{i=1}^3) \ p(N_1)p(N_2) p(N_3)  
 \end{equation}
-The key point in the Bayesian inference is to define the likelihood function and 
-prior \citep{sivia}. For this purpose, we define
-\begin{equation} 
-	 \epsilon_i = T_i - M_i \ ,
-\end{equation}
-where $\epsilon_i$ represents the discrepancy between the model and observations. 
-We assume
-that the observations are independent
-and that $\epsilon_i$ is normally distributed with mean
+
+To formulate the likelihood function, we let 
+	 $\epsilon_i = S_i - M_i $
+represents the discrepancy between the model and observations 
+and assume that the observations are independent
+and normally distributed with mean
 zero and variance $\sigma^2$, i.e. 
 $\epsilon_i \sim N(0,\sigma^2)$. In this 
 case the likelihood function can be written as:
 \begin{equation} 
-p(\{T_i\}_{i=1}^N | \{ \alpha, V_{\max}, m\}) 
+p(\{S_i\}_{i=1}^m |  \{N_i\}_{i=1}^3) 
 = 
-\prod_{i=1}^N  \frac{1}{\sqrt{2 \pi \sigma^2}} 
-\exp \left( \frac{-(T_i - M_i)^2}{2 \sigma^2} \right)  	
+\prod_{i=1}^m  \frac{1}{\sqrt{2 \pi \sigma^2}} 
+\exp \left( \frac{-(S_i - M_i)^2}{2 \sigma^2} \right)  	
 \label{eq:likelihood}
 \end{equation}
 
 The variance $\sigma^2$ is unknown \emph{a priori}; thus we treat it as a hyper-parameter.
 While in general $\sigma^2$ depends on the observations, in cases where the error
 amplitude is generally small and does not change throughout space and time, one may use
-a simplified model and assume single hyper-parameter $\sigma^2$. In our problem, 
-the typhoon wind forcing conditions vary significantly from one day to another
-and AXBT data collected on each day are exposed to different measurement errors.
-We thus consider different variance $\sigma^2$ for every set of AXBT data collected
-on different days as indicated in Section~\ref{sec:results}\ref{sec:inverse}.
+a simplified model and assume single hyper-parameter $\sigma^2$.
 
 The next step is choosing the prior that should be based 
 on some \emph{a priori} knowledge about the parameters. In our case, a uniform
 prior for the model parameters is assumed:
 \begin{equation} 
-p(\{ \alpha, V_{\max}, m\}) = \begin{cases}
-		\displaystyle \frac{1}{b_i-a_i} &\text{for~} a_i < \{ \alpha, V_{\max}, m\} \leq b_i ,  \\
+p(N_i) = \begin{cases}
+		\displaystyle \frac{1}{b_i-a_i} &\text{for~} a_i <  N_i \leq b_i ,  \\
 		0 &\text{otherwise}  , 
 \end{cases}
 \end{equation}
@@ -86,13 +78,13 @@ p(\sigma^2) =  \begin{cases}
 \end{equation}
 Consequently, Bayes' theorem gives:
 \begin{equation} 
-p(\{ \alpha, V_{\max}, m\},\sigma^2 | \{T_i\}_{i=1}^N) 
+p(\{N_i\}_{i=1}^3,\sigma^2 | \{S_i\}_{i=1}^m) 
 \propto
-\left[ \prod_{i=1}^N  \frac{1}{\sqrt{2 \pi \sigma^2}} 
-\exp \left( \frac{-(T_i - M_i)^2}{2 \sigma^2} \right) \right] 
-\ p(\sigma^2)p(\alpha) p(V_{\max})p(m)
+\left[ \prod_{i=1}^m  \frac{1}{\sqrt{2 \pi \sigma^2}} 
+\exp \left( \frac{-(S_i - M_i)^2}{2 \sigma^2} \right) \right] 
+\ p(\sigma^2)p(N_1)p(N_2) p(N_3)
 \end{equation}
-where $p(\{ \alpha, V_{\max}, m\},\sigma^2 | \{T_i\}_{i=1}^N)$  is the joint posterior.
+where $p(\{N_i\}_{i=1}^3,\sigma^2 | \{S_i\}_{i=1}^m)$  is the joint posterior.
 
 Inferring the drag coefficient parameters requires 
 sampling the posterior. In general, when the space of the unknown 
@@ -101,39 +93,11 @@ the Markov Chain Monte  Carlo (MCMC) method.
 We rely on an adaptive Metropolis MCMC \citep{Gareth2009,Haario2001} to
 sample the posterior distribution accurately and efficiently.
 This MCMC phase requires repeated (tens of
-thousands of)
-HYCOM simulations initialized with different values of the
+thousands of) Geoclaw simulations initialized with different values of the
 uncertain parameters; this step is prohibitively expensive. An
 alternative is to construct a surrogate model that requires a much
-smaller ensemble of HYCOM runs, and that can be used instead
+smaller ensemble of GeoClaw runs, and that can be used instead
 at a significantly reduced computational cost.  Here, we rely on
 PCEs to build the surrogate, which, in addition
 also provide statistical properties,  such as the mean, variance and sensitivities,
 efficiently.
-
-PCE methods \citep{LeMaitreKnio2010} are based on expressing the dependence 
-of a quantity of
-interest, $R$ say, as a truncated expansion of the form:
-\begin{equation}
-  R(\xbold,t,\xxi) \doteq \sum_{k = 0}^P \hat{R}_k(\xbold,t) \Psi_k(\xxi),
-\mbox{ with }
- \hat{R}_k \approx \frac{\left< R, \Psi_k \right>_Q}{\left< \Psi_k, \Psi_k \right>} .
-\label{eq:stochseries}
-\end{equation}
-where $\hat{R}_k$ are unknown coefficients, $P$ is finite and depends on
-the truncation strategy adopted, and the functions $\Psi_k(\xxi)$ form
-an orthogonal basis of an underlying probability space, and $\left<
-R, \Psi_k \right>_Q$ denotes an appropriate numerical quadrature.
-The coefficients in the series are computed via a Non-Intrusive
-Spectral Projection (NISP) as it does not require any modification to
-the HYCOM code but only an ensemble of simulations. We have adopted an adaptive quadrature ~\citep{Constantine:2012,winokur:2012,conrad:2012}
-to minimize the errors incurred in evaluating the
-coefficients and to minimize the size of the HYCOM ensemble; furthermore
-it has the virtue of automatically identifying the important stochastic
-variables and steering the quadrature sampling along their directions.
-Appendix C provides more details about PCEs and the adaptive quadrature.
-Once the coefficients are known, the stochastic series in Equation~(\ref{eq:stochseries}) 
-becomes an attractive and
-faithfull surrogate for the model as it can be summed very efficiently
-and at tiny fraction of the cost of a full HYCOM simulation. We will
-use it to estimate the model counterparts $M_i$ of the AXBT temperatures.

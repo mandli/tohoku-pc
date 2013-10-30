@@ -51,7 +51,7 @@ presented and discussed in this section.
 
 The observed data collected at different locations 
 in the likelihood function (Equation~\ref{eq:likelihood}) to update the input parameters.
-MCMCs of $40,000$ iterations are obtained for the Manning roughness coefficients: 
+MCMCs of $50,000$ iterations are obtained for the Manning roughness coefficients: 
 $N_1$,$N_2$ and $N_3$ as well as for the variance $\sigma^2$. Figure \ref{fig:mcmc} 
 shows the sample chains for
 the input parameters for different iterates of the MCMC algorithms. 
@@ -79,7 +79,7 @@ the variance between simulations and observations.}
 
 The computed MCMC chains can be readily used to determine the posterior 
 distribution; kernel density estimation (KDE) is used for this purpose
-~\citep{Parzen1962,Silverman1986}(The first 6000 iterates, associated 
+~\citep{Parzen1962,Silverman1986}(The first 5000 iterates, associated 
 with the burn-in period, are discarded). The resulting posterior pdfs 
 of the three Manning's roughness coefficients $N_1,N_2,N_3$ are shown 
 in Figure~\ref{fig:pdfs}.  As expected from the chains shown in Figure
@@ -94,6 +94,11 @@ The posterior distribution of the variance is also shown in Figure~\ref{fig:mcmc
 Taking the square root of the MAP values yields the water surface elevation standard 
 deviation, and the latter is a reflection of the mismatch between the model and 
 observed data estimated to be 0.144~$m$.
+
+
+   0.021308543478839   0.011083123405057   0.185744276109897   0.021045124706835
+
+
 
  \begin{figure}[h]
         \begin{tabular}{clc}
