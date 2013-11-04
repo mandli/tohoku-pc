@@ -11,6 +11,7 @@ import os
 import glob
 
 import numpy
+import matplotlib.pyplot as plt
 
 import clawpack.visclaw.colormaps as colormaps
 import clawpack.visclaw.geoplot as geoplot
@@ -279,9 +280,17 @@ def setplot(plotdata):
     plotaxes.title = r"Manning's $N$ Coefficient"
     plotaxes.scaled = True
 
-    surge.plot.add_friction(plotaxes, bounds=[0.01,0.04], shrink=0.9)
-    plotaxes.plotitem_dict['friction'].amr_patchedges_show = [0,0,0,0,0,0,0]
-    plotaxes.plotitem_dict['friction'].colorbar_label = ""
+    plotitem = plotaxes.new_plotitem(name='friction',plot_type='2d_pcolor')
+    plotitem.plot_var = lambda cd: cd.aux[1,:,:]
+    plotitem.pcolor_cmap = plt.get_cmap('YlOrRd')
+    plotitem.colorbar_shrink = 0.9
+    plotitem.pcolor_cmin = 0.04
+    plotitem.pcolor_cmax = 0.1    
+    plotitem.add_colorbar = True
+    plotitem.colorbar_label = "Manning's-$n$ Coefficient"
+    plotitem.amr_celledges_show = [0,0,0]
+    plotitem.amr_patchedges_show = [0,0,0,0,0,0,0]
+    plotitem.colorbar_label = r"$n$"
 
     #-----------------------------------------
     

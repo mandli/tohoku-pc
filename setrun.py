@@ -141,7 +141,7 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.output_format == 'ascii'      # 'ascii' or 'netcdf' 
 
     clawdata.output_q_components = 'all'   # need all
-    clawdata.output_aux_components = 4  # eta=h+B is in q
+    clawdata.output_aux_components = [0,3]  # eta=h+B is in q
     clawdata.output_aux_onlyonce = False    # output aux arrays each frame
 
 
