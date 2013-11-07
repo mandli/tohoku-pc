@@ -12,15 +12,6 @@ However, a noticeable uncertainty in the surface
 elevation can be seen  at all gauges as indicated from the thickness 
 of the bands formed by the plots of the realizations. This uncertainty
 occurs till the end of the simulations.
-\begin{figure}[h]
-\centering
-\begin{tabular}{clc}        
-\includegraphics[width=0.6\textwidth]{../figures/rlzs_gauges.pdf} 
-\end{tabular}
-\caption{125 Geoclaw realizations at different gauge locations.}
-\label{fig:rlzs}
-\end{figure}
-
 
 In order to check the consistency of the approximation, we compare
  water surface elevation from the realizations 
@@ -43,18 +34,7 @@ where $\NISP$ is the 125-member ensemble obtained using the PC algorithm.
 This error metric calculated at the different gauge locations is shown in Figure~\ref{fig:error};
 the largest relative normalized error for 
 water surface elevation is about 0.1\% . 
-\begin{figure}[h]
-\centering
-\begin{tabular}{clc}        
-\includegraphics[width=0.5\textwidth]{../figures/error_gauge1.pdf} &
-\includegraphics[width=0.5\textwidth]{../figures/error_gauge2.pdf} \\
-\includegraphics[width=0.5\textwidth]{../figures/error_gauge3.pdf} &
-\includegraphics[width=0.5\textwidth]{../figures/error_gauge4.pdf} 
 
-\end{tabular}
-\caption{125 Geoclaw realizations at different gauge locations.}
-\label{fig:error}
-\end{figure}
 
 %Contour maps of the relative normalized error for the entire simulation region are 
 %shown in Figure~\ref{fig:error2D} for various depths and dates to confirm the error trends of the
@@ -76,31 +56,7 @@ converges with increased order of the PC representation.  Sample
 water surface elevation pdfs are shown in Figure~\ref{fig:pdfs2}
 and Figure~\ref{fig:pdfs3}
 
-\begin{figure}[h]
-\centering
 
-\begin{tabular}{clcl}
-\includegraphics[width=0.5\textwidth]{../figures/pdfs1_2.pdf} &
-\includegraphics[width=0.5\textwidth]{../figures/pdfs2_2.pdf} \\
-\includegraphics[width=0.5\textwidth]{../figures/pdfs3_2.pdf} &
-\includegraphics[width=0.5\textwidth]{../figures/pdfs4_2.pdf}
-\end{tabular}
-\caption{pdf of water surface elevation at the different gauge locations at t = 7200 s.}
-\label{fig:pdfs2}
-\end{figure}
-        
-\begin{figure}[h]
-\centering
-\begin{tabular}{clc}
-        
-\includegraphics[width=0.5\textwidth]{../figures/pdfs1_3.pdf} &
-\includegraphics[width=0.5\textwidth]{../figures/pdfs2_3.pdf} \\
-\includegraphics[width=0.5\textwidth]{../figures/pdfs3_3.pdf} &
-\includegraphics[width=0.5\textwidth]{../figures/pdfs4_3.pdf}
-\end{tabular}
-\caption{pdf of water surface elevation at the different gauge locations at t = 10800 s.}
-\label{fig:pdfs3}
-\end{figure}
 The different curves
 correspond to increased order of PC, from 1 to 5; 
 The plots indicate that the double peaked distributions are
