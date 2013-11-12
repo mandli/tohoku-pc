@@ -1,15 +1,29 @@
+%&pdflatex
+%
+%
+%
+%
 
-\documentclass[12pt]{article}
+% \documentclass[12pt]{article}
+\documentclass[preprint,12pt]{elsarticle}
+
 \usepackage{graphicx}
 \usepackage{bm}
 \usepackage{natbib}
 
-\oddsidemargin 0in
-\evensidemargin 0in
-\textwidth= 6.5in
-\topmargin -0.50in
-\textheight 9in
+% Add line numbers
+\usepackage[mathlines]{lineno}
 
+% Multipart figures
+\usepackage{subcaption}
+
+% \oddsidemargin 0in
+% \evensidemargin 0in
+% \textwidth= 6.5in
+% \topmargin -0.50in
+% \textheight 9in
+
+\usepackage{ifpdf}
 
 \usepackage{latexsym,amssymb,amsmath,color}
 \newcommand{\revised}[1]{\textcolor{blue}{{#1}}}
@@ -36,15 +50,52 @@
                      {\mbox{\boldmath$\textstyle{#1}$}}
                      {\mbox{\boldmath$\scriptstyle{#1}$}}
                      {\mbox{\boldmath$\scriptscriptstyle{#1}$}}}}
-                     %        
+                     
+\newcommand{\geoclaw}{{\sc GeoClaw}\xspace}
+\newcommand{\tohoku}{T\={o}hoku\xspace}
         
+\journal{Ocean Modelling}
+
 \begin{document}
 
-\input{cover}
-\clearpage
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.png, .jpg, .tif, .eps}
+\fi
 
-        
+\begin{frontmatter}
 
+\title{Polynomial Chaos for the Estimation of Manning's Friction}
+\date{\today}
+
+\author[kaust]{Ihab Sraj}
+\ead{ihab.sraj@kaust.edu.sa}
+\ead{Department of Physical Sciences and Engineering, King Abdullah University for Science and Technology, Thuwal, Saudi Arabia}
+\author[ut]{Kyle T. Mandli}
+% \ead{kyle@ices.utexas.edu}
+% \ead[http://users.ices.utexas.edu/~kyle]{http://users.ices.utexas.edu/~kyle}
+\author[kaust]{Ibrahim Hoteit}
+\author[ut]{Clint N. Dawson}
+
+\address[kaust]{Department of Physical Sciences and Engineering, King Abdullah University for Science and Technology, Thuwal, Saudi Arabia}
+\address[ut]{Institute for Computational Engineering and Science, University of Texas at Austin, 201 E 24th ST. Stop C0200, Austin, TX 78712-1229, USA}
+
+\date{\today}
+
+\begin{abstract}
+
+\end{abstract}
+
+\begin{keyword}
+tsunami \sep Manning's N friction \sep sensitivity analysis \sep polynomial chaos
+\end{keyword}
+
+\end{frontmatter}
+\linenumbers
+
+% \input{cover}
+% \clearpage
 
 \input{intro}
 
@@ -59,6 +110,6 @@
 \clearpage
 
 \clearpage
-\bibliographystyle{plainnat}
+\bibliographystyle{elsarticle-num}
 \bibliography{biblio}
 \end{document}
