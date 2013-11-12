@@ -1,3 +1,16 @@
+%!TEX root = paper.tex
+
+Background literature so far
+\begin{itemize}
+    \item Myers and Baptista (2001) - Crude friction coefficient sensitivity, found it to be important but not fully explored
+    \item Jakeman et al (2010) - Again a crude (two coefficient) sensitivity analysis.
+    \item Dao and Tkalich (2007) - Really not a very good paper, also crude SA.
+\end{itemize}
+
+\section{Numerical Model}
+
+
+
 \section{T\={o}hoku Tsunami}
 Our study focuses on quantifying ocean wave uncertainties associated with 
 manning friction coefficient, 
@@ -16,25 +29,33 @@ Figure~\ref{fig:setup}(left) shows the topography of the considered domain.
 Land topography is shown using while the bathymetry is shown using a lighter colormap.
 
 
+
+
 \begin{figure}[h]
 \centering
 \begin{tabular}{clc}
-\includegraphics[width=0.45\textwidth]{../figures/topo.pdf}  &
-\includegraphics[width=0.45\textwidth]{../figures/coef.pdf} 
+\includegraphics[width=0.45\textwidth]{./figures/topo.pdf}  &
+\includegraphics[width=0.45\textwidth]{./figures/coef.pdf} 
 \label{setup}
 \end{tabular}
 \caption{Topography and gauge locations.}
 \label{fig:setup}
 \end{figure}
+
 \subsection{Parametric Uncertainty}
+
+
 \subsection{Observations}
+
+Observations used in th
+
 During this tsunami, different gauges were installed to observed the surface elevation
 The locations of theses gauges are shown in Figure~\ref{setup} .
 The gauges are used in the inverse problem to infer the manning coefficients.
 
 \begin{figure}[h]      
 \centering
-\includegraphics[width=0.6\textwidth]{../figures/obs.pdf}
+\includegraphics[width=0.6\textwidth]{./figures/obs.pdf}
 \caption{Observed data of water surface elevation with time at four different gauges.}
 \label{fig:obs}
 \end{figure}     
