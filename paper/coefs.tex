@@ -1,0 +1,50 @@
+\subsection{Inferring Manning Friction Coefficient}
+ \label{sec:manning}
+ 
+We seek to infer the Manning coefficient from water surface elevation
+data measured at gauges as showm.
+Bayesian inference can be applied directly to infer the uncertain parameters
+using Equation~\ref{eq:post}. In our case, the observation data $\vec d$ 
+are the water surface elevation at the gauges;
+their \emph{GeoClaw} model predicted counterparts by $\vec G$.
+The uncertain parameters $\vec \theta$ will be denoted by $\{N_i\}_{i=1}^3$ for the
+three Manning Friction coefficients treated as the unknown parameters. 
+In this case  Equation~\ref{eq:post} can be written as:
+\begin{equation} 
+p(N_1,N_2,N_3,\sigma^2 | \vec d) 
+\propto \frac{1}{\sqrt{2 \pi \sigma^2}} 
+ \prod_{i=1}^m  
+\exp \left\lbrace \frac{-(d_i - G_i)^2}{2 \sigma^2} \right\rbrace
+\ p(\sigma^2)p(N_1)p(N_2) p(N_3)
+\label{eq:post_coef}
+\end{equation}
+
+To complete deinfe the posterior equation, we need to choose a proper prior that should be based 
+on some \emph{a priori} knowledge about the parameters. In our case, a uniform
+prior for the model parameters is assumed as indicated:
+\begin{equation} 
+p(N_i) = \begin{cases}
+		\displaystyle \frac{1}{b_i-a_i} &\text{for~} a_i <  N_i \leq b_i ,  \\
+		0 &\text{otherwise}  , 
+\end{cases}
+\end{equation}
+where $ [a_i,b_i]$ denote the parameter ranges defined as.
+Regarding the variance, the only information we know 
+is that $\sigma^2$ is always positive.
+We thus assume a Jeffreys prior \citep{sivia}, expressed as:
+\begin{equation} 
+p(\sigma^2) =  \begin{cases}
+		\displaystyle \frac{1}{\sigma^2} &\text{for~} \sigma^2 > 0,  \\
+		0 &\text{otherwise}. 
+		\end{cases}
+\label{eq:var_pr}
+\end{equation}
+
+Inferring the coefficients requires 
+sampling the posterior. In general, when the space of the unknown 
+parameters is multidimensional, a suitable computational strategy is 
+the Markov Chain Monte  Carlo (MCMC) method. 
+We rely on an adaptive Metropolis MCMC \citep{Gareth2009,Haario2001} to
+sample the posterior distribution accurately and efficiently.
+
+

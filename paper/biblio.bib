@@ -2620,6 +2620,20 @@
   timestamp = {2012.07.12},
   url = {http://dx.doi.org/10.1175/1520-0469(1995)052<3969:SOTCTS>2.0.CO;2}
 }
+@article {Malinverno2002,
+author = {Malinverno, Alberto},
+title = {Parsimonious Bayesian Markov chain Monte Carlo inversion in a nonlinear geophysical problem},
+journal = {Geophysical Journal International},
+volume = {151},
+number = {3},
+publisher = {Blackwell Science Ltd},
+issn = {1365-246X},
+url = {http://dx.doi.org/10.1046/j.1365-246X.2002.01847.x},
+doi = {10.1046/j.1365-246X.2002.01847.x},
+pages = {675--688},
+keywords = {Bayesian inversion, geophysical inversion, Markov chain Monte Carlo, MCMC, resistivity},
+year = {2002},
+}
 
 @BOOK{Epstein:1985,
   title = {Statistical Inference and Prediction in Climatology: A Bayesian Approach},
@@ -3007,13 +3021,6 @@
   author = {Andrew Gelman and John B. Carlin and Hal L. Stern and Donald B. Rubin},
   pages = {668},
   edition = {2}
-}
-
-@BOOK{Gelman2004,
-  title = {Bayesian Data Analysis},
-  publisher = {Chapman and Hall/CRC},
-  year = {2004},
-  author = {A.\ Gelman and J.\ B.\ Carlin and H.\ S.\ Stern and D.\ B.\ Rubin}
 }
 
 @ARTICLE{gent,
@@ -7231,7 +7238,7 @@
 }
 
 @ARTICLE{Sobol:2001,
-  author = {Sobol{\cprime}, I. M.},
+  author = {Sobol, I. M.},
   title = {Global sensitivity indices for nonlinear mathematical models and
 	their {M}onte {C}arlo estimates},
   journal = {Math. Comput. Simulation},
@@ -7244,7 +7251,7 @@
 }
 
 @ARTICLE{Sobol:1993,
-  author = {Sobol{\cprime}, I. M.},
+  author = {Sobol, I. M.},
   title = {Sensitivity estimates for nonlinear mathematical models},
   journal = {Math. Modeling Comput. Experiment},
   year = {1993},
@@ -8262,6 +8269,53 @@
   note = {submitted}
 }
 
+@ARTICLE{sraj:2013a,
+  author = {Ihab Sraj and Mohamed Iskandarani and Ashwanth Srinivasan and William
+	C. Thacker and Justin Winokur and Alen Alexanderian and Chia-Ying Lee and Shuyi S. Chen and Omar M. Knio},
+  title = {Bayesian Inference of Drag Parameters using Fanapi AXBT Data},
+  journal = {Monthly Weather Review},
+  year = {2013},
+  volume = {141},
+  pages = { 2347-2367},
+  doi  = {10.1175/MWR-D-12-00228.1},
+  abstract={We introduce a three-parameter characterization of the wind-speed dependence of the drag coefficient and apply a
+Bayesian formalism to infer values for these parameters from AXBT temperature data obtained during Typhoon Fanapi. One parameter
+is a multiplicative factor that amplifies or attenuates the drag coefficient for all wind speeds, the second is the maximum wind
+speed at which drag coefficient saturation occurs, and the third is the drag coefficient’s rate of change with increasing wind
+speed after saturation. Bayesian inference provides optimal estimates of the parameters as well as a non-Gaussian probability
+distribution characterizing the uncertainty of these estimates. The efficiency of our approach stems from the use of adaptive
+polynomial expansions to build an inexpensive surrogate for the high-resolution numerical model that couples simulated winds to
+the oceanic temperature data, dramatically reducing the computational burden of the Markov Chain Monte-Carlo sampling. Our
+results indicate that the most likely values for the drag coefficient saturation and the corresponding wind speed are about
+$2.3\times10^{−3}$ and 34 m s$^−1$, respectively; the data was not informative regarding the drag coefficient behavior at higher wind
+speeds.},
+  owner = {mohamed},
+  timestamp = {2012.09.25}
+}
+@ARTICLE{sraj:2013b,
+  author = {Ihab Sraj and Mohamed Iskandarani and Ashwanth Srinivasan and William
+	C. Thacker and Omar M. Knio},
+  title = {Drag Parameter Estimation using Gradients and Hessian  from a Polynomial Chaos Model Surrogate},
+  journal = {Monthly Weather Review},
+  year = {2013},
+  abstract={An adjoint-free approach to approximating
+the gradient of a function computed using a complex numerical model
+is presented. The methodology relies on polynomial chaos expansions
+to approximate the model, and on differentiating the resulting
+representation.  The main computational burden is an ensemble of
+realizations to build the expansion; no code modification is needed. The
+methodology is presented in the context of a variational parameter
+estimation problem where gradients are used to iteratively minimize
+the mismatch between observations and model predictions. The approach
+also delivers the function's Hessian at very little extra cost, and
+leverages it to enhance the performance of the iterative optimization
+algorithm. Furthermore, the Hessian's inverse yields an estimate of the uncertainty
+in the solution when the latter's probability density is approximately
+Gaussian.  The ensuing optimal parameters are compared to those obtained
+from a Bayesian inference approach where the full posterior distribution
+was constructed. The similarities and differences between the new
+methodology and a traditional adjoint-based calculation are discussed.},
+}
 @ARTICLE{knio_worlikar_96,
   author = {A.~S. Worlikar and O.~M. Knio},
   title = {Numerical Modeling of a Thermoacoustic Refrigerator. Part 1. Unsteady
