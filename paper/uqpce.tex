@@ -53,7 +53,9 @@ For multi-dimensional problems the basis functions are
 tensor products of 1D basis functions.
 
 The series representation Equation~\ref{eq:stochseries} can be viewed as a spectral expansion
-of $U$ along the stochastic dimensions. The existence and convergence of this series
+of $U$ along the stochastic dimensions. It can be also seen as
+combining approximation and probabilistic frameworks, a combination
+that has proven extremely useful in solving UQ problems. The existence and convergence of this series
 is asserted by the Cameron-Martin theorem \citep{Cameron:1947} with the condition of $U$ having a finite variance.
 The series rate of convergence, and hence the number of terms to retain, depends on the smoothness of
 $U$ with respect to $\xxi$. The series converges spectrally fast with $P$
@@ -119,7 +121,7 @@ approximation of the corresponding variance-based, global
 sensitivity indices. This can be done by computing the so-called {\it total} 
 sensitivity indices of random variables from the PC representations or Sobol decomposition~\citep{Sobol:1993,Homma:1996,Sobol:2001}. To get the total sensitivity corresponding to the uncertain
 input $\xi_i$ we compute the total index~\citep{LeMaitreKnio2010,Crestaux,Sudret}:
-\begin{equation} \label{equ:T-hard}
+\begin{equation} \label{eq:T-hard}
    T_i =
          \frac{\displaystyle
                \sum_{k \in K_i} U_k^2 \ave{\Psi_k^2}}
@@ -133,19 +135,10 @@ where we define \[
 multi-index associated with $k^{th}$ term in the
 PC expansion~\cite{LeMaitreKnio2010}.
 
-Using Equation~\eqref{equ:T-hard}, the computation of $T_i$ is straightforward.
+Using Equation~\eqref{eq:T-hard}, the computation of $T_i$ is straightforward.
 The total sensitivity index $T_i$ measures the contribution of
 the $i^{th}$ random input to total model variability by
 computing the fraction of the total variance due to all the terms in the
 PC expansion which involve $\xi_i$.
-% It is also worth noting that for random variables expanded in a PC basis, all the index sets
-%above are dictated by the basis alone. Thus, we need to find the index sets $K_u$
-%for computation of $S_u$ and $\mathcal{I}_i$ for computation
-%of $T_i$ only once. Hence, the computation of $S_u$ or $T_i$ for a
-%random variable is immediate once its PC coefficients are determined.
 
 
-%The series representation (\ref{eq:stochseries}) can thus be seen as
-%combining approximation and probabilistic frameworks, a combination
-%that has proven extremely useful in solving UQ
-%problems.
