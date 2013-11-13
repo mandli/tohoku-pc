@@ -8,12 +8,7 @@ To this end, Figure~\ref{fig:compare}
 compares PC mean water surface elevation profiles
 with their counterparts from the observed gauge locations.
 The plots show good agreement between the simulations and the observations at different
-locations and at different times. 
-%
-
-   
-
-Figure~\ref{fig:compare} can be recast as a scatter plot shown in 
+locations and at different times. Figure~\ref{fig:compare} can be recast as a scatter plot shown in 
 Figure~\ref{fig:scatter}.
 
 We now can exploit the surrogate model in the Bayesian inference of the Manning's 
@@ -23,7 +18,7 @@ update the Manning's roughness coefficient distributions in light of the
 observed data. This sampling, demanding tens of thousands of forward simulations, 
 would have been prohibitively expensive in the
 absence of the surrogate, as the generation of each sample would have required an
-independent Geoclaw realization. The surrogate provides a computationally
+independent \geoclaw realization. The surrogate provides a computationally
 efficient alternative, and requires only evaluating the PCE for different values 
 of the seed $\xxi$. The setup of the Bayesian inference problem,
 MCMC chains for the input drag parameters and the corresponding posterior distributions are 
@@ -58,33 +53,20 @@ with the burn-in period, are discarded). The resulting posterior pdfs
 of the three Manning's roughness coefficients $N_1,N_2,N_3$ are shown 
 in Figure~\ref{fig:pdfs}.  As expected from the chains shown in Figure
 ~\ref{fig:mcmc}, the posterior pdf of $N_2$, exhibits well-defined peak, 
-with a Maximum A Posteriori (MAP) estimate of around 0.013; an extended tail 
+with a Maximum A Posteriori (MAP) estimate of around 0.011; an extended tail 
 towards the higher Manning's roughness coefficient values is also observed.
-In contrast, the posterior pdfs of $N_1$ and $N_3$ appear to be fairly flat, 
+In contrast, the posterior pdfs of $N_1$ appear to be fairly flat, 
 and similar to the uniform prior. This is an indication that 
-the observed data were not useful to refine our prior knowledge for $N_1$ and $N_3$.  
-
+the observed data were not useful to refine our prior knowledge for $N_1$.
+While for $N_3$, we observed a posterior that has a well defined peak
+of 0.185 but no clear pdf shape.
 The posterior distribution of the variance is also shown in Figure~\ref{fig:mcmc}. 
 Taking the square root of the MAP values yields the water surface elevation standard 
 deviation, and the latter is a reflection of the mismatch between the model and 
-observed data estimated to be 0.144~$m$.
+observed data estimated to be 0.145~$m$.
 
 
-   0.021308543478839   0.011083123405057   0.185744276109897   0.021045124706835
+   %MAPS 0.021308543478839   0.011083123405057   0.185744276109897   0.021045124706835
 
 
 
-<<<<<<< HEAD
- \begin{figure}[h]
-        \begin{tabular}{clc}
-\includegraphics[width=0.475\textwidth]{./figures/pdf_p1.pdf} &
-\includegraphics[width=0.475\textwidth]{./figures/pdf_p2.pdf} \\
-\includegraphics[width=0.475\textwidth]{./figures/pdf_p3.pdf} &
-\includegraphics[width=0.475\textwidth]{./figures/pdf_s1.pdf}
-        \end{tabular}
-        \caption{Posterior distributions for the three Manning's roughness coefficients $N_1,N_2,N_3$ 
-and $\sigma^2$ the variance between simulations and observations.}
-\label{fig:pdfs} 
-        \end{figure}
-=======
->>>>>>> 6a05714caf0e310c86ee1e2cf02ec09bf56b73fa

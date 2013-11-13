@@ -6,7 +6,7 @@ to study the statistics of the water surface elevation, and to conduct
 a global sensitivity analysis of the impact of the uncertain input parameters.
 We note that the statistical and sensitivity analysis presented below 
 is performed using the PC coefficients solely; these were calculated
-from an ensemble of 125 Geoclaw simulations.
+from an ensemble of 125 \geoclaw simulations.
 \subsubsection{Statistical analysis}
 The mean of a QoI and its standard deviation is computed
 from the PC coefficients as shown in Equation~\ref{eq:mean} and Equation~\ref{eq:sigma}. 
@@ -17,19 +17,21 @@ Note that we only show the evolution after $t=6000~s$ where the uncertainty is s
 reflected in a significant standard deviation as seen earlier from the realizations in Figure~\ref{fig:rlzs}.
 We observed that the standard deviation ...... 
 
-
-\comment{The same statistical analysis can be performed for the
+The same statistical analysis can be performed for the
 entire domain in 2D. Figure~\ref{fig:mean2d}(top row) shows
 the PC mean water surface elevation for the considered computational
 domain at three different times as indicated in the title of each panel.
-The standard deviation is also shown in Figure~\ref{fig:mean2d}(bottom row).}
-         
+The standard deviation is also shown in Figure~\ref{fig:mean2d}(bottom row)
+at different times. We clearly notice the propagation of the variance
+due to the parametric uncertainty with time
+and along the tsunami's reflections. 
+
         
 \subsubsection{Sensitivity analysis}
 A global sensitivity analysis is next conducted to quantity the contribution of each
 uncertain parameter to the variance in water surface elevation. To this end, we calculate 
-the total sensitivity index using the PC coefficients as shown in Equation~\ref{eq:sens}~\citep{Alexanderian2012,Sudret,Crestaux}. The evolution of the total sensitivity index
-of each of the uncertain parameters is shown in Figure~\ref{fig:sens} for the four gauges. 
+the total sensitivity index using the PC coefficients as shown in Equation~\eqref{eq:T-hard}~\citep{Alexanderian2012,Sudret,Crestaux}. The evolution of the total sensitivity index
+of each of the uncertain parameters is shown in Figure~\ref{fig:sens} at the four gauges. 
 The Manning's roughness coefficient at the shore $N_2$ is clearly dominant and contributes
 the most to the variance in the water surface elevation compared to the other two 
 Manning's roughness coefficients $N_1$ and $N_3$; this is true for almost the entire simulation time
@@ -39,33 +41,20 @@ during the second hour of simulation and Manning's roughness coefficient
 at the land $N_1$ appears to be an insignificant contributor
 to the variance.
 
-\comment{In 2D, the sensitivity analysis shows that .... Figure~\ref{fig:sens2d}(top row) shows
-the PC mean water surface elevation for the considered computational
-domain at three different times as indicated in the title of each panel.
-The standard deviation is also shown in Figure~\ref{fig:mean2d}(bottom row)}.
+In 2D, the sensitivity analysis shows also that $N_2$ is dominant
+where we have variance in water surface elevation. This is
+indicated from Figure~\ref{fig:sens2d} that shows the total sensitivity index
+for $N_1$(top row) $N_2$(center row) and $N_3$ (bottom row)
+at different times as indicated in each panel.
 
 \subsubsection{Response surface}
 In addition to the static and analysis, the PC surrogate 
 can be used to construct a response surface for the uncertain input parameters.
 This is achieved by sampling the PC surrogate for different values of the germ $\xxi$ within the prior
-range.
-\comment{The impact of $N_2$ and $N_3$ for fixed $N_1=0.1025$ is illustrated in Figure~\ref{fig:response2}
+range. Since, $N_3$ shows insignificant contribution in the 
+uncertainty in the model output, we find the impact of $N_2$ and $N_3$ for 
+fixed $N_1=0.1025$ as illustrated in Figure~\ref{fig:response2}
 and Figure~\ref{fig:response3}
-for the area-averaged SST within the $42~km\times42~km$ analysis region; the
-different panels illustrate the time evolution of the SST response
-surfaces. 
-Their most striking features are the relatively flat
-horizontal contours on Sep~17 and Sep~18 indicating that SST depends
-only mildly on $V_{\max}$ even during peak winds;
-unsurprisingly these contours turn completely flat on Sep
-19 (and afterwards) when the winds dip below 10~m/s. The multiplicative
-factor $\alpha$, however, exerts a strong influence on SST even
-under mild wind conditions.  This influence is relatively
-weak for the low $\alpha$ range and increases substantially for the
-higher $\alpha$ as evidenced by the packed contours.  The temperature
-response surfaces at 50-m and 200-m depths (not shown) exhibit
-roughly the same structure as the surface, with milder
-dependence on $V_{\max}$ even during the peak winds of Sep~18.}
-
-
-  \clearpage   
+for different times as indicated. The most striking features are the relatively flat
+horizontal contours in the $N_3$ direction indicating that water surface elevation depends
+only mildly on $N_3$ even during peak tsunami events.
