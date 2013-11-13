@@ -10,12 +10,13 @@
 \usepackage{graphicx}
 \usepackage{bm}
 \usepackage{natbib}
+\usepackage{xspace} % Incorporates correct optional space after commands
 
 % Add line numbers
-\usepackage[mathlines]{lineno}
+\usepackage[mathlines]{lineno} % Control line numbers
 
 % Multipart figures
-\usepackage{subcaption}
+\usepackage{subcaption}  % "Newest" subfigure like package
 
 % \oddsidemargin 0in
 % \evensidemargin 0in
@@ -23,7 +24,7 @@
 % \topmargin -0.50in
 % \textheight 9in
 
-\usepackage{ifpdf}
+\usepackage{ifpdf} % For declaring rules for graphics below
 
 \usepackage{latexsym,amssymb,amsmath,color}
 \newcommand{\revised}[1]{\textcolor{blue}{{#1}}}
@@ -50,7 +51,7 @@
                      {\mbox{\boldmath$\textstyle{#1}$}}
                      {\mbox{\boldmath$\scriptstyle{#1}$}}
                      {\mbox{\boldmath$\scriptscriptstyle{#1}$}}}}
-                     
+
 \newcommand{\geoclaw}{{\sc GeoClaw}\xspace}
 \newcommand{\tohoku}{T\={o}hoku\xspace}
         
