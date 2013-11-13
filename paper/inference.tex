@@ -6,15 +6,15 @@ that has recently gained much interest in different applications including
 ocean~\citep{Alexanderian2011a,Zedler2012,sraj:2013a}
 climate~\citep{OlsonEtAl2012} and geophysical~\citep{Malinverno2002} modeling.
 The key idea in this approach is to express all forms of uncertainty
-in terms of probability. The first step in a Bayesian inference 
+in terms of probability. The first step in Bayesian inference 
 is to formulate the forward problem (response surface/model) using 
 a suitable likelihood function and a product of conditional probability densities. 
-We then formulate the prior distribution over the unknown parameters of the model
-using our best belief. Lastly, given some observation data, Bayes rule 
-is used to obtain a posterior distribution for these unknown
+The prior distributions over the unknown parameters of the model
+are then formulated using our best belief. Lastly, given some observation data, Bayes rule 
+is used to obtain a posterior distribution for these unknown parameters
 \citep{sivia}. We review this approach briefly below.
 
-Let $\vec{d}=(d_1,...,d_m)^T$ be a vector of observation data and $\vec{\theta}=(\theta_1,...,\theta_n)^T$ be a vector of model parameters or inputs. We now consider a forward model $\vec G$ that predicts the data function of 
+Let $\vec{d}=(d_1,...,d_m)^T$ be a vector of observation data and $\vec{\theta}=(\theta_1,...,\theta_n)^T$ be a vector of model parameters or inputs. We consider a forward model $\vec G$ that predicts the data function of 
 the parameters such that:
 \begin{equation}
 \vec d \approx \vec{G}( \vec \theta)
