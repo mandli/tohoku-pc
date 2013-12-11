@@ -1,13 +1,16 @@
 \section{Results}
 \label{sec:results}
-The results of the forward and inverse problems are presented and 
-discussed in three sections. First, we perform an error analysis 
-of the PC expansion construction, namely  to establish the 
-validity of the corresponding surrogate.  Second, we perform a 
-sensitivity analysis and rank the impact of the different Manning's 
-roughness coefficient on the predicted surface elevation. Finally, 
-posterior distributions for the input parameters are determined 
-and analyzed in light of the available gauge data.
+We begin the results section by performing
+an error and convergence analysis of the
+constructed surrogate using the PC expansions
+to establish its validity in Section~\ref{sec:analysis}.
+Then in Section~\ref{sec:forward}, we present
+statistical analysis to quantify the uncertainty in the predicted surface elevation
+as well as a sensitivity analysis to rank the impact of the different Manning's 
+roughness coefficients on this uncertainty. 
+Finally, in Section~\ref{sec:inverse}, we present the results of the inverse
+problem where we determined the posterior distributions of the input parameters 
+and analyzed them in light of the available gauge data.
 \input{pcstudy}
 \input{analysis}
 \input{mcmc}
