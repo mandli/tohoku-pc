@@ -1,103 +1,34 @@
 %!TEX root = paper.tex
 
-\section{Approach}
+\section{Tsunami Computational Model and Case Study Descriptions} \label{sec:model_description}
 
-The approach taken to quantify the surface displacement uncertainties associated with the Manning's $n$ friction parameterization uses a polynomial chaos approach coupled with a shallow water forward model as applied to a real event, the \tohoku tsunami of 2011.  Here we briefly described the setup of the forward model and the prior of the model used.
+In this section we briefly describe the forward computational model used, \geoclaw, and the case study used in the following UQ analysis, the great \tohoku earthquake with observations from NOAA DART buoys.
 
-\subsection{Forward Model}
+\subsection{\geoclaw} \label{ssub:geoclaw}
 
-The forward model we use is the \geoclaw package, a finite volume wave-propagation class that solves the two-dimensional nonlinear shallow water equations  
+The \geoclaw software package uses a finite volume, wave-propagation approach described in \cite{LeVeque:1997eg} to solve the two-dimensional shallow water equations
 \begin{equation} \label{eq:swe}
     \begin{aligned}
     &\pd{}{t} h + \pd{}{x} (hu) + \pd{}{y} (hv) = 0, \\
-    &\pd{}{t}(hu) + \pd{}{x} \left(hu^2 + \frac{1}{2} g h^2 \right ) + \pd{}{y} (huv) = ~~ fhv - gh \pd{}{x} b - C_f |\vec{u}| u \\
-    &\pd{}{t} (hv) + \pd{}{x} (huv) + \pd{}{y} \left (hv^2 + \frac{1}{2} gh^2 \right) = -fhu - gh \pd{}{y} b - C_f |\vec{u}| v
+    &\pd{}{t}(hu) + \pd{}{x} \left(hu^2 + \frac{1}{2} g h^2 \right ) + \pd{}{y} (huv) = ~~ fhv - gh \pd{}{x} b - C_f |\vec{u}| hu \\
+    &\pd{}{t} (hv) + \pd{}{x} (huv) + \pd{}{y} \left (hv^2 + \frac{1}{2} gh^2 \right) = -fhu - gh \pd{}{y} b - C_f |\vec{u}| hv
     \end{aligned}
 \end{equation}
-where $h$ is the depth of the water column, $u$ and $v$ the velocities in the longitudinal and latitudinal directions respectively, $g$ the acceleration due to gravity, $b$ the bathymetry, $f$ the Coriolis parameter, and $C_f$ the bottom friction coefficient.  As is common, $C_f$ is calculated given a Manning's $n$ parameterization such that
+where $h$ is the depth of the water column, $u$ and $v$ the velocities in the longitudinal and latitudinal directions respectively, $g$ the acceleration due to gravity, $b$ the bathymetry, $f$ the Coriolis parameter, and $C_f$ the bottom friction coefficient.  As is common in tsunami modeling, $C_f$ is calculated given a Manning's $n$ parameterization such that
 \begin{equation}
     C_f = \frac{g n^2}{h^{5/3}}
 \end{equation}
-where $n$ is determined from empirical roughness studies.
+where $n$ is an empirically determined parameter.  
 
-The input data 
+The primary computational kernel in \geoclaw is the evaluation of the solution to the Riemann problem at each grid cell interface.  The Riemann solver used includes the ability to handle inundation (wet-dry interfaces), well-balancing even when the momentum is non-zero, and entropy corrections \cite{George:2008aa}.
 
+One unique feature that \geoclaw has is the ability to adaptively refine the grids used for the computation essentially following a region of interest as time progresses (in this case, a tsunami wave).  \geoclaw implements these algorithms following \cite{Berger:1984ui,Berger:1998aa} and is described in detail in \cite{Berger:2011du} in the case of tsunami modeling.
 
-\subsubsection{Source Term Evaluation} \label{ssub:source_term_numerics}
+\alert{Need to describe how we handled the AMR in the UQ calculation.}
 
-Since the effect of friction on the water column is the primary focus of this study, we give a brief description of the process by which friction and the other source terms are included in \geoclaw.  We can write hyperbolic balance laws such as \eqref{eq:swe} commonly in the form
-\begin{equation}
-    q_t + f(q)_x + g(q)_y = \Psi(q)
-\end{equation}
-where $q$ are the conserved quantities, $f(q)$ and $g(q)$ the fluxes in the appropriate directions, and $\Psi(q)$ the source terms.  In the case of \eqref{eq:swe} these can be written
-\begin{align}
-    q = \begin{bmatrix}
-        h \\ hu \\ hv
-    \end{bmatrix} & &
-    f(q) = \begin{bmatrix}
-        hu \\ hu^2 + \frac{1}{2} gh^2 \\ huv
-    \end{bmatrix} & &
-    g(q) = \begin{bmatrix}
-        hv \\ huv \\ hv^2 + \frac{1}{2} gh^2
-    \end{bmatrix}
-    \Psi(q) = \begin{bmatrix}
-        0 \\ fhv - ghb_x - C_f |\vec{u}| u \\ -fhu - ghb_y - C_f |\vec{u}| v
-    \end{bmatrix}.
-\end{align}
+\subsection{The \tohoku Tsunami} \label{ssub:tohoku}
 
-In \geoclaw, the bathymetry source term is handled directly in the Riemann solver step due to well-balancing concerns.  The Coriolis and friction terms are handled via a operator-splitting approach that solves two simpler problems, $q_t + f(q)_x + g(q)_y = 0$ and $q_t = \Psi(q)$, combining the updates to $q$.  The simplest splitting is Godunov splitting in which each system is solved alternately using the full time step $\dt$.  Although this approach is only first-order accurate the observed splitting errors do no dominate the overall error in practice (see \cite{LevequeBook2002} for a more thorough discussion).
-
-Starting with the friction and Coriolis, the bottom friction terms can be evaluated as
-\[
-    (hu)_t = -C_f hu ~~~~\text{and}~~~~ (hv)_t = -C_f hv
-\]
-and are solved using a backwards Euler method for computing the loss of momentum so that
-\[
-    (hu)^{n+1}_{ij} = \frac{(hu)^n_{ij}}{1 + (C_f)_{ij} \dt} ~~~~\text{and}~~~~
-    (hv)^{n+1}_{ij} = \frac{(hv)^n_{ij}}{1 + (C_f)_{ij} \dt}
-\]
-where the drag coefficient is computed using the previous time step's state as
-\[
-    (C_f)_{ij} = \frac{gn_{ij}^2}{(h^n_{ij})^{-7/3}} \sqrt{[(hu)^n_{ij}]^2 + [(hv)^n_{ij}]^2} \left[1-\left(\frac{h_{\text{break}}}{h^n_{ij}}\right)^{\theta_f} \right]^{\gamma_f / \theta_f}.
-\]
-The values $h_{\text{break}}$, $\theta_f$, and $\gamma_f$ are constant parameters that define the hybridization between the Chezy and Manning's $n$ formulation from \eqref{eq:friction_term}.  The Coriolis terms
-\[
-    (hu)_t = -f hv ~~~~\text{and}~~~~ (hv)_t = f hu
-\]
-are evaluated using a matrix exponential up to the 4th term in the series such that the update becomes
-\[
-    \begin{bmatrix}
-        hu \\ hv     
-    \end{bmatrix}^{n+1}_{ij} = 
-    \begin{bmatrix}
-        hu \\ hv     
-    \end{bmatrix}^{n}_{ij} \cdot 
-    \begin{bmatrix}
-        1 - \frac{1}{2} (f \dt)^2 + \frac{1}{24} (f \dt)^4 & f \dt - \frac{1}{6} (f \dt)^3 \\
-        - f \dt + \frac{1}{6} (f \dt)^3 & 1 - \frac{1}{2} (f \dt)^2 + \frac{1}{24} (f \dt)^4
-    \end{bmatrix}
-\]
-where $f = 2 \Omega \sin y$ with $\Omega = 2 \pi / 8.61642\times10^4$ and $y$ the longitudinal coordinate in radians. 
-
-
-\begin{enumerate}
-    \item Finite volume wave-propagation approach
-    \item Adaptive mesh refinement
-    \item Riemann solver - included inundation and well-balanced properties
-    \item Implementation of friction as a source-term splitting
-\end{enumerate}
-
-
-\geoclaw is Based on work by \cite{MacInnes:2013cr}, \cite{Berger:2011du}, \cite{Berger:2011vi}, \cite{George:2008aa}
-
-\subsection{\tohoku Tsunami}
-
-The \tohoku earthquake and tsunami of 2011 has been the subject of a number of studies due to the wealth of observational evidence and severity of the tsunami.  The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and caused massive devastation across Japan.  In this study we have based our simulation on a recent study that attempted to ascertain which source earthquake model matched the observed data optimally \cite{MacInnes:2013cr}.  
-
-\begin{enumerate}
-    \item Note that we do not have the bathymetry used in this paper
-    \item Figure out which source we are using
-\end{enumerate}
+The \tohoku earthquake and tsunami of 2011 has been the subject of a number of studies due to the wealth of observational evidence and severity of the tsunami.  The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and caused massive devastation across Japan.  In this study we have based our simulation on a recent study that attempted to ascertain which source earthquake model matched the observed data optimally \cite{MacInnes:2013cr}.  From that study, we have used \alert{SOMETHING} source model and the publicly available bathymetry (the finest bathymetry located near the Japanese coastline was not included here and should not have a large impact on the deep-ocean observations we are utilizing).
 
 \subsection{Observations}
 
@@ -123,8 +54,3 @@ To represent the uncertainty in the Manning's $n$ coefficients a uniform distrib
 
 Uniform distribution is assumed as the prior for the three manning coefficients.
 such that UN = [0.005-0.2]. The three regions are shown in Figure~\ref{fig:setup}(right)
-
-\subsection{Observations}
-During this tsunami, different gauges were installed to observed the surface elevation
-The locations of theses gauges are shown in Figure~\ref{setup} .
-The gauges are used in the inverse problem to infer the manning coefficients.

@@ -8622,73 +8622,8 @@ methodology and a traditional adjoint-based calculation are discussed.},
   series = {Lecture Notes in Engineering}
 }
 
-@article{Berger:2011du,
-author = {LeVeque, Randall J. and George, David L and Berger, Marsha J},
-title = {{Tsunami Propagation and inundation with adaptively refined finite volume methods}},
-journal = {Acta Numerica},
-year = {2011},
-pages = {211--289},
-doi = {10.1017/S0962492904},
-date-added = {2010-11-19T18:10:57GMT},
-date-modified = {2013-05-15T21:36:30GMT},
-abstract = {Numerical modeling of transoceanic tsunami propagation together with the detailed modeling of inundation of small-scale coastal regions poses a number of algorithmic challenges. The depth-averaged shallow water equations can be used to reduce this to a time-dependent problem in two space dimensions, but even so it is crucial to use adaptive mesh refinement in order to efficiently handle the vast differences in spatial scales. This must be done in a ``well- balanced'' manner that accurately captures very small perturbations to the steady state of the ocean at rest. Inundation can be modeled by allowing cells to dynamically change from dry to wet, but this must also be done carefully near refinement boundaries. We discuss these issues in the context of Riemann-solver based finite volume methods for tsunami modeling. Several examples are presented using the GeoClaw software and sample codes are available to accompany the paper. The techniques discussed also apply to a variety of other geophysical flows.},
-}
-
-@article{MacInnes:2013cr,
-author = {MacInnes, B T and Gusman, A R and LeVeque, R J and Tanioka, Y},
-title = {{Comparison of Earthquake Source Models for the 2011 Tohoku Event Using Tsunami Simulations and Near-Field Observations}},
-journal = {Bulletin of the Seismological Society of America},
-year = {2013},
-volume = {103},
-number = {2B},
-pages = {1256--1274},
-month = may,
-doi = {10.1785/0120120121},
-language = {English},
-url = {http://www.bssaonline.org/cgi/doi/10.1785/0120120121},
-}
-
-@article{Myers:2001el,
-author = {Myers, Edward P and Baptista, Ant{\'o}nio M},
-title = {{Analysis of Factors Influencing Simulations of the 1993 Hokkaido Nansei-Oki and 1964 Alaska Tsunamis}},
-journal = {Natural Hazards},
-year = {2001},
-volume = {23},
-number = {1},
-pages = {1--28},
-publisher = {Kluwer Academic Publishers},
-doi = {10.1023/A:1008150210289},
-language = {English},
-url = {http://link.springer.com/10.1023/A:1008150210289},
-}
-
-@article{Jakeman:2010hk,
-author = {Jakeman, John Davis and Nielsen, Ole M and Putten, Kristy Van and Mleczko, Richard and Burbidge, David and Horspool, Nick},
-title = {{Towards spatially distributed quantitative assessment of tsunami inundation models}},
-journal = {Ocean Dynamics},
-year = {2010},
-volume = {60},
-number = {5},
-pages = {1115--1138},
-month = jul,
-publisher = {Springer-Verlag},
-doi = {10.1007/s10236-010-0312-4},
-language = {English},
-url = {http://link.springer.com/10.1007/s10236-010-0312-4},
-}
-
-@article{Dao:2007hr,
-author = {Dao, M H and Tkalich, P},
-title = {{Tsunami propagation modelling - a sensitivity study}},
-journal = {Natural Hazards and Earth System Science},
-year = {2007},
-volume = {7},
-number = {6},
-pages = {741--754},
-doi = {10.5194/nhess-7-741-2007},
-language = {English},
-url = {http://www.nat-hazards-earth-syst-sci.net/7/741/2007/},
-}
+%% Created using Papers on Wed, 11 Dec 2013.
+%% http://papersapp.com/papers/
 
 @article{Berger:2011vi,
 author = {Berger, Marsha J and George, David L and LeVeque, Randall J. and Mandli, Kyle T},
@@ -8699,9 +8634,27 @@ volume = {34},
 number = {9},
 pages = {1195--1206},
 annote = {18 pages, 11 figures, Animations and source code for some examples at
-  http://www.clawpack.org/links/awr10},
-publisher = {Elsevier},
-keywords = {math.NA, physics.geo-ph}}
+  http://www.clawpack.org/links/awr10}
+}
+
+@article{Dao:2007hr,
+author = {Dao, M H and Tkalich, P},
+title = {{Tsunami propagation modelling - a sensitivity study}},
+journal = {Natural Hazards and Earth System Science},
+year = {2007},
+volume = {7},
+number = {6},
+pages = {741--754}
+}
+
+@book{LeVeque:2002aa,
+author = {LeVeque, Randall},
+title = {{Finite Volume Methods for Hyperbolic Problems}},
+publisher = {Cambridge University Press},
+year = {2002},
+series = {Cambridge Texts in Applied Mathematics},
+address = {Cambridge, UK}
+}
 
 @article{George:2008aa,
 author = {George, David L},
@@ -8711,9 +8664,55 @@ year = {2008},
 volume = {227},
 number = {6},
 pages = {3089--3113},
-month = mar,
-affiliation = {525 B ST, STE 1900, SAN DIEGO, CA 92101-4495 USA},
-keywords = {finite volume methods, Godunov methods, hyperbolic conservation laws, Riemann solvers, shallow water equations, shock capturing methods, tsunami modeling, wave propagation},
-doi = {DOI 10.1016/j.jcp.2007.10.027},
+month = mar
+}
+
+@article{LeVeque:1997eg,
+author = {LeVeque, Randall J.},
+title = {{Wave Propagation Algorithms for Multidimensional Hyperbolic Systems}},
+journal = {Journal of Computational Physics},
+year = {1997},
+volume = {131},
+number = {2},
+pages = {327--353},
+month = mar
+}
+
+@article{Berger:1998aa,
+author = {Berger, Marsha J and LeVeque, Randall J.},
+title = {{Adaptive Mesh Refinement using Wave-Propagation Algorithms for Hyperbolic Systems}},
+journal = {SIAM Journal on Numerical Analysis},
+year = {1998},
+volume = {35},
+pages = {2298--2316}
+}
+
+@article{Berger:2011du,
+author = {LeVeque, Randall J. and George, David L and Berger, Marsha J},
+title = {{Tsunami Propagation and inundation with adaptively refined finite volume methods}},
+journal = {Acta Numerica},
+year = {2011},
+pages = {211--289}
+}
+
+@article{Myers:2001el,
+author = {Myers, Edward P and Baptista, Ant{\'o}nio M},
+title = {{Analysis of Factors Influencing Simulations of the 1993 Hokkaido Nansei-Oki and 1964 Alaska Tsunamis}},
+journal = {Natural Hazards},
+year = {2001},
+volume = {23},
+number = {1},
+pages = {1--28}
+}
+
+@article{Jakeman:2010hk,
+author = {Jakeman, John Davis and Nielsen, Ole M and Putten, Kristy Van and Mleczko, Richard and Burbidge, David and Horspool, Nick},
+title = {{Towards spatially distributed quantitative assessment of tsunami inundation models}},
+journal = {Ocean Dynamics},
+year = {2010},
+volume = {60},
+number = {5},
+pages = {1115--1138},
+month = jul
 }
 
