@@ -279,6 +279,7 @@ def setplot(plotdata):
     plotaxes.ylimits = 'auto'
     plotaxes.title = r"Manning's $N$ Coefficient"
     plotaxes.scaled = True
+    plotaxes.afteraxes = addgauges
 
     plotitem = plotaxes.new_plotitem(name='friction',plot_type='2d_pcolor')
     plotitem.plot_var = lambda cd: cd.aux[1,:,:]
@@ -290,7 +291,8 @@ def setplot(plotdata):
     plotitem.colorbar_label = "Manning's-$n$ Coefficient"
     plotitem.amr_celledges_show = [0,0,0]
     plotitem.amr_patchedges_show = [0,0,0,0,0,0,0]
-    plotitem.colorbar_label = r"$n$"
+    plotitem.colorbar_label = r"$n$")
+
 
     #-----------------------------------------
     
