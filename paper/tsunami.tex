@@ -1,8 +1,8 @@
 %!TEX root = paper.tex
 
-\section{Tsunami Computational Model and Case Study Descriptions} \label{sec:model_description}
+\section{Simulation Setup}
 
-In this section we briefly describe the forward computational model used, \geoclaw, and the case study used in the following UQ analysis, the great \tohoku earthquake with observations from NOAA DART buoys.
+In this section we briefly describe the forward computational model used, \geoclaw, and the case study used in the following uncertainty analysis, the great \tohoku earthquake with observations from NOAA DART buoys.
 
 \subsection{\geoclaw} \label{ssub:geoclaw}
 
@@ -28,11 +28,11 @@ One unique feature that \geoclaw has is the ability to adaptively refine the gri
 
 \subsection{The \tohoku Tsunami} \label{ssub:tohoku}
 
-The \tohoku earthquake and tsunami of 2011 has been the subject of a number of studies due to the wealth of observational evidence and severity of the tsunami.  The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and caused massive devastation across Japan.  In this study we have based our simulation on a recent study that attempted to ascertain which source earthquake model matched the observed data optimally \cite{MacInnes:2013cr}.  From that study, we have used \alert{SOMETHING} source model and the publicly available bathymetry (the finest bathymetry located near the Japanese coastline was not included here and should not have a large impact on the deep-ocean observations we are utilizing).
+The \tohoku earthquake and tsunami of 2011 has been the subject of a number of studies due to the wealth of observational evidence and severity of the tsunami.  The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and caused massive devastation across Japan.  In the case study presented, the simulation is based on work done in \cite{MacInnes:2013cr} and modified to use the specified variable friction field.
 
-\subsection{Observations}
+\subsubsection{Observations}
 
-The observations used in this study are from the Deep-ocean Assessment and Reporting of Tsunamis (DART) buoy system developed and maintained by the National Oceanic and Atmospheric Administration (NOAA).  The purpose of the network is to provide early-warning detection and forecasting of tsunami propagation in the Pacific Ocean \cite{Percival:2011}.  The DART buoys closest to the earthquake source of the \tohoku tsunami were buoys 21418, 21413, 21401, and 21419 whose locations are shown in Figure~\ref{fig:setup} and whose de-tided data for the event are show in Figure~\ref{fig:obs}.
+The observations used in this study are from the Deep-ocean Assessment and Reporting of Tsunamis (DART) buoy system developed and maintained by the National Oceanic and Atmospheric Administration (NOAA).  The purpose of the network is to provide early-warning detection and forecasting of tsunami propagation in the Pacific Ocean \alert{need citation for this?}.  The DART buoys closest to the earthquake source of the \tohoku tsunami were buoys 21418, 21413, 21401, and 21419 whose locations are shown in Figure~\ref{fig:setup} and whose de-tided data for the event are show in Figure~\ref{fig:obs}.
 
 % \begin{figure}[tb]    
 %     \centering
@@ -48,6 +48,18 @@ The observations used in this study are from the Deep-ocean Assessment and Repor
 %     \end{subfigure}
 %     \caption{Stuff}
 %   \end{figure}
+
+\subsubsection{Source Model}
+
+Since the previous study \cite{MacInnes:2013cr} did not find that the source model effected the tsunami wave-forms at the DART buoys, we did not expect there to be much difference between the available models.  After comparing the same analysis with two different source models, namely the models from \cite{Ammon:2011dm} and
+
+\begin{itemize}
+    \item Perhaps do one of the tsunami inversion fault models
+\end{itemize}
+
+Since the previous study found that the source model used did not impact the off-shore gauge stations, the ones used here from \cite{Ammon:2011dm}, was chose the source model that was commonly available.  Access to the finest bathymetry located near the Japanese coastline was also not included as it primarily effected only the shore observations.
+
+\subsubsection{Bathymetry}
 
 \subsection{Parametric Uncertainty}
 To represent the uncertainty in the Manning's $n$ coefficients a uniform distribution was assumed as the prior where $n$ was sampled in the interval $[0.005-0.2]$.  The regions
