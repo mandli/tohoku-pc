@@ -2,24 +2,28 @@
 \label{sec:analysis}
 
 Figure~\ref{fig:rlzs} shows the evolution of the
-water surface elevation for the 125 realizations obtained 
-to compute the PC expansions at the four different gauge 
-locations. We notice that the variation in surface elevation 
-is negligible during the first hour at gauge number 21418 
-and during the first two hours for the remaining gauges
-as the plots of the different realizations are seen to superimpose.
-However, a noticeable uncertainty in the surface 
-elevation can be seen  at all gauges as indicated from the thickness 
-of the bands formed by the plots of the realizations. This uncertainty
-occurs till the end of the simulations.
+water surface elevation predicted at the four different gauges 
+using \geoclaw for the 125 different realizations 
+required to compute the PC expansions. We notice that the 
+variability in water surface elevation is insignificant for the first 
+hour at all gauges as the plots of the different realizations superimpose.
+Later, the variability starts to increase with time at the different gauges 
+as indicated from the thickness of the bands formed by the plots of the realizations
+and is significant at $t\sim$ 5400~s, 6000~s, 3600~s and 7200~s
+for gauges 21401, 21413, 21418, 21419 respectively.
+This is consistent with the distance from the gauge to the source of the earthquake
+where gauge 21418 is the closest and gauge 21419 is the farthest.
+The uncertainty in the water surface  elevation continues till the end of the simulations
+at all gauges.
 
-In order to check the consistency of the approximation, we compare
- water surface elevation from the realizations 
+In order to check the consistency of the PC approximation, we compare
+water surface elevation from the realizations 
 with those obtained from the PC surrogate. The different curves
-show an excellent agreement (not shown) for all times. We also define
+show an excellent agreement (not shown) for all times and gauges locations.
+To quantify this agreement, we define
 an error metric that measures the relative normalized root mean-square error between the left hand side function 
-in Equation~(\ref{eq:stochseries})
-and its PC representation at the sampling points:
+in Equation~(\ref{eq:stochseries}) and its PC representation at the sampling points:
+
 \begin{equation} 
    E = \frac{\displaystyle
          \left(\sum_{\xxi \in \NISP} \left|U(\xxi) - \sum_{k = 0}^{P}
@@ -55,10 +59,9 @@ functions (pdfs) of water surface elevation at the different gauge locations
 converges with increased order of the PC representation.  Sample
 water surface elevation pdfs are shown in Figure~\ref{fig:pdfs2}
 and Figure~\ref{fig:pdfs3}
-The different curves
-correspond to increased order of PC, from 1 to 5.
+The different curves correspond to increased order of PC, from 1 to 5.
 The plots indicate that the double peaked distributions are
-well-resolved with order  4 but becomes weakly insenstive to further refinement 
+well-resolved with order 4 but becomes weakly insenstive to further refinement 
 as shown with order 5. The various error metrics presented above 
 provide confidence that the PC expansion is a faithful 
 model surrogate. 
