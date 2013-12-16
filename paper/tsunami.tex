@@ -6,7 +6,8 @@ In this section we briefly describe the forward computational model used, \geocl
 
 \subsection{\geoclaw} \label{ssub:geoclaw}
 
-The \geoclaw software package uses a finite volume, wave-propagation approach described in \cite{LeVeque:1997eg} to solve the two-dimensional shallow water equations
+The \geoclaw software package uses a finite volume, wave-propagation approach described in \cite{LeVeque:1997eg} to solve the two-dimensional shallow water equations:
+
 \begin{equation} \label{eq:swe}
     \begin{aligned}
     &\pd{}{t} h + \pd{}{x} (hu) + \pd{}{y} (hv) = 0, \\
@@ -14,7 +15,13 @@ The \geoclaw software package uses a finite volume, wave-propagation approach de
     &\pd{}{t} (hv) + \pd{}{x} (huv) + \pd{}{y} \left (hv^2 + \frac{1}{2} gh^2 \right) = -fhu - gh \pd{}{y} b - C_f |\vec{u}| hv
     \end{aligned}
 \end{equation}
-where $h$ is the depth of the water column, $u$ and $v$ the velocities in the longitudinal and latitudinal directions respectively, $g$ the acceleration due to gravity, $b$ the bathymetry, $f$ the Coriolis parameter, and $C_f$ the bottom friction coefficient.  As is common in tsunami modeling, $C_f$ is calculated given a Manning's $n$ parameterization such that
+
+where $h$ is the depth of the water column, $u$ and $v$ the velocities in the 
+longitudinal and latitudinal directions respectively, $g$ the acceleration due 
+to gravity, $b$ the bathymetry, $f$ the Coriolis parameter, and $C_f$ the bottom 
+friction coefficient.  As is common in tsunami modeling, $C_f$ is calculated 
+given a Manning's $n$ parameterization such that:
+
 \begin{equation}
     C_f = \frac{g n^2}{h^{5/3}}
 \end{equation}

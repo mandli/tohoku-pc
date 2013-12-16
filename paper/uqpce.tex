@@ -29,6 +29,7 @@ interest (QoI) that is the output of certain model.
 $U$ is normally function of space $\bm{x}$ and time $t$, and 
 also on the vector of normalized uncertain model inputs $\xxi=(\xi_1,...,\xi_n)$ (called the germ). 
 PC expresses $U$ in the form:
+
 \begin{equation}
   U(\xbold,t,\xxi) \doteq \sum_{k = 0}^P U_k(\xbold,t) \Psi_k(\xxi)
 \label{eq:stochseries}
@@ -42,6 +43,7 @@ of polynomials.
 The choice of the basis is dictated by the probability density
 function of the stochastic variable $\xxi$, and which appears as a weight
 function in the stochastic space's inner product:
+
 \begin{equation}
  \left<\Psi_i,\Psi_j\right> = \int \Psi_i(\xxi) \;\Psi_j(\xxi) \; \rho(\xxi) \; \mbox{d}\xxi=\delta_{ij}\ave{\Psi_i^2}
 \label{eq:inner}
@@ -70,6 +72,7 @@ approach that allows the use of the forward model \geoclaw as a black box
 with no code modifications required. PC expansion coefficients are thus determined
 based on a set of response \geoclaw simulations at specified set of the uncertain parameters. 
 In particular, we rely on the Non-Intrusive Spectral Projection (NISP) method that exploits the orthogonality of the basis and applies the Galerkin projection to find the PC expansion coefficients as follows:
+
 \begin{equation}
  U_k(\bm{x},t) = \frac{\left< U, \Psi_k \right>}{\left< \Psi_k, \Psi_k \right>} = 
  \frac{1}{\left< \Psi_k, \Psi_k \right>} 
@@ -94,6 +97,7 @@ The computational cost of this ensemble is low compared to the cost of the
 tens of thousands of runs using the forward model.
 
 The computation of the ${U}_k$ can thus be expressed as a matrix-vector product of the form:
+
 \begin{equation} 
  U_k(\bm{x},t)=\sum_q \Pi_{kq} U(\bm{x},t,\xxi_q),\;\;\;
  \Pi_{kq}=\frac{\Psi_k(\xxi_q)\omega_q}{\left< \Psi_k, \Psi_k \right>}
@@ -108,6 +112,7 @@ The identification of the inner product weight function
 with the probability distribution of $\xxi$ simplifies the calculations of $U$'s statistical moments. 
 Noting that since $\Psi_0(\xxi)$ is a constant that can be normalized to satisfy 
 $\left<\Psi_0,\Psi_0\right>=1$, the expectation and variance of $U$ can be computed as:
+
 \begin{eqnarray}
  E[U]&=&\int U \, \rho(\xxi) \, \mbox{d}\xxi=\left< U,\Psi_0\right> = U_0  
  \label{eq:mean} \\
@@ -121,6 +126,7 @@ approximation of the corresponding variance-based, global
 sensitivity indices. This can be done by computing the so-called {\it total} 
 sensitivity indices of random variables from the PC representations or Sobol decomposition~\citep{Sobol:1993,Homma:1996,Sobol:2001}. To get the total sensitivity corresponding to the uncertain
 input $\xi_i$ we compute the total index~\citep{LeMaitreKnio2010,Crestaux,Sudret}:
+
 \begin{equation} \label{eq:T-hard}
    T_i =
          \frac{\displaystyle

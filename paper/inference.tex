@@ -16,10 +16,12 @@ is used to obtain a posterior distribution for these unknown parameters
 
 Let $\vec{d}=(d_1,...,d_m)^T$ be a vector of observation data and $\vec{\theta}=(\theta_1,...,\theta_n)^T$ be a vector of model parameters or inputs. We consider a forward model $\vec G$ that predicts the data function of 
 the parameters such that:
+
 \begin{equation}
 \vec d \approx \vec{G}( \vec \theta)
 \end{equation}
 Applying the Bayes' rule yields:
+
 \begin{equation}
  p(\vec{\theta}| \vec d) \propto 
  p(\vec d | \vec{\theta}) \ p(\vec{\theta})  
@@ -36,6 +38,7 @@ To formulate the likelihood function, we let $\vec \epsilon = \vec d - \vec{G}$
 represents the discrepancy between the model and observations.
 Here, the components of $\vec \epsilon $ are i.i.d. random variables with density $p_{\epsilon}$.
 In this case the likelihood function can be written as:
+
 \begin{equation} 
 p(\vec d |  \vec{\theta}) 
 = 
@@ -52,6 +55,7 @@ While in general $\sigma^2$ depends on the observations, in cases where the erro
 amplitude is generally small and does not change throughout space and time, one may use
 a simplified model and assume single $\sigma^2$ value.
 Consequently, Equation~\eqref{eq:likelihood} becomes:
+
 \begin{equation} 
 p(\vec d |  \vec{\theta}) 
 = 
@@ -60,6 +64,7 @@ p(\vec d |  \vec{\theta})
 \label{eq:likelihood2}
 \end{equation}
 The joint posterior from Bayes' rule can be given as:
+
 \begin{equation} 
 p(\vec{\theta}| \vec d)
 \propto
@@ -69,6 +74,7 @@ p(\vec{\theta}| \vec d)
 \end{equation}
 The variance $\sigma^2$ is unknown \emph{a priori}; thus we treat it as a hyper-parameter.
 In other words, $\sigma^2$ may become an additional object for Bayesian inference and may themselves be endowed with priors and estimated from data. In this case the joint posterior is finally written as follows:
+
 \begin{equation} 
 p(\vec{\theta},\sigma^2 | \vec d)
 \propto
