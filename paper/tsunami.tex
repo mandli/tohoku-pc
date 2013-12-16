@@ -37,24 +37,6 @@ One unique feature that \geoclaw has is the ability to adaptively refine the gri
 
 The \tohoku earthquake and tsunami of 2011 has been the subject of a number of studies due to the wealth of observational evidence and severity of the tsunami.  The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and caused massive devastation across Japan.  In the case study presented, the simulation is based on work done in \cite{MacInnes:2013cr} and modified to use the specified variable friction field.
 
-\subsubsection{Observations}
-
-The observations used in this study are from the Deep-ocean Assessment and Reporting of Tsunamis (DART) buoy system developed and maintained by the National Oceanic and Atmospheric Administration (NOAA).  The purpose of the network is to provide early-warning detection and forecasting of tsunami propagation in the Pacific Ocean \alert{need citation for this?}.  The DART buoys closest to the earthquake source of the \tohoku tsunami were buoys 21418, 21413, 21401, and 21419 whose locations are shown in Figure~\ref{fig:setup} and whose de-tided data for the event are show in Figure~\ref{fig:obs}.
-
-% \begin{figure}[tb]    
-%     \centering
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \includegraphics[width=\textwidth]{./figures/DART_locations}
-%         \caption{}
-%         \label{fig:dart_locations}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \includegraphics[width=\textwidth]{./figures/DART_data}
-%         \caption{}
-%         \label{fig:dart_data}
-%     \end{subfigure}
-%     \caption{Stuff}
-%   \end{figure}
 
 \subsubsection{Source Model}
 
@@ -67,9 +49,21 @@ Since the previous study \cite{MacInnes:2013cr} did not find that the source mod
 Since the previous study found that the source model used did not impact the off-shore gauge stations, the ones used here from \cite{Ammon:2011dm}, was chose the source model that was commonly available.  Access to the finest bathymetry located near the Japanese coastline was also not included as it primarily effected only the shore observations.
 
 \subsubsection{Bathymetry}
+The bathymetry is shown in Figure~\ref{fig:setup} in addition to the topography
+of the Pacific Ocean.
+\subsubsection{Observations}
 
+The observations used in this study are from the Deep-ocean Assessment and Reporting of Tsunamis (DART) buoy system developed and maintained by the National Oceanic and Atmospheric Administration (NOAA).  The purpose of the network is to provide early-warning detection and forecasting of tsunami propagation in the Pacific Ocean \alert{need citation for this?}.  The DART buoys closest to the earthquake source of the \tohoku tsunami were buoys 21418, 21413, 21401, and 21419 whose locations are shown in Figure~\ref{fig:setup}(left) and whose de-tided data for the event are shown in Figure~\ref{fig:setup}(right).
 \subsection{Parametric Uncertainty}
-To represent the uncertainty in the Manning's $n$ coefficients a uniform distribution was assumed as the prior where $n$ was sampled in the interval $[0.005-0.2]$.  The regions
-
-Uniform distribution is assumed as the prior for the three manning coefficients.
-such that UN = [0.005-0.2]. The three regions are shown in Figure~\ref{fig:setup}(right)
+In this work, we seek to quantify parametric uncertainty namely due 
+to the uncertainty in the roughness parameter $n$. To this end,
+we characterize the roughness $N$ by three different parameters
+that are varied in three different regions but are assume
+constant in each region. The three regions are as follows: 
+on-shore who coefficnet is denoted by $N_1$, near-shore 
+denoted by $N_2$, and deep-water denoted by $N_3$.
+The three regions are shown in Figure~\ref{fig:ceofs}.
+To carry out the uncertainty quantification we have employed polynomial chaos expansions 
+as used in \cite{sraj:2013a,sraj:2013b}. The method and its application
+to our problem is described in Section~\ref{sec:uqpce}.  
+To represent the uncertainty in the Manning's $n$ coefficients a uniform distribution was assumed as the prior where $n$ was sampled in the interval $[0.005-0.2]$.  
