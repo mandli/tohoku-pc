@@ -3,15 +3,18 @@
 
 Before attempting solving the inverse problem,
 we need to make sure that the observed data are
-comparable to the simulated one.
-To this end, Figure~\ref{fig:compare}
-compares PC mean water surface elevation profiles
+comparable to the simulated one. To this end, Figure~\ref{fig:compare}
+compares PC mean water surface elevation profiles (with error bars)
 with their counterparts from the observed gauge locations.
-The plots show good agreement between the simulations and the observations at different
-locations and at different times. Figure~\ref{fig:compare} can be recast as a scatter plot shown in 
-Figure~\ref{fig:scatter}.
+The plots show a good agreement between the simulations and the 
+observations at different locations and at different times. 
+The same comparison can be recast as a scatter plot shown in 
+Figure~\ref{fig:scatter}. The difference between the observations
+and simulations is attributed to the uncertainty in the 
+Manning's N coefficient and to the measurement errors to be quantified
+in this section.
 
-We now can exploit the surrogate model in the Bayesian inference of the Manning's 
+The surrogate model is exploited in the Bayesian inference of the Manning's 
 roughness coefficient.  To this end, an adaptive MCMC method is used to sample 
 the posterior distributions \citep{Gareth2009,Haario2001} and consequently 
 update the Manning's roughness coefficient distributions in light of the 
@@ -23,8 +26,6 @@ efficient alternative, and requires only evaluating the PCE for different values
 of the seed $\xxi$. The setup of the Bayesian inference problem,
 MCMC chains for the input drag parameters and the corresponding posterior distributions are 
 presented and discussed in this section. 
-
-
 
 
 The observed data collected at different locations 

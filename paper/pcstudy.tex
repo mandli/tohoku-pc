@@ -59,10 +59,13 @@ functions (pdfs) of water surface elevation at the different gauge locations
 converges with increased order of the PC representation.  Sample
 water surface elevation pdfs are shown in Figure~\ref{fig:pdfs2}
 and Figure~\ref{fig:pdfs3}
-The different curves correspond to increased order of PC, from 1 to 5.
+The different curves correspond to increased order of PC (from 1 to 5).
 The plots indicate that the double peaked distributions are
-well-resolved with order 4 but becomes weakly insenstive to further refinement 
-as shown with order 5. The various error metrics presented above 
-provide confidence that the PC expansion is a faithful 
-model surrogate. 
+well-resolved with order 3 at t = 7200 s as shown in Figure~\ref{fig:pdfs2}.
+However, at t = 10800 s further refinement is needed as the pdfs are
+sensitive to the refinement up to order 4 but then becomes weakly 
+insensitive with additional refinement  (order 5) as indicated in Figure~\ref{fig:pdfs3}. 
+We, therefore, used PC order 5 in all computations.
+This test and the various error metrics presented above provide confidence that the PC expansion is a faithful 
+model surrogate that can be used in both the forward and inverse problems.. 
 
