@@ -4,12 +4,32 @@
 
 Tsunamis in the past decade have been responsible for some of the most deadly and costly natural disasters ever recorded.  Coastal communities have faced this hazard by assessing the risk of these hazards, attempting to make informed decisions about the likelihood that such an event would occur with cost to life and property.  To do this, computational models of tsunami events are often employed to explore multiple different scenarios.  Unfortunately, since tsunami events are relatively rare, there is an abundance of uncertainty in the input data for these computational models ranging from effects of the domain such as bathymetry and friction parameterizations, to the earthquake source.  In this article we present an approach to quantifying the uncertainty in the friction field and a method to find the best parameterized values of the friction field using the \tohoku tsunami as a case study.
 
-Previous work looking into uncertainty in the input for tsunami simulations often has focused on the earthquake source but mainly as a way of constraining the various proposed earthquake scenarios only after the event (see for example \cite{MacInnes:2013cr}).  In this work we concentrate on the uncertainty in the friction parameterization used in tsunami simulations.  Changes to the friction parameterization has been shown in the past to lead to significant changes to inundation levels \cite{Myers:2001el,Jakeman:2010hk} but these previous studies were limited in the scope of the changes allowed.  
+Previous work looking into uncertainty in the input for tsunami simulations often has focused on the earthquake source but mainly as a way of constraining the various proposed earthquake scenarios only after the event (see for example \cite{MacInnes:2013cr}).  In this work we concentrate on the uncertainty in the friction parameterization used in tsunami simulations.  Changes to the friction parameterization has been shown in the past to lead to significant changes to inundation levels \cite{Myers:2001el,Jakeman:2010hk} but these previous studies were limited in the scope of the changes allowed.  Recently, Sarri \emph{et al.} built a statistical surrogate of a landslide-generated tsunami computer model by using an emulator~\cite{Sarri2012}. The implemented emulator was the Gaussian process
+that requires using a combination of prior knowledge about the simulator and
+appropriate choices of functions and parameters. Their work was presented as a proof-of-concept case study
+where they performed basic statistical and sensitivity analysis 
 
-In this work we have used the widely used Manning's-n law to provide a relationship between the friction coefficient and the roughness parameter $n$.  The parameter $n$ is also allowed to vary in space determined by the initial water depth to study effects of deep-water, near-shore, and on-shore sensitivities.  To carry out the uncertainty quantification we have employed polynomial chaos expansions as used in \cite{sraj:2013a,sraj:2013b}.  Here the quantity of interest is taken to be the surface elevation $\eta$ and will compared to available NOAA Deep-ocean Assessment and Reporting of Tsunamis (DART) buoys for the \tohoku tsunami.  The forward model runs are performed using \geoclaw following the setup and using one of the source models explored in \cite{MacInnes:2013cr}.
+In this work, we take advantage of the recent developments in Uncertainty Quantification 
+(UQ) methods, which make it feasible to probe the sensitivity of complex and realistic tsunami models 
+to uncertain parameters, and to assess the amount of information that can
+be gained from specific measurements and observations. In particular, 
+we implement an inverse modeling approach towards the objective stated above.  
+Specifically, we will rely on Polynomial Chaos (PC) expansions to construct a 
+faithful surrogate of the response of the large and complex geophysical 
+model simulations.  The availability of the surrogate enables us to efficiently 
+implement a Bayesian inference formalism to the inverse problem, namely 
+because it dramatically reduces the cost of sampling the posterior distribution. 
 
-\begin{itemize}
-    \item Possibly mention this \url{http://arxiv.org/pdf/1203.6297.pdf}?  Talks about creating a surrogate model for land-slide generated tsunamis.
-\end{itemize}
+PC expansions have been developed and applied in the engineering community to quantify uncertainties
+in numerical simulations; their principal use is in propagating input
+uncertainties through large, complex and non-linear models to compute the
+ensuing output uncertainties. Several researchers have been 
+investigating the applicability of PC expansions for UQ in oceanic simulations
+\citep{thacker2012,ashwanth2010,Alexanderian2012}. Recently,
+PC combined with Bayesian inference was used to estimate drag coefficient
+during Typhoon Fanapi 2010. The inference was done using
+adjoint method and MCMC \cite{sraj:2013a,sraj:2013b}.
 
+In this work, we follow a similar procedure as in \cite{sraj:2013a,sraj:2013b}
+to estimate Manning N friction. We use the widely used Manning's-n law to provide a relationship between the friction coefficient and the roughness parameter $n$.  The parameter $n$ is also allowed to vary in space determined by the initial water depth to study effects of deep-water, near-shore, and on-shore sensitivities.  To carry out the uncertainty quantification we have employed polynomial chaos expansions.  Here the quantity of interest is taken to be the surface elevation $\eta$ and will compared to available NOAA Deep-ocean Assessment and Reporting of Tsunamis (DART) buoys for the \tohoku tsunami.  The forward model runs are performed using \geoclaw following the setup and using one of the source models explored in \cite{MacInnes:2013cr}.
 
