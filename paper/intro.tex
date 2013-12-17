@@ -7,7 +7,11 @@ Tsunamis in the past decade have been responsible for some of the most deadly an
 Previous work looking into uncertainty in the input for tsunami simulations often has focused on the earthquake source but mainly as a way of constraining the various proposed earthquake scenarios only after the event (see for example \cite{MacInnes:2013cr}).  In this work we concentrate on the uncertainty in the friction parameterization used in tsunami simulations.  Changes to the friction parameterization has been shown in the past to lead to significant changes to inundation levels \cite{Myers:2001el,Jakeman:2010hk} but these previous studies were limited in the scope of the changes allowed.  Recently, Sarri \emph{et al.} built a statistical surrogate of a landslide-generated tsunami computer model by using an emulator~\cite{Sarri2012}. The implemented emulator was the Gaussian process
 that requires using a combination of prior knowledge about the simulator and
 appropriate choices of functions and parameters. Their work was presented as a proof-of-concept case study
-where they performed basic statistical and sensitivity analysis 
+where they performed basic statistical and sensitivity analysis.
+\comment{In this work we reformulate a statistical data assimilation method generally used in the estimation of model states to estimate this model parameter \cite{Mayo2013} . We show that
+low-dimensional representations of Manning’s n coefficients can be recovered by assimilating
+water elevation data. This is a promising approach to parameter estimation in coastal ocean
+modeling.}
 
 In this work, we take advantage of the recent developments in Uncertainty Quantification 
 (UQ) methods, which make it feasible to probe the sensitivity of complex and realistic tsunami models 

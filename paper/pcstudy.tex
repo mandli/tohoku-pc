@@ -7,19 +7,19 @@ using \geoclaw for the 125 different realizations
 required to compute the PC expansions. We notice that the 
 variability in water surface elevation is insignificant for the first 
 hour at all gauges as the plots of the different realizations superimpose.
-Later, the variability starts to increase with time at the different gauges 
-as indicated from the thickness of the bands formed by the plots of the realizations
-and is significant at $t\sim$ 5400~s, 6000~s, 3600~s and 7200~s
+Later in time, the variability starts to increase with time at the different gauges 
+as indicated from the thickness of the bands formed by the plots of the realizations.
+This variability appears to be significant at $t\sim$ 5400~s, 6000~s, 3600~s and 7200~s
 for gauges 21401, 21413, 21418, 21419 respectively.
 This is consistent with the distance from the gauge to the source of the earthquake
-where gauge 21418 is the closest and gauge 21419 is the farthest.
-The uncertainty in the water surface  elevation continues till the end of the simulations
+(epicenter located approximately 72 km east of \tohoku) where gauge 21418 is the closest and gauge 21419 is the farthest as shown in Figure~\ref{fig:setup}.
+The uncertainty in the prediction of water surface  elevation continues till the end of the simulations
 at all gauges.
 
 In order to check the consistency of the PC approximation, we compare
 water surface elevation from the realizations 
-with those obtained from the PC surrogate. The different curves
-show an excellent agreement (not shown) for all times and gauges locations.
+with those obtained from the PC surrogate. The different curves (not shown) 
+reveal an excellent agreement for all times and gauges locations.
 To quantify this agreement, we define
 an error metric that measures the relative normalized root mean-square error between the left hand side function 
 in Equation~(\ref{eq:stochseries}) and its PC representation at the sampling points:
@@ -34,7 +34,7 @@ U_k\Psi_k(\xxi)\right|^2
           },
 \label{eq:error}
 \end{equation}
-where $\NISP$ is the 125-member ensemble obtained using the PC algorithm. 
+where $\NISP$ is the 125-member ensemble obtained to construct the PC surrogate. 
 This error metric calculated at the different gauge locations is shown in Figure~\ref{fig:error};
 the largest relative normalized error for 
 water surface elevation is about 0.1\%. 
@@ -54,18 +54,19 @@ water surface elevation is about 0.1\%.
 %depth, the surrogate's errors are considered acceptable and small.
 
  
-A final check consists of verifying whether the probability density
+A final check for the validity of the PC approximation 
+consists of verifying whether the probability density
 functions (pdfs) of water surface elevation at the different gauge locations
-converges with increased order of the PC representation.  Sample
+converges with increased order of the PC expansion.  Sample
 water surface elevation pdfs are shown in Figure~\ref{fig:pdfs2}
-and Figure~\ref{fig:pdfs3}
-The different curves correspond to increased order of PC (from 1 to 5).
-The plots indicate that the double peaked distributions are
-well-resolved with order 3 at t = 7200 s as shown in Figure~\ref{fig:pdfs2}.
+and Figure~\ref{fig:pdfs3} where
+the different curves correspond to increased order of PC ($p= 1-5$).
+The plots indicate double peaked distributions that are
+well-resolved with PC order $p=3$ at t = 7200 s as shown in Figure~\ref{fig:pdfs2}.
 However, at t = 10800 s further refinement is needed as the pdfs are
-sensitive to the refinement up to order 4 but then becomes weakly 
-insensitive with additional refinement  (order 5) as indicated in Figure~\ref{fig:pdfs3}. 
-We, therefore, used PC order 5 in all computations.
+sensitive to the refinement up to order $p=4$ but then becomes weakly 
+insensitive with additional refinement  ($p = 5$) as indicated in Figure~\ref{fig:pdfs3}. 
+We, therefore, used PC order $p = 5$ in all computations below.
 This test and the various error metrics presented above provide confidence that the PC expansion is a faithful 
-model surrogate that can be used in both the forward and inverse problems.. 
+model surrogate that can be used in both the forward and inverse problems. 
 
