@@ -31,7 +31,11 @@ The primary computational kernel in \geoclaw is the evaluation of the solution t
 
 One unique feature that \geoclaw has is the ability to adaptively refine the grids used for the computation essentially following a region of interest as time progresses (in this case, a tsunami wave).  \geoclaw implements these algorithms following \cite{Berger:1984ui,Berger:1998aa} and is described in detail in \cite{Berger:2011du} in the case of tsunami modeling.
 
-\alert{Need to describe how we handled the AMR in the UQ calculation.}
+\alert{Need to describe how we handled the AMR in the UQ calculation: Ihab: Nothing special, we had only four time
+steps so I made sure that we have the same AMR grid for the 125 ensemble of realizations. It turned out
+one time step results in different AMR grid for some realizations so I ignored it and didnt include in the discussion.
+Regarding the inverse problem and estimating N, there was no need to worry since I had the local data
+at the gauges ready.... Not sure if this explanation is worth including here ///}
 
 \subsection{The \tohoku Tsunami} \label{ssub:tohoku}
 
@@ -66,4 +70,4 @@ The three regions are shown in Figure~\ref{fig:ceofs}.
 To carry out the uncertainty quantification we have employed polynomial chaos expansions 
 as used in \cite{sraj:2013a,sraj:2013b}. The method and its application
 to our problem is described in Section~\ref{sec:uqpce}.  
-To represent the uncertainty in the Manning's $n$ coefficients a uniform distribution was assumed as the prior where $n$ was sampled in the interval $[0.005-0.2]$.  
+To represent the uncertainty in the Manning's $N$ coefficients a uniform distribution was assumed as the prior where $N$ was sampled in the interval $N \in [0.005-0.2]$.  
