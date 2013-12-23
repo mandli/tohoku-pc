@@ -73,8 +73,7 @@
 
 \begin{frontmatter}
 
-\title{Polynomial Chaos for
- the Estimation of Manning's Friction}
+\title{Estimation of Manning's Friction Coefficient using Polynomial Chaos and Bayesian inference}
 \date{\today}
 
 \author[kaust]{Ihab Sraj}
@@ -95,10 +94,25 @@ Hudson Hall, Durham, North Carolina 27708, USA}
 
 \begin{abstract}
 
+Tsunamis have been lately catastrophic due to the warnings
+issued late and to poorly predicted water elevations. Computational 
+models of tsunami events are often employed to predict water elevations 
+by exploring multiple different scenarios due to the abundance of uncertainty 
+in the input data. Accurate estimation of water elevations requires 
+accurate estimation of many model parameters. Our objective here is to 
+present an efficient method to estimate the Manning's n friction coefficient
+that plays an important role in the tsunami governing equations. 
+In our work, we perform a sensitivity analysis of the Manning’s n coefficient 
+and infer using water surface elevation data obtained during \tohoku tsunami. 
+We characterize the Manning’s friction coefficient by three different parameters 
+assumed constant in three regions: $n_1$ on-shore, $n_2$ near-shore and $n_3$ deep-water. 
+The efficiency of our approach stems from the use of polynomial chaos expansions to build an inexpensive surrogate for the numerical tsunami \geoclaw model that can be used to perform the sensitivity analysis. The surrogate also reduces the computational burden of the Markov Chain Monte-Carlo sampling needed for the Bayesian inference. Our objective is to sharpen three initial estimates of the three uncertain parameters. Our results indicate that Manning’s n friction coefficients have a Maximum-A-Posteriori (MAP) values of $n_2=0.011$ and $n3=0.185$ while for $n_1$ no meaningful MAP value can be determined using the available data. 
+
+
 \end{abstract}
 
 \begin{keyword}
-tsunami \sep Manning's N friction \sep sensitivity analysis \sep polynomial chaos
+tsunami \sep Manning's n friction coefficient \sep sensitivity analysis \sep polynomial chaos \sep Bayesian inference
 \end{keyword}
 
 \end{frontmatter}

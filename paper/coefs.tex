@@ -1,14 +1,14 @@
 \subsection{Inferring Manning Friction Coefficient}
  \label{sec:manning}
  
-We seek to infer the Manning coefficient from water surface elevation
+We seek to infer the Manning's n coefficients from water surface elevation
 data measured at different gauges as shown in Figure~\ref{fig:setup}.
 Bayesian inference can be applied directly to infer the uncertain parameters
 using Equation~\eqref{eq:post}. In our case, the observation data $\vec d$ 
 are the water surface elevation at the gauges;
 their model predicted counterparts $\vec G$ is predicted by \geoclaw.
 The uncertain parameters $\vec \theta$ will be denoted by $\{N_i\}_{i=1}^3$ for the
-three Manning Friction coefficients treated as the unknown parameters. 
+three Manning's coefficients treated as the unknown parameters. 
 In this case  Equation~\eqref{eq:post} can be written as:
 
 \begin{equation} 
