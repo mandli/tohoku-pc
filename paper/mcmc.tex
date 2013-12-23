@@ -5,22 +5,22 @@ Before we attempt solving the inverse problem of parameter estimation,
 we first check the ability of \geoclaw to simulate water surface elevation
 realistically. To this end, we present a comparison between the 
 (DART) buoys observations  and their \geoclaw model counterparts
-for a reference simulation in which the  the Manning's N coefficients were set to their optimal values $N_1=N_2=N_3=0.015$. Figure~\ref{fig:scatter} 
+for a reference simulation in which the  the Manning's N coefficients were set to their optimal values $n_1=n_2=n_3=0.025$. Figure~\ref{fig:scatter} 
 shows a scatter plot that compares the observed 
 water surface elevation at the different gauges locations and the  \geoclaw model counterparts. 
 The plots show a good agreement between the simulations and the 
 observations at different locations and at different times. 
 The difference between the observations and simulations is attributed to the uncertainty in the 
-Manning's N coefficient and to the measurement errors.
+Manning's n coefficients and to the measurement errors.
 \alert{An interesting observation is the more scatter in the data collection by gauge 21418 which is the closest to
 the epicenter of the earthquake and therefore receiving more impact by the tsunami.}
 
 Bayesian inference is now used to estimate the Manning's 
-roughness coefficient ranges that minimize this scatter between 
+n coefficients ranges that minimize this scatter between 
 observed and modeled water surface elevation, and to estimate the variance of the noise in the measured data.
 To this end, an adaptive MCMC method is used to sample 
 the posterior distributions \citep{Gareth2009,Haario2001} and consequently 
-update the Manning's roughness coefficient distributions in light of the 
+update the Manning's n coefficients distributions in light of the 
 observed data. This sampling requires tens of thousands of 
 \geoclaw model runs that are prohibitively expensive as each MCMC 
 sample requires an independent \geoclaw realization. Instead,
@@ -29,14 +29,14 @@ efficient alternative that requires only evaluating the PC expansion
 for different values of the germ $\xxi$.
 
 The MCMC algorithm required $50,000$ iterations to guarantee convergence
-and to obtain the posteriors of the Manning roughness coefficients: 
-$N_1$,$N_2$ and $N_3$ as well as for the variance $\sigma^2$. Figure \ref{fig:mcmc} 
+and to obtain the posteriors of the Manning's n coefficients: 
+$n_1$,$n_2$ and $n_3$ as well as for the variance $\sigma^2$. Figure \ref{fig:mcmc} 
 shows the sample chains for the input parameters for different iterations of the MCMC algorithms. 
 The different panels shows well-mixed chains for all input parameters as well as the variance $\sigma^2$.
-The chain of  $N_{1}$ span the entire range of the prior meaning the observations are not informative 
-concerning this uncertain input.  On the contrary, the $N_{2}$ chain appears to be concentrated in the 
+The chain of  $n_{1}$ span the entire range of the prior meaning the observations are not informative 
+concerning this uncertain input.  On the contrary, the $n_{2}$ chain appears to be concentrated in the 
 lower end of the parameter range, with values between 0.005 and 0.1. 
-While for $N_{3}$, the chain appears to be concentrated in the 
+While for $n_{3}$, the chain appears to be concentrated in the 
 upper end of the parameter range. Finally, the chain for the variance 
 appears to be well mixed with a well defined posterior range between 0.02 and 0.022.
 
@@ -44,18 +44,18 @@ appears to be well mixed with a well defined posterior range between 0.02 and 0.
 Next, the computed MCMC chains are used to determine the posterior 
 distributions using kernel density estimation (KDE)
 ~\citep{Parzen1962,Silverman1986}.  The resulting posterior pdfs 
-of the three Manning's roughness coefficients $N_1,N_2,N_3$ are shown 
+of the three Manning's n coefficients $n_1,n_2,n_3$ are shown 
 in Figure~\ref{fig:pdfs} in addition to the pdfs of $\sigma^2$. 
-Note that the first 5000 iterates, associated with the burn-in period, were discarded.  
+Note that the first 10000 iterates, associated with the burn-in period, were discarded.  
 As expected from the chains shown in Figure
-~\ref{fig:mcmc}, the posterior pdfs of $N_1$ appear to be fairly flat, 
+~\ref{fig:mcmc}, the posterior pdfs of $n_1$ appear to be fairly flat, 
 and similar to the uniform prior; an indication that 
-the observed data were not useful to refine our prior knowledge for $N_1$.,
-In contrast, the posterior pdf of $N_2$ exhibits well-defined peak, 
+the observed data were not useful to refine our prior knowledge for $n_1$.,
+In contrast, the posterior pdf of $n_2$ exhibits well-defined peak, 
 with a Maximum A Posteriori (MAP) estimate of around 0.011
-and an extended tail towards the higher Manning's roughness coefficient values.
-While for $N_3$, we observed a posterior that has a well defined peak
-of 0.185 but no clear pdf shape. The posterior distribution of the variance 
+and an extended tail towards the higher Manning's n coefficient values.
+While for $n_3$, we observed a posterior that has a well defined peak
+of 0.18 but no clear pdf shape. The posterior distribution of the variance 
 appears to be well-defined of Gaussian-like shape. 
 The MAP value of $\sigma^2=0.021$ can be used to estimate the water surface elevation standard 
 deviation estimated to be 0.145~$m$. 
@@ -63,7 +63,7 @@ This value is a reflection of the mismatch between the model and
 observed data.
 
 
-%MAPS 0.021308543478839   0.011083123405057   0.185744276109897   0.021045124706835
+%   0.180222380841571   0.011347632046398   0.185486684362890   0.021050903421753
 
 
 

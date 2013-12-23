@@ -1,29 +1,38 @@
 %!TEX root = paper.tex
 
 \section{Introduction}
-\alert{We need to unify the name of the input parameters, Manning coefficint or friction or roughness.
-what is the best name ??}
 
-Tsunamis in the past decade have been responsible for some of the most deadly and costly natural disasters ever recorded.  Coastal communities have faced this hazard by assessing the risk they pose, attempting to make informed decisions about the likelihood that such an event would occur with cost to life and property.  To do this, computational models of tsunami events are often employed to explore multiple different scenarios.  Unfortunately, since tsunami events are relatively rare, there is an abundance of uncertainty in the input data for these computational models ranging from effects of the domain such as bathymetry and friction parameterizations, to the earthquake source.  In this article we present an approach to quantifying the uncertainty in the friction field and a method to find the best parameterized values of the friction field using the \tohoku tsunami as a case study.
+Tsunamis in the past decade have been responsible for some of the most 
+deadly and costly natural disasters ever recorded. Coastal communities 
+have faced this hazard by assessing the risk they pose, attempting 
+to make informed decisions about the likelihood that such an event would 
+occur with cost to life and property.  To do this, computational models of 
+tsunami events are often employed to explore multiple different scenarios
+to predict the water elevation caused by the tsunamis. The accurate prediction 
+of water elevations requires accurate estimation of many model parameters that 
+are either measured directly, defined empirically, or inferred from
+sparsely collected data. Unfortunately, since tsunami events are relatively rare, 
+there is an abundance of uncertainty in the input data for these computational 
+models ranging from effects of the domain such as bathymetry and friction parameterizations, 
+to the earthquake source.  In this article, we aim to estimate the Manning's n friction
+coefficient that plays a key role in predicting the water elevation. 
+Our approach is to quantify the uncertainty in the predicted water elevation 
+and employ an inverse modeling approach to estimate the Manning's n coefficient 
+using real observations of water elevation measured during the \tohoku tsunami as a case study.
 
-Previous work looking into uncertainty in the input for tsunami simulations often has focused on the earthquake source but mainly as a way of constraining the various proposed earthquake scenarios only after the event (see for example \cite{MacInnes:2013cr}).  In this work we concentrate on the uncertainty in the friction parameterization used in tsunami simulations.  Changes to the friction parameterization has been shown in the past to lead to significant changes to inundation levels \cite{Myers:2001el,Jakeman:2010hk} but these previous studies were limited in the scope of the changes allowed.  Recently, Sarri \emph{et al.} built a statistical surrogate of a landslide-generated tsunami computer model by using an emulator~\cite{Sarri2012}. The implemented emulator was the Gaussian process
-that requires using a combination of prior knowledge about the simulator and
+Previous work looking into uncertainty in the input for tsunami simulations often has focused on the earthquake source but mainly as a way of constraining the various proposed earthquake scenarios only after the event (see for example \cite{MacInnes:2013cr}).  For instance, Sarri \emph{et al.} recently built a statistical surrogate of a landslide-generated tsunami computer model by using an emulator~\cite{Sarri2012}. The implemented emulator was the Gaussian process that requires using a combination of prior knowledge about the simulator and
 appropriate choices of functions and parameters. Their work was presented as a proof-of-concept case study
-where they performed basic statistical and sensitivity analysis.
-In another recent work, Mayo et el. reformulated a statistical data assimilation method generally used in the estimation of model states to estimate Manning’s n coefficients~\cite{Mayo2013}. 
-They used a low-dimensional representations of Manning’s n coefficients and recovered it by assimilating
-water elevation data.
+where they performed basic statistical and sensitivity analysis. In this work we focus on the uncertainty in the friction parameterization used in tsunami simulations.  Changes to the friction parameterization has been shown in the past to lead to significant changes to inundation levels \cite{Myers:2001el,Jakeman:2010hk} but these previous studies were limited in the scope of the changes allowed.  In a recent work, Mayo et el. reformulated a statistical data assimilation method generally used in the estimation of model states to estimate Manning's n coefficient~\cite{Mayo2013}. They used a low-dimensional representations of Manning's n coefficients and recovered it by assimilating water elevation data.
 
-In this work, we take advantage of the recent developments in Uncertainty Quantification 
-(UQ) methods, which make it feasible to probe the sensitivity of complex and realistic tsunami models 
-to uncertain parameters, and to assess the amount of information that can
-be gained from specific measurements and observations. In particular, 
-we implement an inverse modeling approach towards the objective stated above.  
-Specifically, we will rely on Polynomial Chaos (PC) expansions to construct a 
+In this work, we aim at making use of the recent developments in Uncertainty Quantification 
+(UQ) methods that allows probing the sensitivity of realistic tsunami models 
+to uncertain parameters, and inferring those parameters from specific observations. 
+In particular, we implement an inverse modeling approach that relied on the Bayesian inference approach.  
+We will also rely on Polynomial Chaos (PC) expansions to construct a 
 faithful surrogate of the response of the large and complex geophysical 
-model simulations.  The availability of the surrogate enables us to efficiently 
-implement a Bayesian inference formalism to the inverse problem, namely 
-because it dramatically reduces the cost of sampling the posterior distribution. 
+model simulations.  The construction of the surrogate enables us to efficiently 
+implement the Bayesian inference formalism as it dramatically reduces the cost of 
+sampling the posterior distribution. 
 
 PC expansions have been developed and applied in the engineering community to quantify uncertainties
 in numerical simulations; their principal use is in propagating input
@@ -32,9 +41,12 @@ ensuing output uncertainties. Several researchers have been
 investigating the applicability of PC expansions for UQ in oceanic simulations
 \citep{thacker2012,ashwanth2010,Alexanderian2012}. Recently,
 PC combined with Bayesian inference was used to estimate drag coefficient
-during Typhoon Fanapi 2010. The inference was done using
-adjoint method and MCMC \cite{sraj:2013a,sraj:2013b}.
+during Typhoon Fanapi 2010. The same problem was solved using
+the adjoint method and MCMC \cite{sraj:2013a,sraj:2013b}.
 
 In this work, we follow a similar procedure as in \cite{sraj:2013a,sraj:2013b}
-to estimate Manning N friction. We use the widely used Manning's-n law to provide a relationship between the friction coefficient and the roughness parameter $n$.  The parameter $n$ is also allowed to vary in space determined by the initial water depth to study effects of deep-water, near-shore, and on-shore sensitivities.  To carry out the uncertainty quantification we have employed polynomial chaos expansions.  Here the quantity of interest is taken to be the surface elevation $\eta$ and will compared to available NOAA Deep-ocean Assessment and Reporting of Tsunamis (DART) buoys for the \tohoku tsunami.  The forward model runs are performed using \geoclaw following the setup and using one of the source models explored in \cite{MacInnes:2013cr}.
+to estimate Manning'n n coefficient of friction. 
+%We use the widely used Manning's n law to provide a relationship between the friction coefficient and the roughness parameter $n$.  The parameter $n$ is also allowed to vary in space determined by the initial water depth to study effects of deep-water, near-shore, and on-shore sensitivities.  
+To carry out the uncertainty quantification we have employed polynomial chaos expansions.  Here the quantity of interest is taken to be the surface elevation $\eta$ and will compared to available NOAA Deep-ocean Assessment and Reporting of Tsunamis (DART) buoys for the \tohoku tsunami.  The forward model runs are performed using \geoclaw following the setup and using one of the source models explored in \cite{MacInnes:2013cr}.
 
+\alert{maybe an outline for this paper}
