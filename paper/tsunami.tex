@@ -1,4 +1,4 @@
-\section{Manning’s Friction Coefficient}
+\section{Manning's Friction Coefficient}
 %We use the widely used .  The parameter $n$ is also allowed to vary in space determined by the initial water depth to study effects of deep-water, near-shore, and on-shore sensitivities.  
 
 Manning's $n$ law provides a relationship between the friction coefficient appearing in the shallow
@@ -8,7 +8,7 @@ and dependent on the surface characteristics of the sea-floor.
 The direct measurement of $n$ is therefore impossible, instead, values
 are often assigned from tables that are empirically estimated
 for common types of land that are determined from satellite images.
-As a result, the Manning’s n coefficients used in tsunami models
+As a result, the Manning's $n$ coefficients used in tsunami models
 often contain large amounts of uncertainty.
 
 The uncertainty in the Manning's $n$ coefficient leads to uncertainties
@@ -27,7 +27,8 @@ The three regions are shown in Figure~\ref{fig:ceofs}.
 To carry out the uncertainty quantification we have employed polynomial chaos expansions 
 as used in \cite{sraj:2013a,sraj:2013b}. The method and its application
 to our problem is described in Section~\ref{sec:uqpce}.  
-To represent the uncertainty in the Manning's $n$ coefficients a uniform distribution was assumed as the prior where $N$ was sampled in the interval $n \in [0.005-0.2]$.  
+To represent the uncertainty in the Manning's $n$ coefficients a uniform 
+distribution was assumed as the prior where $n$ was sampled in the interval $n \in [0.005,0.2]$.  
 
 \section{Simulation Setup}
 

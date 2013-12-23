@@ -41,30 +41,30 @@ A global sensitivity analysis is next performed to quantity the contribution of 
 uncertain parameter to the variance in water surface elevation. To this end, we calculate 
 the total sensitivity index using the PC coefficients as shown in Equation~\eqref{eq:T-hard}~\citep{Alexanderian2012,Sudret,Crestaux}. The evolution of the total sensitivity index
 of each of the uncertain parameters is shown in Figure~\ref{fig:sens} at the four gauges. 
-The Manning's n coefficient at the shore $N_2$ is clearly dominant and contributes
+The Manning's $n$ coefficient at the shore $n_2$ is clearly dominant and contributes
 the most to the variance in the water surface elevation compared to the other two 
-Manning's n coefficients $N_1$ and $N_3$; this is true for almost the entire simulation time
-and at the four gauges. The Manning's n coefficient
-in the bottom of ocean $N_{3}$ at gauge number 21419 exhibits small sensitivity index 
-during the second hour of simulation and Manning's n coefficient
-at the land $N_1$ appears to be an insignificant contributor
+Manning's $n$ coefficients $n_1$ and $n_3$; this is true for almost the entire simulation time
+and at the four gauges. The Manning's $n$ coefficient
+in the bottom of ocean $n_{3}$ at gauge number 21419 exhibits small sensitivity index 
+during the second hour of simulation and Manning's $n$ coefficient
+at the land $n_1$ appears to be an insignificant contributor
 to the variance.
 
-In 2D, the sensitivity analysis shows also that $N_2$ is dominant
+In 2D, the sensitivity analysis shows also that $n_2$ is dominant
 at the same regions where we observe variance in water surface elevation. This is
 indicated from Figure~\ref{fig:sens2d} that shows the total sensitivity index
-for $N_1$(top row) $N_2$(center row) and $N_3$ (bottom row)
+for $n_1$(top row) $n_2$(center row) and $n_3$ (bottom row)
 at different times as indicated in each panel.
 
 \subsubsection{Response surface}
 In addition to the statistical and sensitivity analysis, the PC surrogate 
 can be used to construct a response surface for the uncertain input parameters.
 This is achieved by sampling the PC surrogate for different values of the germ $\xxi$ within the prior
-range. Since $N_3$ shows insignificant contribution in the 
-uncertainty in the model output, we find the impact of $N_2$ and $N_3$ for 
-fixed value of $N_1=0.1025$ as illustrated in Figure~\ref{fig:response2}
+range. Since $n_3$ shows insignificant contribution in the 
+uncertainty in the model output, we find the impact of $n_2$ and $n_3$ for 
+fixed value of $n_1=0.1025$ as illustrated in Figure~\ref{fig:response2}
 and Figure~\ref{fig:response3} for different times as indicated. The most striking features are the relatively flat
-horizontal contours in the $N_3$ direction indicating that water surface elevation depends
-only mildly on $N_3$ even during peak tsunami events. This is true for gauges 21401, 21413 and 21418. However,
-at gauge 21419, its the opposite case where the horizontal contours are in the $N_2 $ direction
-and there water surface elevation depends mildly on $N_2$.
+horizontal contours in the $n_3$ direction indicating that water surface elevation depends
+only mildly on $n_3$ even during peak tsunami events. This is true for gauges 21401, 21413 and 21418. However,
+at gauge 21419, its the opposite case where the horizontal contours are in the $n_2 $ direction
+and there water surface elevation depends mildly on $n_2$.
