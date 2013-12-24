@@ -1,7 +1,7 @@
 %!TEX root = paper.tex
 
 \section{Introduction}
-
+\label{sec:intro}
 Tsunamis in the past decade have been responsible for some of the most  deadly
 and costly natural disasters ever recorded. Coastal communities  have faced this
 hazard by assessing the risk they pose, attempting  to make informed decisions
@@ -46,8 +46,8 @@ quantification (UQ) methods that allow non-intrusive probing of the sensitivity
 of realistic tsunami  models to uncertain parameters, inferring those parameters
 from specific  observations.  In particular, we implement an inverse modeling
 approach that relies on the Bayesian inference approach.  We will also rely on
-polynomial chaos (PC) expansions to construct a faithful surrogate of the
-response of the large and complex geophysical model simulations.  THe
+Polynomial Chaos (PC) expansions to construct a faithful surrogate of the
+response of the large and complex geophysical model simulations.  The
 construction of the surrogate enables us to efficiently implement the Bayesian
 inference formalism as it dramatically reduces the cost of sampling the
 posterior distribution.
@@ -70,4 +70,18 @@ Reporting Tsunamis (DART) buoys.  The forward model runs are performed using the
 \geoclaw package following the setup in MacInnes \emph{et al.} including the
 source models analyzed there \cite{MacInnes:2013cr}.
 
-\alert{maybe an outline for this paper}
+The structure of this manuscript is as follows. First, we motivate the UQ problem 
+by discussing the uncertainties of the drag parameters in Section~\ref{sec:manning}. 
+Section~\ref{sec:simulation} summarizes the forward simulations setup
+and the DART buoys observational data. 
+Section~\ref{sec:formu} describes the two main numerical method employed:
+Bayesian inference formalism that brings together observations 
+and model results is briefly described in Section~\ref{sec:inference} 
+and PC expansions that were used to build the surrogate model are described
+in Section~\ref{sec:uqpce}. Section~\ref{sec:results} describes the main results in 
+three subsections: first, we present evidence that the surrogate is a faithful 
+representation of the \geoclaw model; second, we use the surrogate to explore the 
+response surfaces of simulated water elevations, and to compute their sensitivity 
+to the control parameters; and third, we present the posterior distribution obtained 
+via MCMC sampling and contrast it to the prior distributions. 
+A discussion of our findings and methodology is presented in Section~\ref{sec:conc}.
