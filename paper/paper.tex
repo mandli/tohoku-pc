@@ -101,13 +101,13 @@ Tsunami computational models are often employed to explore multiple
 different scenarios to predict water elevations due to the abundance 
 of uncertainty in the input data. However, accurate estimation of water elevations 
 requires accurate estimation of many model parameters,
-in particular the Manning's $n$ friction coefficient that plays an important role in the 
-tsunami governing equations. Our objective here is to present an efficient method for the 
+in particular the Manning's $n$ friction coefficient. Our objective here is to 
+present an efficient method for the 
 estimation of Manning's $n$ coefficient characterized by three different parameters 
 assumed constant in three regions: $n_1$ on-shore, $n_2$ near-shore and $n_3$ deep-water. 
 This method uses Polynomial Chaos (PC) to build an inexpensive surrogate for the 
-\geoclaw model and then employs the Bayesian inference that uses the DART buoys data
-obtained during \tohoku tsunami to estimate the three uncertain parameters. The efficiency of our approach stems from 
+\geoclaw model and then employs the Bayesian inference to estimate the three uncertain parameters
+using the DART buoys data obtained during \tohoku tsunami. The efficiency of our approach stems from 
 using a surrogate model that reduces the computational burden of the Markov Chain Monte-Carlo 
 sampling needed in the Bayesian inference. The PC surrogate is also used to perform a sensitivity analysis. 
 Our results indicate that Manning's $n$ coefficients have a Maximum-A-Posteriori (MAP) values of $n_2=0.011$ and $n_3=0.180$, while for $n_1$ no meaningful MAP value can be determined using the available data. 

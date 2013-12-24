@@ -8,80 +8,81 @@ hazard by assessing the risk they pose, attempting  to make informed decisions
 about the likelihood that such an event would  occur with cost to life and
 property.  To do this, computational models of  tsunami events are often
 employed to explore multiple different scenarios to predict the water elevation
-caused by the tsunamis. The accurate prediction  of water elevations requires
-accurate estimation of many model parameters that  are either measured directly,
-defined empirically, or inferred from sparsely collected data. Unfortunately,
+caused by the tsunamis. The accurate prediction  of water elevations, however, requires
+accurate estimation of many model parameters that are either measured directly,
+defined empirically, or estimated from a collection of observed data. Unfortunately,
 since tsunami events are relatively rare,  there is an abundance of uncertainty
 in the input data for these computational  models ranging from effects of the
 domain such as bathymetry and friction parameterizations,  to the earthquake
 source.  In this article, we aim to estimate the Manning's $n$ friction
 coefficient. Our approach quantifies the uncertainty in the predicted water
 elevation  and employs an inverse modeling approach to estimate the Manning's
-$n$ coefficient using observations of water elevation measured during an event.
+$n$ coefficient using observations of water elevation measured during a tsunami event.
 
 Previous work looking into uncertainty in the input for tsunami simulations
 often has focused on the earthquake source but primarily as a way of
 constraining the various proposed earthquake scenarios only after the event (see
 for example \cite{MacInnes:2013cr}).  A similar approach for landslide-generated
-tsunami was presented in Sarri \emph{et al.}, building a statistical surrogate
-using an emulator \cite{Sarri2012}.  The implemented emulator was the Gaussian
+tsunami was presented in Sarri \emph{et al.}, by building a statistical surrogate
+using an emulator \cite{Sarri2012}. The implemented emulator was the Gaussian
 process that requires using a combination of prior knowledge about the simulator
 and appropriate choices of functions and parameters. Their work was presented as
-a proof-of-concept case study where they performed basic statistical and
-sensitivity analysis. In this work we focus on the uncertainty in the friction
-parameterization used in tsunami simulations.  Changes to the friction
-parameterization has been shown in the past to lead to significant changes to
-inundation levels \cite{Myers:2001el,Jakeman:2010hk} but these previous studies
-were limited in the scope of the changes to the parameterization allowed.  In
-recent work, Mayo et el. reformulated a statistical data assimilation method
+a proof-of-concept case study where they only performed basic statistical and
+sensitivity analysis.  Changes to the friction parameterization has been shown in 
+the past to lead to significant changes to inundation levels \cite{Myers:2001el,Jakeman:2010hk} 
+but these previous studies were limited in the scope of the changes to the parameterization allowed.  
+In a recent work, Mayo et el. reformulated a statistical data assimilation method
 generally used in the estimation of model states to estimate the Manning's $n$
 coefficient~\cite{Mayo2013}. They used a low-dimensional representations of
-Manning's $n$ coefficients and recovered it by assimilating water elevation data.
+Manning's $n$ coefficients and recovered it by assimilating synthetic water elevation data.
 
-\alert{Did the Talia et al. study use synthetic data?  Probably should mention
-this if that was the case.}
-
-The method proposed here utilizes recent developments in uncertainty
-quantification (UQ) methods that allow non-intrusive probing of the sensitivity
-of realistic tsunami  models to uncertain parameters, inferring those parameters
-from specific  observations.  In particular, we implement an inverse modeling
-approach that relies on the Bayesian inference approach.  We will also rely on
-Polynomial Chaos (PC) expansions to construct a faithful surrogate of the
+In this work, we focus our attention on the uncertainty in the friction
+parameterization used in tsunami simulations. We present a three-dimensional 
+representation of Manning's $n$ coefficient and an efficient method
+to estimate this representation using real water elevation data. The method proposed here utilizes recent 
+developments in Uncertainty Quantification (UQ) methods that allow 
+probing of the sensitivity of realistic tsunami  models to uncertain parameters
+without modifying the forward model and inferring those parameters
+from a number of observations.  In particular, we implement an inverse modeling
+approach that relies on the Bayesian inference technique.  We also employ
+Polynomial Chaos (PC) expansions to construct a faithful surrogate model of the
 response of the large and complex geophysical model simulations.  The
 construction of the surrogate enables us to efficiently implement the Bayesian
-inference formalism as it dramatically reduces the cost of sampling the
+inference technique as it dramatically reduces the cost of sampling the
 posterior distribution.
 
 PC expansions have been developed and applied in the engineering community to
-quantify uncertainties in numerical simulations; their principal use is in
-propagating input uncertainties through large, complex and non-linear models to
-compute the ensuing output uncertainties. Several researchers have been
-investigating the applicability of PC expansions for UQ in oceanic simulations
-\citep{thacker2012,ashwanth2010,Alexanderian2012}. Recently, PC combined with
-Bayesian inference was used to estimate drag coefficient during Typhoon Fanapi
-2010. The same problem was solved using the adjoint method and MCMC
-\cite{sraj:2013a,sraj:2013b}.
+quantify uncertainties in numerical simulations.  The main advantage of
+using PC expansions is the ability of propagating input uncertainties through 
+large, complex and non-linear models to compute the corresponding output uncertainties. 
+Several researchers have been investigating the applicability of PC expansions for 
+UQ in oceanic simulations~\citep{thacker2012,ashwanth2010,Alexanderian2012}. 
+Recently, PC was combined with Bayesian inference to estimate the drag coefficient 
+using temperature data collected during Typhoon Fanapi 2010. The same problem was 
+solved using two different techniques: the adjoint method and Markov Chain Monte Carlo
+(MCMC)\cite{sraj:2013a,sraj:2013b}.
 
 In this work, we follow a similar procedure as in \cite{sraj:2013a,sraj:2013b}
-to estimate Manning's $n$ coefficient of friction using the \tohoku tsunami
-event as a case-study.  The quantity of interest is taken to be the surface
+to estimate Manning's $n$ coefficient using the \tohoku tsunami
+event as a case-study. The quantity of interest is taken to be the surface
 elevation $\eta$ and is compared to the available NOAA Deep-ocean Assessment and
 Reporting Tsunamis (DART) buoys.  The forward model runs are performed using the
 \geoclaw package following the setup in MacInnes \emph{et al.} including the
 source models analyzed there \cite{MacInnes:2013cr}.
 
-The structure of this manuscript is as follows. First, we motivate the UQ problem 
-by discussing the uncertainties of the drag parameters in Section~\ref{sec:manning}. 
-Section~\ref{sec:simulation} summarizes the forward simulations setup
-and the DART buoys observational data. 
-Section~\ref{sec:formu} describes the two main numerical method employed:
+The structure of this manuscript is as follows. First, we discussing the uncertainties 
+of the Manning'g $n$ coefficient to motivate the UQ problem in Section~\ref{sec:manning}
+and present a proposed three-dimensional representation of $n$. 
+In Section~\ref{sec:tohoku}, we describe our case-study the \tohoku tsunami,
+summarize the forward simulations setup and present the DART buoys observational data. 
+Section~\ref{sec:formu} describes the two main numerical methods employed in the UQ analysis:
 Bayesian inference formalism that brings together observations 
-and model results is briefly described in Section~\ref{sec:inference} 
-and PC expansions that were used to build the surrogate model are described
-in Section~\ref{sec:uqpce}. Section~\ref{sec:results} describes the main results in 
-three subsections: first, we present evidence that the surrogate is a faithful 
-representation of the \geoclaw model; second, we use the surrogate to explore the 
-response surfaces of simulated water elevations, and to compute their sensitivity 
-to the control parameters; and third, we present the posterior distribution obtained 
-via MCMC sampling and contrast it to the prior distributions. 
-A discussion of our findings and methodology is presented in Section~\ref{sec:conc}.
+and model results (briefly described in Section~\ref{sec:inference}) 
+and PC expansions that were used to build the surrogate model (described
+in Section~\ref{sec:uqpce}). Section~\ref{sec:results} describes the main results in 
+three subsections: first, we perform error and convergence studies
+as evidences that the PC surrogate is a faithful 
+representation of the \geoclaw model; second, we use the PC surrogate to 
+perform a statistical analysis and compute the  sensitivity of simulated water elevations
+to the uncertain input parameters; and third, we present the result of the
+posterior distributions obtained using Bayesian inference by MCMC. A discussion of our findings and methodology is finally presented in Section~\ref{sec:conc}.

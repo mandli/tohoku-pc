@@ -2,8 +2,10 @@
 \label{sec:manning}
 %We use the widely used .  The parameter $n$ is also allowed to vary in space determined by the initial water depth to study effects of deep-water, near-shore, and on-shore sensitivities.  
 
-Manning's $n$ law provides a relationship between the friction coefficient appearing in the shallow
-water equations governing tsunamis and the roughness parameter $n$. 
+Manning's $n$ law provides a relationship between the friction coefficient 
+(Equation \ref{eq:coef}) appearing in the shallow
+water equations governing tsunamis (see Equation \ref{eq:swe})
+and the roughness parameter $n$. 
 This Manning's $n$ coefficient is variable that is highly spatial 
 and dependent on the surface characteristics of the sea-floor. 
 The direct measurement of $n$ is therefore impossible, instead, values
@@ -18,8 +20,8 @@ and becomes a health risk during tsunami events. In addition,
 the prediction of these quantities of interest are often highly sensitive to 
 the changes in these uncertain parameters. 
 In this work, we seek to quantify parametric uncertainty namely due 
-to the uncertainty in the roughness parameter $n$. To this end,
-we characterize the roughness $n$ by three different parameters
+to the uncertainty in the friction parameter $n$. To this end,
+we characterize the Manning's $n$ coefficient by three different parameters
 that are varied in three different regions but are assumed
 constant in each region. The three regions are as follows: 
 on-shore whose coefficient is denoted by $n_1$, near-shore 
@@ -32,7 +34,7 @@ To represent the uncertainty in the Manning's $n$ coefficients a uniform
 distribution was assumed as the prior where $n$ was sampled in the interval $n \in [0.005,0.2]$.  
 
 \section{The \tohoku Tsunami} 
-\label{ssub:tohoku}
+\label{sec:tohoku}
 
 The \tohoku earthquake and tsunami of 2011 has been the subject of a number of studies due to the wealth of observational evidence and severity of the tsunami.  The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and caused massive devastation across Japan.  In the case study presented, the simulation is based on work done in \cite{MacInnes:2013cr} and modified to use the specified variable friction field.
 In this section we briefly describe the forward computational model used, \geoclaw, and the 
@@ -63,6 +65,7 @@ given a Manning's $n$ parameterization such that:
 
 \begin{equation}
     C_f = \frac{g n^2}{h^{5/3}}
+\label{eq:coef}
 \end{equation}
 where $n$ is an empirically determined parameter.  
 
@@ -70,11 +73,11 @@ The primary computational kernel in \geoclaw is the evaluation of the solution t
 
 One unique feature that \geoclaw has is the ability to adaptively refine the grids used for the computation essentially following a region of interest as time progresses (in this case, a tsunami wave).  \geoclaw implements these algorithms following \cite{Berger:1984ui,Berger:1998aa} and is described in detail in \cite{Berger:2011du} in the case of tsunami modeling.
 
-\alert{Need to describe how we handled the AMR in the UQ calculation: Ihab: Nothing special, we had only four time
-steps so I made sure that we have the same AMR grid for the 125 ensemble of realizations. It turned out
-one time step results in different AMR grid for some realizations so I ignored it and didnt include in the discussion.
-Regarding the inverse problem and estimating N, there was no need to worry since I had the local data
-at the gauges ready.... Not sure if this explanation is worth including here ///}
+%\alert{Need to describe how we handled the AMR in the UQ calculation: Ihab: Nothing special, we had only four time
+%steps so I made sure that we have the same AMR grid for the 125 ensemble of realizations. It turned out
+%one time step results in different AMR grid for some realizations so I ignored it and didnt include in the discussion.
+%Regarding the inverse problem and estimating N, there was no need to worry since I had the local data
+%at the gauges ready.... Not sure if this explanation is worth including here ///}
 
 
 \subsection{Source Model and Bathymetry}
@@ -91,4 +94,4 @@ of the Pacific Ocean.}
 
 \subsection{DART Buoys Observations}
 
-The observations used in this study are from the Deep-ocean Assessment and Reporting of Tsunamis (DART) buoy system developed and maintained by the National Oceanic and Atmospheric Administration (NOAA).  The purpose of the network is to provide early-warning detection and forecasting of tsunami propagation in the Pacific Ocean \alert{need citation for this?}.  The DART buoys closest to the earthquake source of the \tohoku tsunami were buoys 21401, 21413, 21418, and 21419 whose locations are shown in Figure~\ref{fig:setup}(left) and whose de-tided data for the event are shown in Figure~\ref{fig:setup}(right).
+The observations used in this study are from the Deep-ocean Assessment and Reporting of Tsunamis (DART) buoy system developed and maintained by the National Oceanic and Atmospheric Administration (NOAA).  The purpose of the network is to provide early-warning detection and forecasting of tsunami propagation in the Pacific Ocean \alert{need citation for this?}.  The DART buoys closest to the earthquake source of the \tohoku tsunami were buoys 21401, 21413, 21418, and 21419 whose locations are shown in Figure~\ref{fig:setup}(left) and whose de-tided data for the event are shown in Figure~\ref{fig:setup}(right). \comment{maybe more description of the data in the figure}.
