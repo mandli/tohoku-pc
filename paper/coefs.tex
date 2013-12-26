@@ -1,36 +1,35 @@
-\subsection{Inferring Manning Friction Coefficient}
- \label{sec:manning}
+\subsubsection{Inferring Manning's Friction Coefficient}
+\label{sec:infmanning}
  
-We seek to infer the Manning's n coefficients from water surface elevation
+We seek to infer the Manning's $n$ coefficients from water surface elevation
 data measured at different gauges as shown in Figure~\ref{fig:setup}.
 Bayesian inference can be applied directly to infer the uncertain parameters
 using Equation~\eqref{eq:post}. In our case, the observation data $\vec d$ 
 are the water surface elevation at the gauges;
 their model predicted counterparts $\vec G$ is predicted by \geoclaw.
-The uncertain parameters $\vec \theta$ will be denoted by $\{N_i\}_{i=1}^3$ for the
+The uncertain parameters $\vec \theta$ will be denoted by $\{n_i\}_{i=1}^3$ for the
 three Manning's coefficients treated as the unknown parameters. 
 In this case  Equation~\eqref{eq:post} can be written as:
 
 \begin{equation} 
-p(N_1,N_2,N_3,\sigma^2 | \vec d) 
+p(n_1,n_2,n_3,\sigma^2 | \vec d) 
 \propto \frac{1}{\sqrt{2 \pi \sigma^2}} 
  \prod_{i=1}^m  
 \exp \left\lbrace \frac{-(d_i - G_i)^2}{2 \sigma^2} \right\rbrace
-\ p(\sigma^2)p(N_1)p(N_2) p(N_3)
+\ p(\sigma^2)p(n_1)p(n_2) p(n_3)
 \label{eq:post_coef}
 \end{equation}
 
 To complete the definition of the posterior, we need to choose a proper prior that should be based 
 on some \emph{a priori} knowledge about the parameters. In our case, a uniform
-prior for the model parameters is assumed as indicated:
+prior for all model parameters is assumed where $n_i \in [0.005,0.2]$ and therefore:
 
 \begin{equation} 
-p(N_i) = \begin{cases}
-		\displaystyle \frac{1}{b_i-a_i} &\text{for~} a_i <  N_i \leq b_i ,  \\
-		0 &\text{otherwise}  , 
+p(n_i) = \begin{cases}
+		\displaystyle \frac{1}{0.2-0.005} &\text{for~} 0.005 <  N_i \leq 0.2 ,  \\
+		0 &\text{otherwise}  .
 \end{cases}
 \end{equation}
-where $ [a_i,b_i]$ denote the parameter ranges defined as.
 Regarding the variance, the only information we know 
 is that $\sigma^2$ is always positive.
 We thus assume a Jeffreys prior \citep{sivia}, expressed as:

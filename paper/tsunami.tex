@@ -1,8 +1,16 @@
 %!TEX root = paper.tex
 
-\section{Simulation Setup}
+\section{The \tohoku Tsunami} 
+\label{sec:tohoku}
 
-In this section we briefly describe the forward computational model used, \geoclaw, and the case study used in the following uncertainty analysis, the great \tohoku earthquake with observations from NOAA DART buoys.
+The \tohoku earthquake and tsunami of 2011 has been the subject of a number of studies due to the wealth of observational evidence and severity of the tsunami.  The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and caused massive devastation across Japan.  In the case study presented, the simulation is based on work done in \cite{MacInnes:2013cr} and modified to use the specified variable friction field.
+In this section we briefly describe the forward computational model used, \geoclaw, and the 
+simulation setup used in the uncertainty analysis and finally describe
+the observations from NOAA DART buoys.
+
+%\section{Simulation Setup}
+%\label{sec:simulation}
+
 
 \subsection{\geoclaw} \label{ssub:geoclaw}
 
@@ -21,6 +29,7 @@ friction coefficient.  As is common in tsunami modeling, $C_f$ is calculated
 given a Manning's $n$ parameterization such that:
 \begin{equation}
     C_f = \frac{g n^2}{h^{5/3}}
+\label{eq:coef}
 \end{equation}
 where $n$ is an empirically determined parameter known as Manning's $n$.  
 
@@ -31,12 +40,11 @@ One unique feature that \geoclaw has is the ability to adaptively refine the gri
 
 For the simulations presented, refinement thresholds were used that matched what was presented in \cite{MacInnes:2013cr}.  As was done there, four levels of refinement were used staring with a resolution of 1 degree in both the latitudinal and longitudinal directions down to 0.5' resolution (approximately 900 meters) located around the observation locations.  The tolerance for the refinement criteria for sea-surface anomaly was 0.02 meters.
 
-
 \subsection{The \tohoku Tsunami} \label{ssub:tohoku}
 
 The \tohoku earthquake and tsunami of 2011 has been the subject of a number of studies due to the wealth of observational evidence and severity of the tsunami.  The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and caused massive devastation across Japan.  In the case study presented, the simulation is based on work done in \cite{MacInnes:2013cr} and modified to use the specified variable friction field.
 
-\subsubsection{Source Model}
+\subsection{Source Model and Bathymetry}
 
 The MacInnes \emph{et al.} study found that source models from tsunami
 inversions were 
@@ -47,7 +55,10 @@ Since the previous study \cite{MacInnes:2013cr} did not find that the source mod
 [7] Saito et al. used a tsunami inversion
 
 Since the previous study found that the source model used did not impact the off-shore gauge stations, the ones used here from \cite{Ammon:2011dm}, was chose the source model that was commonly available.  Access to the finest bathymetry located near the Japanese coastline was also not included as it primarily effected only the shore observations.
+\comment{The bathymetry is shown in Figure~\ref{fig:setup} in addition to the topography
+of the Pacific Ocean.}
 
+<<<<<<< HEAD
 \subsubsection{Bathymetry}
 The bathymetry used in the simulation is a combination of ETOPO 1' and 4' 
 accurate bathymetry for the region \cite{Amante:2009ud}.  The additional 
@@ -57,6 +68,11 @@ this study.
 
 \subsubsection{Observations}
 The observations used in this study are from the Deep-ocean Assessment and Reporting of Tsunamis (DART) buoy system developed and maintained by the National Oceanic and Atmospheric Administration (NOAA).  The purpose of the network is to provide early-warning detection and forecasting of tsunami propagation in the Pacific Ocean \alert{need citation for this?}.  The DART buoys closest to the earthquake source of the \tohoku tsunami were buoys 21401, 21413, 21418, and 21419 whose locations are shown in Figure~\ref{fig:setup}(left) and whose de-tided data for the event are shown in Figure~\ref{fig:setup}(right).
+
+\subsection{DART Buoys Observations}
+
+The observations used in this study are from the Deep-ocean Assessment and Reporting of Tsunamis (DART) buoy system developed and maintained by the National Oceanic and Atmospheric Administration (NOAA).  The purpose of the network is to provide early-warning detection and forecasting of tsunami propagation in the Pacific Ocean \alert{need citation for this?}.  The DART buoys closest to the earthquake source of the \tohoku tsunami were buoys 21401, 21413, 21418, and 21419 whose locations are shown in Figure~\ref{fig:setup}(left) and whose de-tided data for the event are shown in Figure~\ref{fig:setup}(right). \comment{maybe more description of the data in the figure}.
+
 
 
 \section{Manning’s $n$ Friction Parameterization}
@@ -91,3 +107,36 @@ to our problem is described in Section~\ref{sec:uqpce}.
 To represent the uncertainty in the Manning's $n$ coefficients a uniform distribution was assumed as the prior where $N$ was sampled in the interval $n \in [0.005-0.2]$.  
 
 Note that on the Sendai plain a Manning's $n$ value of 0.035 was used to account for pasture, farmland and rice paddies.
+
+\section{Manning's Friction Coefficient} \label{sec:manning}
+
+Manning's $n$ law provides a relationship between the friction coefficient 
+(Equation \ref{eq:coef}) appearing in the shallow
+water equations governing tsunamis (see Equation \ref{eq:swe})
+and the roughness parameter $n$. 
+This Manning's $n$ coefficient is variable that is highly spatial 
+and dependent on the surface characteristics of the sea-floor. 
+The direct measurement of $n$ is therefore impossible, instead, values
+are often assigned from tables that are empirically estimated
+for common types of land that are determined from satellite images.
+As a result, the Manning's $n$ coefficients used in tsunami models
+often contain large amounts of uncertainty.
+
+The uncertainty in the Manning's $n$ coefficient leads to uncertainties
+in the predicted quantities of interest such as the water elevations
+and becomes a health risk during tsunami events. In addition, 
+the prediction of these quantities of interest are often highly sensitive to 
+the changes in these uncertain parameters. 
+In this work, we seek to quantify parametric uncertainty namely due 
+to the uncertainty in the friction parameter $n$. To this end,
+we characterize the Manning's $n$ coefficient by three different parameters
+that are varied in three different regions but are assumed
+constant in each region. The three regions are as follows: 
+on-shore whose coefficient is denoted by $n_1$, near-shore 
+denoted by $n_2$, and deep-water denoted by $n_3$.
+The three regions are shown in Figure~\ref{fig:ceofs}.
+To carry out the uncertainty quantification we have employed polynomial chaos expansions 
+as used in \cite{sraj:2013a,sraj:2013b}. The method and its application
+to our problem is described in Section~\ref{sec:uqpce}.  
+To represent the uncertainty in the Manning's $n$ coefficients a uniform 
+distribution was assumed as the prior where $n$ was sampled in the interval $n \in [0.005,0.2]$.  
