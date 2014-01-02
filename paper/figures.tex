@@ -1,23 +1,27 @@
-\begin{figure}[h]
+%!TEX root = paper.tex
+
+\begin{figure}[ht]
 \centering
-\begin{tabular}{clc}
-\includegraphics[width=0.60\textwidth]{./figures/topo.pdf}  &
-\includegraphics[width=0.60\textwidth]{./figures/obs.pdf} 
-\label{setup}
-\end{tabular}
-\caption{(left) Topography and Bathymetry and gauge locations (right)
-Observed data of water surface elevation with time at four different gauges.}
+\begin{subfigure}[c]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{./figures/topo.pdf}
+    \caption{} \label{fig:setup_buoy_locations}
+\end{subfigure}
+\begin{subfigure}[c]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{./figures/obs.pdf} 
+    \caption{} \label{fig:setup_buoy_data}
+\end{subfigure}
+\caption{Figure~\ref{fig:setup_buoy_locations} shows the topography, bathymetry and gauge locations used in the simulation.  Figure~\ref{fig:setup_buoy_data} shows observed de-tided water surface height at all the DART buoys used.}
 \label{fig:setup}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]      
+\begin{figure}[ht]      
 \centering
 \includegraphics[width=0.6\textwidth]{./figures/coef.pdf}
 \caption{Manning's $n$ coefficients at three regions: $n_1$ on-shore, $n_2$ near shore, $n_3$ deep-water.}
 \label{fig:ceofs}
 \end{figure}  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \begin{tabular}{clc}        
 \includegraphics[width=0.6\textwidth]{./figures/rlzs_gauges.pdf} 
@@ -27,7 +31,7 @@ Observed data of water surface elevation with time at four different gauges.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \begin{tabular}{clc}        
 \includegraphics[width=0.5\textwidth]{./figures/error_gauge1.pdf} &
@@ -40,7 +44,7 @@ Observed data of water surface elevation with time at four different gauges.}
 \label{fig:error}
 \end{figure}   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 
 \begin{tabular}{clcl}
@@ -53,7 +57,7 @@ Observed data of water surface elevation with time at four different gauges.}
 \label{fig:pdfs2}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \begin{tabular}{clc}
         
@@ -66,7 +70,7 @@ Observed data of water surface elevation with time at four different gauges.}
 \label{fig:pdfs3}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{tabular}{clc}
         
 \includegraphics[width=0.475\textwidth]{./figures/musigma1.pdf} &
@@ -78,7 +82,7 @@ Observed data of water surface elevation with time at four different gauges.}
 \label{fig:ave}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{tabular}{clc}
 %        
 \includegraphics[width=0.475\textwidth]{./figures/compare1.pdf} &
@@ -91,7 +95,7 @@ and observed data of water surface elevation with time at the four gauges.}
 \label{fig:compare}
 \end{figure}  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
         \begin{tabular}{ccc}
 \hspace*{-65pt}
 \includegraphics[width=0.45\textwidth]{./figures/mean2d1.pdf} &
@@ -111,7 +115,7 @@ and observed data of water surface elevation with time at the four gauges.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{tabular}{clc}
 \includegraphics[width=0.475\textwidth]{./figures/sens1.pdf} &
 \includegraphics[width=0.475\textwidth]{./figures/sens2.pdf} \\
@@ -123,7 +127,7 @@ and observed data of water surface elevation with time at the four gauges.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{tabular}{clc}
  \hspace*{-65pt}
 \includegraphics[width=0.45\textwidth]{./figures/T12d1.pdf} &
@@ -149,7 +153,7 @@ and observed data of water surface elevation with time at the four gauges.}
 \label{fig:sens2d}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 
 \begin{tabular}{clcl}
@@ -162,7 +166,7 @@ and observed data of water surface elevation with time at the four gauges.}
 \label{fig:response2}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 
 \begin{tabular}{clcl}
@@ -175,7 +179,7 @@ and observed data of water surface elevation with time at the four gauges.}
 \label{fig:response3}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.475\textwidth]{./figures/scatter.pdf} 
 \caption{Scatter plot of measured water surface elevation against their \geoclaw
@@ -185,7 +189,7 @@ differently for the different gauges as indicated in the legend. }
 
 \end{figure}  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{tabular}{clc}
 \includegraphics[width=0.475\textwidth]{./figures/chain_p1.pdf} &
 \includegraphics[width=0.475\textwidth]{./figures/chain_p2.pdf} \\
@@ -198,7 +202,7 @@ burn-in iterations.}
 \label{fig:mcmc} 
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \begin{figure}[h]
+ \begin{figure}[ht]
         \begin{tabular}{clc}
 \includegraphics[width=0.475\textwidth]{./figures/pdf_p1.pdf} &
 \includegraphics[width=0.475\textwidth]{./figures/pdf_p2.pdf} \\
