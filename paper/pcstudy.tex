@@ -1,19 +1,19 @@
 \subsection{Error and convergence study}
 \label{sec:analysis}
 
-Figure~\ref{fig:rlzs} shows the evolution of the
+Figure~\ref{fig:rlzs} plots the evolution of the
 water surface elevation predicted at the four different gauges 
 using \geoclaw for the 125 different realizations 
 required to compute the PC expansions. We notice that the 
-variability in water surface elevation is insignificant for the first 
+variability in water surface elevation is insignificant in the first 
 hour at all gauges as the plots of the different realizations superimpose.
-Later in time, the variability starts to increase with time at the different gauges 
+Later in time, the variability starts to increase at the different gauges 
 as indicated from the thickness of the bands formed by the plots of the realizations.
 This variability appears to be significant at $t\sim$ 5400~s, 6000~s, 3600~s and 7200~s
-for gauges 21401, 21413, 21418, 21419 respectively.
+for gauges 21401, 21413, 21418, 21419, respectively.
 This is consistent with the distance from the gauge to the source of the earthquake
 (epicenter located approximately 72 km east of \tohoku) where gauge 21418 is the closest and gauge 21419 is the farthest as shown in Figure~\ref{fig:setup_buoy_locations}.
-The uncertainty in the prediction of water surface  elevation continues till the end of the simulations
+The uncertainty in the prediction of water surface  elevation persists till the end of the simulations
 at all gauges.
 
 In order to check the consistency of the PC approximation, we compare
@@ -57,7 +57,7 @@ water surface elevation is about 0.1\%.
 A final check for the validity of the PC approximation 
 consists of verifying whether the probability density
 functions (pdfs) of water surface elevation at the different gauge locations
-converges with increased order of the PC expansion.  Sample
+converges with increased order of the PC expansion  \comment{add referece}.  Sample
 water surface elevation pdfs are shown in Figure~\ref{fig:pdfs2}
 and Figure~\ref{fig:pdfs3} where
 the different curves correspond to increased order of PC ($p= 1-5$).
@@ -65,7 +65,7 @@ The plots indicate double peaked distributions that are
 well-resolved with PC order $p=3$ at t = 7200 s as shown in Figure~\ref{fig:pdfs2}.
 However, at t = 10800 s further refinement is needed as the pdfs are
 sensitive to the refinement up to order $p=4$ but then becomes weakly 
-insensitive with additional refinement  ($p = 5$) as indicated in Figure~\ref{fig:pdfs3}. 
+insensitive with additional refinement  ($p = 5$) as shown in Figure~\ref{fig:pdfs3}. 
 We, therefore, used PC order $p = 5$ in all computations below.
 This test and the various error metrics presented above provide confidence that the PC expansion is a faithful 
 model surrogate that can be used in both the forward and inverse problems. 
