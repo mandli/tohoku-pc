@@ -291,7 +291,7 @@ def setplot(plotdata):
     plotitem.colorbar_label = "Manning's-$n$ Coefficient"
     plotitem.amr_celledges_show = [0,0,0]
     plotitem.amr_patchedges_show = [0,0,0,0,0,0,0]
-    plotitem.colorbar_label = r"$n$")
+    plotitem.colorbar_label = r"$n$"
 
 
     #-----------------------------------------

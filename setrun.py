@@ -141,7 +141,7 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.output_format == 'ascii'      # 'ascii' or 'netcdf' 
 
     clawdata.output_q_components = 'all'   # need all
-    clawdata.output_aux_components = [0,3]  # eta=h+B is in q
+    clawdata.output_aux_components = 'all'  # eta=h+B is in q
     clawdata.output_aux_onlyonce = False    # output aux arrays each frame
 
 
@@ -153,7 +153,7 @@ def setrun(claw_pkg='geoclaw'):
     # The current t, dt, and cfl will be printed every time step
     # at AMR levels <= verbosity.  Set verbosity = 0 for no printing.
     #   (E.g. verbosity == 2 means print only on levels 1 and 2.)
-    clawdata.verbosity = 1
+    clawdata.verbosity = 4
 
 
 
@@ -409,9 +409,12 @@ def setgeo(rundata):
     dtopo_data = rundata.dtopo_data
     # for moving topography, append lines of the form:  (<= 1 allowed for now!)
     #   [topotype, minlevel,maxlevel,fname]
-    dtopodir = os.path.expandvars('$SRC/tohoku2011-paper1/sources/')
+    # dtopodir = os.path.expandvars('$SRC/tohoku2011-paper1/sources/')
+    # dtopo_data.dtopofiles.append([1, 4, 4,
+    #                                    os.path.join(dtopodir, 'Ammon.txydz')])
+    dtopodir = os.getcwd()
     dtopo_data.dtopofiles.append([1, 4, 4,
-                                       os.path.join(dtopodir, 'Ammon.txydz')])
+                                       os.path.join(dtopodir, 'saito.xyzt')])
 
 
     # == setqinit.data values ==

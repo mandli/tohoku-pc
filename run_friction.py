@@ -56,7 +56,8 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         path = sys.argv[1]
 
-    source_path = '$SRC/tohoku2011-paper1/sources/Ammon.txydz'
+    # source_path = '$SRC/tohoku2011-paper1/sources/Ammon.txydz'
+    source_path = os.path.abspath(os.path.join(os.getcwd(),'saito.xyzt'))
 
     # Read in friction test values
     friction_values = numpy.loadtxt(path)
