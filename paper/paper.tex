@@ -73,20 +73,19 @@
 
 \begin{frontmatter}
 
-\title{Estimation of Manning's Friction Coefficient using DART Buoys Data during
+\title{Uncertainty Quantification and Inference of Manning's Friction Coefficient using DART Buoys Data during
 \tohoku Tsunami}
 \date{\today}
 
 \author[kaust]{Ihab Sraj}
-\ead{ihab.sraj@kaust.edu.sa}
-\ead{Department of Physical Sciences and Engineering, King Abdullah University for Science and Technology, Thuwal, Saudi Arabia}
 \author[ut]{Kyle T. Mandli}
 % \ead{kyle@ices.utexas.edu}
 % \ead[http://users.ices.utexas.edu/~kyle]{http://users.ices.utexas.edu/~kyle}
 \author[duke]{Omar M. Knio}
 \author[ut]{Clint N. Dawson}
 \author[kaust]{Ibrahim Hoteit}
-
+\ead{ibrahim.hoteit@kaust.edu.sa}
+\ead{Department of Physical Sciences and Engineering, King Abdullah University for Science and Technology, Thuwal, Saudi Arabia}
 \address[kaust]{Department of Physical Sciences and Engineering, King Abdullah University for Science and Technology, Thuwal, Saudi Arabia}
 \address[ut]{Institute for Computational Engineering and Science, University of Texas at Austin, 201 E 24th ST. Stop C0200, Austin, TX 78712-1229, USA}
 \address[duke]{Department of Mechanical Engineering and Materials Science, Duke University, 144
@@ -95,22 +94,25 @@ Hudson Hall, Durham, North Carolina 27708, USA}
 
 \begin{abstract}
 
-Tsunamis have been lately catastrophic due to the warnings
-issued late and to the inaccurate predictions of water elevations. 
-Tsunami computational models are often employed to explore multiple 
-different scenarios to predict water elevations due to the abundance 
-of uncertainty in the input data. However, accurate estimation of water elevations 
+%Tsunamis have been lately catastrophic due to the warnings
+%issued late and to the inaccurate predictions of water elevations. 
+Tsunami computational models are employed to explore multiple 
+different scenarios and to predict water elevations 
+%due to the abundance of uncertainty in the input data. 
+However, accurate estimation of water elevations 
 requires accurate estimation of many model parameters,
-in particular the Manning's $n$ friction coefficient. Our objective here is to 
-present an efficient method for the 
-estimation of Manning's $n$ coefficient characterized by three different parameters 
-assumed constant in three regions: $n_1$ on-shore, $n_2$ near-shore and $n_3$ deep-water. 
-This method uses Polynomial Chaos (PC) to build an inexpensive surrogate for the 
-\geoclaw model and then employs the Bayesian inference to estimate the three uncertain parameters
-using the DART buoys data obtained during \tohoku tsunami. The efficiency of our approach stems from 
-using a surrogate model that reduces the computational burden of the Markov Chain Monte-Carlo 
-sampling needed in the Bayesian inference. The PC surrogate is also used to perform a sensitivity analysis. 
-Our results indicate that Manning's $n$ coefficients have a Maximum-A-Posteriori (MAP) values of $n_2=0.011$ and $n_3=0.180$, while for $n_1$ no meaningful MAP value can be determined using the available data. 
+in particular the Manning's $n$ friction coefficient. 
+Our objective here is to develop an efficient approach for the 
+uncertainty quantification and inference of Manning's $n$ coefficient 
+which we characterize here by three different parameters 
+as being constant over three different regions: $n_1$ on-shore, $n_2$ near-shore and $n_3$ deep-water. 
+We use Polynomial Chaos (PC) to build an inexpensive surrogate for the 
+\geoclaw model and then employs Bayesian inference to estimate 
+and quantify the uncertainties to those uncertain parameters
+using the DART buoys data collected during \tohoku tsunami. 
+The surrogate model significantly reduces the computational burden of the Markov Chain Monte-Carlo (MCMC) 
+sampling of the Bayesian inference. The PC surrogate is also used to perform a sensitivity analysis. 
+Our results indicate that Manning's $n$ coefficients have a Maximum-A-Posteriori (MAP) values of $n_2=0.011$ and $n_3=0.180$, while for $n_1$ no meaningful MAP value can be determined from the available data. 
 
 
 \end{abstract}

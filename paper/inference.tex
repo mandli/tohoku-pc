@@ -2,7 +2,7 @@
  \label{sec:inference}
  
 Bayesian inference is a statistical approach to inverse problems
-that has recently gained much interest in different applications including
+that has recently gained great interest in different applications, including
 ocean~\citep{Alexanderian2011a,Zedler2012,sraj:2013a}
 climate~\citep{OlsonEtAl2012} and geophysical~\citep{Malinverno2002} modeling.
 The key idea in this approach is to express all forms of uncertainty
@@ -19,13 +19,13 @@ Let $\vec{d}=(d_1,...,d_m)^T$ be a vector of observation data and $\vec{\theta}=
 the parameters such that:
 
 \begin{equation}
-\vec d \approx \vec{G}( \vec \theta)
+\vec d \approx \vec{G}( \vec \theta).
 \end{equation}
 Applying the Bayes' rule yields:
 
 \begin{equation}
  p(\vec{\theta}| \vec d) \propto 
- p(\vec d | \vec{\theta}) \ p(\vec{\theta})  
+ p(\vec d | \vec{\theta}) \ p(\vec{\theta}), 
 \label{eq:bayes}
 \end{equation}
 where $p(\vec{\theta})$ is the prior of $\vec{\theta}$, representing the \emph{a priori} knowledge
@@ -33,18 +33,18 @@ about the parameters;
 $p(\vec d| \vec{\theta})$ is the likelihood function representing
 the probability of obtaining the data given the set of parameters $\vec{\theta}$;
 and finally $p(\vec{\theta}| \vec d)$ is the posterior,
-representing the probability that $\vec{\theta}$ is true given the data $\vec d $.
+representing the probability of occurrence of $\vec{\theta}$ given the data $\vec d $.
 
 To formulate the likelihood function, we let $\vec \epsilon = \vec d - \vec{G}$
 represents the discrepancy between the model and observations.
-Here, the components of $\vec \epsilon $ are i.i.d. random variables with density $p_{\epsilon}$.
+Here, the components of $\vec \epsilon $ are assumed to be i.i.d. random variables with density $p_{\epsilon}$.
 In this case the likelihood function can be written as:
 
 \begin{equation} 
 p(\vec d |  \vec{\theta}) 
 = 
 \prod_{i=1}^m  
-p_\epsilon (d_i - G_i(\vec \theta))  	
+p_\epsilon (d_i - G_i(\vec \theta)).  	
 \label{eq:likelihood}
 \end{equation}
 
@@ -61,7 +61,7 @@ Consequently, Equation~\eqref{eq:likelihood} becomes:
 p(\vec d |  \vec{\theta}) 
 = 
 \frac{1}{\sqrt{2 \pi \sigma^2}}\prod_{i=1}^m   
-\exp \left\lbrace \frac{-(d_i - G_i(\vec \theta))^2}{2 \sigma^2} \right\rbrace 	
+\exp \left\lbrace \frac{-(d_i - G_i(\vec \theta))^2}{2 \sigma^2} \right\rbrace. 	
 \label{eq:likelihood2}
 \end{equation}
 The joint posterior from Bayes' rule can be given as:
@@ -71,17 +71,18 @@ p(\vec{\theta}| \vec d)
 \propto
 \frac{1}{\sqrt{2 \pi \sigma^2}}   \prod_{i=1}^m  
 \exp \left\lbrace \frac{-(d_i - G_i(\vec \theta))^2}{2 \sigma^2} \right\rbrace  
-\prod_{i=1}^n p(\theta_i)
+\prod_{i=1}^n p(\theta_i).
 \end{equation}
 The variance $\sigma^2$ is unknown \emph{a priori}; thus we treat it as a hyper-parameter.
-In other words, $\sigma^2$ may become an additional object for Bayesian inference and may themselves be endowed with priors and estimated from data. In this case the joint posterior is finally written as follows:
+In other words, $\sigma^2$ may become an additional parameter for Bayesian inference and  
+therefore endowed with a prior and estimated from data. In this case the joint posterior is finally written as follows:
 
 \begin{equation} 
 p(\vec{\theta},\sigma^2 | \vec d)
 \propto
 \frac{1}{\sqrt{2 \pi \sigma^2}}   \prod_{i=1}^m  
 \exp \left\lbrace \frac{-(d_i - G_i(\vec \theta))^2}{2 \sigma^2} \right\rbrace
-\ p(\sigma^2) \prod_{i=1}^n p(\theta_i)
+\ p(\sigma^2) \prod_{i=1}^n p(\theta_i).
 \label{eq:post}
 \end{equation}
 

@@ -3,14 +3,14 @@
 
 The four-dimensional posterior in Equation~\eqref{eq:post_coef} can be explored via MCMC;
 this requires repeated simulations (tens of thousands) of the forward \geoclaw model, 
-once for every proposed set of parameters of the Markov chain. While a single \geoclaw simulation
+once for every proposed set of parameters of the Markov chain \comment{add reference}. While a single \geoclaw simulation
 takes $\sim 15~$mins, depending on the details of the MCMC algorithm used, it is desirable 
-to avoid forward model simulations altogether. This can be accomplished by constructing a 
+to avoid forward model simulations altogether. This is achieved by constructing a 
 surrogate model that requires a much
 smaller ensemble of \geoclaw runs, and that can be used instead
 at a significantly reduced computational cost.  Here, we rely on
 Polynomial Chaos expansions for accelerating Bayesian inference in this context 
-by building a surrogate, which, in addition can provide statistical properties, such as the mean, variance and sensitivities, efficiently. 
+by building a surrogate model, which, in addition can provide statistical properties, such as the mean, variance and sensitivities, efficiently. 
 
 \subsubsection{Polynomial Chaos}
 
@@ -21,16 +21,16 @@ the engineering community to represent uncertainties in the output of
 numerical simulations~\citep{Villegas2012,Lin2009,Xiu2004}
 due to the uncertainties in a model's input. We briefly describe the PC
 method below; for more details on this method, and other UQ methods
-refer to \citep{LeMaitreKnio2010}.
+the reader is referred to \citep{LeMaitreKnio2010}.
 
-Let $U=U(\bm{x},t,\xxi)$ denote a quantity of 
+Let $U=U(\bm{x},t,\xxi)$ denotes a quantity of 
 interest (QoI) that is the output of certain model.
-$U$ is normally function of space $\bm{x}$ and time $t$, and 
+$U$ is function of space $\bm{x}$ and time $t$, and 
 also on the vector of normalized uncertain model inputs $\xxi=(\xi_1,...,\xi_n)$ (called the germ). 
 PC expresses $U$ in the form:
 
 \begin{equation}
-  U(\xbold,t,\xxi) \doteq \sum_{k = 0}^P U_k(\xbold,t) \Psi_k(\xxi)
+  U(\xbold,t,\xxi) \doteq \sum_{k = 0}^P U_k(\xbold,t) \Psi_k(\xxi),
 \label{eq:stochseries}
 \end{equation} 
 where $U_k(\xbold,t)$ are the polynomial coefficients, and
@@ -40,24 +40,23 @@ $P+1 = \frac{(d+p)! }{n!\ p!}$ where $n$ is the number of stochastic dimension a
 of polynomials. 
 
 The choice of the basis is dictated by the probability density
-function of the stochastic variable $\xxi$, and which appears as a weight
+function of the stochastic variable $\xxi$, which appears as a weight
 function in the stochastic space's inner product:
 
 \begin{equation}
- \left<\Psi_i,\Psi_j\right> = \int \Psi_i(\xxi) \;\Psi_j(\xxi) \; \rho(\xxi) \; \mbox{d}\xxi=\delta_{ij}\ave{\Psi_i^2}
+ \left<\Psi_i,\Psi_j\right> = \int \Psi_i(\xxi) \;\Psi_j(\xxi) \; \rho(\xxi) \; \mbox{d}\xxi=\delta_{ij}\ave{\Psi_i^2},
 \label{eq:inner}
 \end{equation}
 where $\delta_{ij}$ is the Kronecker delta.
 For uniform
 distributions the basis functions are hence scaled Legendre polynomials.
 For multi-dimensional problems the basis functions are
-tensor products of 1D basis functions.
+tensor products of 1D basis functions \comment{add refer}.
 
 The series representation Equation~\eqref{eq:stochseries} can be viewed as a spectral expansion
 of $U$ along the stochastic dimensions. It can be also seen as
-combining approximation and probabilistic frameworks, a combination
-that has proven extremely useful in solving UQ problems. The existence and convergence of this series
-is asserted by the Cameron-Martin theorem \citep{Cameron:1947} with the condition of $U$ having a finite variance.
+combining approximation and probabilistic frameworks; a combination
+that has proven extremely useful in solving UQ problems\comment{add refer}. The existence and convergence of this series is asserted by the Cameron-Martin theorem \citep{Cameron:1947} with the condition of $U$ having a finite variance.
 The series rate of convergence, and hence the number of terms to retain, depends on the smoothness of
 $U$ with respect to $\xxi$. The series converges spectrally fast with $P$
 when $U$ is infinitely smooth; the convergence rate becomes algebraic
@@ -75,7 +74,7 @@ In particular, we rely on the Non-Intrusive Spectral Projection (NISP) method th
 \begin{equation}
  U_k(\bm{x},t) = \frac{\left< U, \Psi_k \right>}{\left< \Psi_k, \Psi_k \right>} = 
  \frac{1}{\left< \Psi_k, \Psi_k \right>} 
- \int U(\bm{x},t,\xxi) \Psi_k(\xxi) \rho(\xxi) \mbox{ d}\xxi
+ \int U(\bm{x},t,\xxi) \Psi_k(\xxi) \rho(\xxi) \mbox{ d}\xxi.
 \end{equation}
 This orthogonal projection minimizes the $L_2$ error on the space spanned by the basis.
 Using NISP the stochastic integrals are solved using a numerical quadrature to obtain:
@@ -83,11 +82,11 @@ Using NISP the stochastic integrals are solved using a numerical quadrature to o
 \begin{equation}
   \left< U, \Psi_k \right> 
 \approx \left< U, \Psi_k \right>_Q
-= \sum_{q=1}^Q U(\xxi_q) \Psi_k(\xxi_q) \omega_q
+= \sum_{q=1}^Q U(\xxi_q) \Psi_k(\xxi_q) \omega_q,
 \end{equation}
 where the subscript $Q$ refers to approximating the inner product integral with
 quadrature, and $\xxi_q$ and $\omega_q$ are multi-dimensional quadrature points and weights,
-respectively. The quadrature order should be commensurate with the
+respectively. The quadrature order should be commensurated with the
 truncation order, and should be high enough to avoid aliasing artifacts.
 The choice of quadrature rule is hence critical to the performance
 of the PC (in its NISP version at least). In the current work, we employ the 
@@ -99,7 +98,7 @@ The computation of the ${U}_k$ can thus be expressed as a matrix-vector product 
 
 \begin{equation} 
  U_k(\bm{x},t)=\sum_q \Pi_{kq} U(\bm{x},t,\xxi_q),\;\;\;
- \Pi_{kq}=\frac{\Psi_k(\xxi_q)\omega_q}{\left< \Psi_k, \Psi_k \right>}
+ \Pi_{kq}=\frac{\Psi_k(\xxi_q)\omega_q}{\left< \Psi_k, \Psi_k \right>},
 \end{equation} 
 where $\Pi_{kq}$ is the projection matrix and $U(\bm{x},t,\xxi_q)$ is obtained
 from an ensemble of the deterministic model realizations with the uncertain parameters set at
@@ -112,17 +111,19 @@ with the probability distribution of $\xxi$ simplifies the calculations of $U$'s
 Noting that since $\Psi_0(\xxi)$ is a constant that can be normalized to satisfy 
 $\left<\Psi_0,\Psi_0\right>=1$, the expectation and variance of $U$ can be computed as:
 
-\begin{eqnarray}
- E[U]&=&\int U \, \rho(\xxi) \, \mbox{d}\xxi=\left< U,\Psi_0\right> = U_0  
- \label{eq:mean} \\
- E[(U-E[U])^2]&=&\int (U-E[U])^2 \, \rho(\xxi) \, \mbox{d}\xxi=\sum_{k=1}^P U_k^2
+\begin{equation}
+ E[U] = \int U \, \rho(\xxi) \, \mbox{d}\xxi=\left< U,\Psi_0\right> = U_0,  
+ \label{eq:mean}
+\end{equation}
+and \begin{equation}
+ E[(U-E[U])^2] = \int (U-E[U])^2 \, \rho(\xxi) \, \mbox{d}\xxi=\sum_{k=1}^P U_k^2
  \label{eq:sigma}
-\left<\Psi_k,\Psi_k\right>
-\end{eqnarray}
+\left<\Psi_k,\Psi_k\right>.
+\end{equation}
 
 PC representations of random variables also enable efficient
-approximation of the corresponding variance-based, global
-sensitivity indices. This can be done by computing the so-called {\it total} 
+approximation of the corresponding variance-based, \comment{global
+sensitivity indices}. This can be done by computing the so-called {\it total} 
 sensitivity indices of random variables from the PC representations or Sobol decomposition~\citep{Sobol:1993,Homma:1996,Sobol:2001}. To get the total sensitivity corresponding to the uncertain
 input $\xi_i$ we compute the total index~\citep{LeMaitreKnio2010,Crestaux,Sudret}:
 
@@ -130,7 +131,7 @@ input $\xi_i$ we compute the total index~\citep{LeMaitreKnio2010,Crestaux,Sudret
    T_i =
          \frac{\displaystyle
                \sum_{k \in K_i} U_k^2 \ave{\Psi_k^2}}
-              {\displaystyle\sum_{k = 1}^P U_k^2 \ave{\Psi_k^2}} .
+              {\displaystyle\sum_{k = 1}^P U_k^2 \ave{\Psi_k^2}},
 \end{equation}
 where we define \[
    K_i = \left\{ k \in \{1, \ldots, P\} :
@@ -144,6 +145,6 @@ Using Equation~\eqref{eq:T-hard}, the computation of $T_i$ is straightforward.
 The total sensitivity index $T_i$ measures the contribution of
 the $i^{th}$ random input to total model variability by
 computing the fraction of the total variance due to all the terms in the
-PC expansion which involve $\xi_i$.
+PC expansion that involve $\xi_i$.
 
 
