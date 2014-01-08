@@ -60,13 +60,14 @@ def setplot(plotdata):
     """ 
 
     plotdata.clearfigures()  # clear any old figures,axes,items data
+    plotdata.format = 'binary'
+
 
     # Import useful run data
     clawdata = data.ClawInputData(2)
     clawdata.read(os.path.join(plotdata.outdir, 'claw.data'))
     friction_data = surge.data.FrictionData()
     friction_data.read(os.path.join(plotdata.outdir, 'friction.data'))
-
 
     # To plot gauge locations on pcolor or contour plot, use this as
     # an afteraxis function:
