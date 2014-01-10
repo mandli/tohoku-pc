@@ -3,47 +3,74 @@
 
 Manning's $n$ law provides a relationship between the friction coefficient
 \eqref{eq:coef} appearing in the shallow water equations \eqref{eq:swe}
-governing tsunamis and the roughness parameter $n$.  This Manning's $n$
-coefficient varies spatially  and is dependent on the surface
-characteristics of the sea-floor.  A direct measurement of $n$ is therefore
-impossible, instead, values are often assigned from tables that are empirically
-estimated for common types of land that are determined from satellite images. As
-a result, the Manning’s n coefficients used in tsunami models often contain
-large amounts of uncertainty.
+governing tsunamis and the empirically derived roughness parameter $n$.  The 
+value of $n$ can vary both spatially and temporally due to changes in the
+bottom roughness from wave action and other processes.  For tsunami modeling it
+is a common practice to assume a single value of Manning's $n$ for the areas
+that are initially below sea-level and sometimes use satellite images and 
+land-use data to determine the coefficient in areas above sea-level.  This
+process both above and below sea-level has several sources of uncertainty, all
+of which can have an impact on the quantities of interest in tsunami modeling.   
+In MacInnes \emph{et al.}, for
+instance, they found that adopting a uniform value of $n = 0.025$ everywhere
+lead to poor performance of the forward model's predicted inundation levels.  To
+address this they used $n = 0.035$ in the Sendai plane to account for land-uses 
+such as pasture, farmland, and rice paddies.  It is uncertainties such as these 
+that we wish to address in a systematic way so that accurate risk assessments 
+can be done.
 
-The uncertainty in the Manning's $n$ coefficient leads to uncertainties in the
-predicted quantities of interest such as the water elevations and becomes a
-health risk during tsunami events. In addition,  the prediction of these
-quantities of interest are often highly sensitive to changes in these
-uncertain parameters.  In MacInnes \emph{et al.} a Manning's $n$ coefficient of 0.025
-was used except on the Sendai plane where 0.035 was used to account for pasture,
-farmland and rice paddies.  In this work, we seek to quantify parametric
-uncertainty due to the uncertainty in the Manning's $n$ friction coefficient. To
-this end, we characterize $n$ as being contasnt over three different 
-regions. The three regions are:  on-shore whose coefficient is denoted by
-$n_1$, near- shore  denoted by $n_2$, and deep-water denoted by $n_3$. The three
-regions are shown in Figure~\ref{fig:ceofs}. To quantify the uncertainties
-with respect to those three parameters we employ Polynomial Chaos (PC) expansions as used in
-\cite{sraj:2013a,sraj:2013b}.  The method and its application to our problem is
+The direct result of the uncertainty in the Manning's $n$ coefficient lead to
+uncertainties in the quantities of interest such as the water elevation,
+especially in the most crucial area in risk assessments, the near-shore. In 
+addition,  the prediction of these quantities of interest are often highly 
+sensitive to changes in these uncertain parameters.  We seek to therefore 
+quantify the parametric uncertainty due to the uncertainty in the Manning's $n$ 
+friction coefficient by characterizing the spatial variability by using
+iso-baths to define distinct regions in the domain that are characterized by a
+single Manning's $n$ coefficient.  In this study three regions were used, an
+on-shore region (initially above sea-level), a near-shore region (between
+sea-level and the 200 meter iso-bath), and the deep-water region (deeper than
+200 meters), denoted by $n_1$, $n_2$, and $n_3$ respectively and as shown in 
+Figure~\ref{fig:ceofs}. To quantify the uncertainties
+with respect to those three parameters we employ Polynomial Chaos (PC) 
+expansions as used in \cite{sraj:2013a,sraj:2013b}.  The method and its 
+application to our problem is
 described in Section~\ref{sec:uqpce}.  To represent the uncertainty in the
-Manning's $n$ coefficients an uninformative uniform distribution was assumed as the prior with
-$n$  sampled from the interval $n \in [0.005-0.2]$.
+Manning's $n$ coefficients an uninformative uniform distribution was assumed as 
+the prior with physically relevant values of $n$ sampled from the interval 
+$n \in [0.005-0.2]$.
+
+% This Manning's $n$
+% coefficient is allowed to vary spatially by defining a set of isobaths that 
+% partition the domain into disjoint regions where a single value of $n$ can be 
+% used.  The values used for $n$ can be chosen using satellite images and
+% land-use data but this is impractical for the values used in regions
+% below sea-level or in the case of highly variable land-use regions.  As a
+% result, values used for $n$ contain large amounts of uncertainty. 
 
 \section{The \tohoku Tsunami} 
 \label{sec:tohoku}
 
-The \tohoku earthquake and tsunami of 2011 has been the subject of a number of
+The \tohoku earthquake and tsunami of 2011 have been the subject of a number of
 studies due to the wealth of observational evidence and severity of the tsunami.
 The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and
 caused massive devastation across Japan.  In our case study, the
-simulation is based on work done in \cite{MacInnes:2013cr} and modified to use
-the specified variable friction field. Hereafter, we briefly describe the
+simulation used is based on work done in \cite{MacInnes:2013cr} and modified to 
+use the specified variable friction field. Hereafter, we briefly describe the
 forward computational model, \geoclaw, the  simulation setup used in the
 uncertainty analysis, and finally present the observations from NOAA DART buoys.
-\alert{describe a bit more the tsunami and its geophysical location}.
-\subsection{\geoclaw} \label{ssub:geoclaw}
-The \geoclaw software package uses a finite volume, wave-propagation approach as described in \cite{LeVeque:1997eg} to solve the two-dimensional shallow water equations:
 
+\alert{describe a bit more the tsunami and its geophysical location}.
+
+\comment{Kyle - I kind of figured the MacInnes paper goes into detail on this
+so I am not sure what pertinent information should be included here.  We could
+do some more info on the fault itself and some shore maximum inundations but we
+really aren't using any of that.}
+
+\subsection{\geoclaw} \label{ssub:geoclaw}
+The \geoclaw software package uses a finite volume, wave-propagation approach as
+described in \cite{LeVeque:1997eg} to solve the two-dimensional shallow water \
+equations:
 \begin{equation} \label{eq:swe}
     \begin{aligned}
     &\pd{}{t} h + \pd{}{x} (hu) + \pd{}{y} (hv) = 0, \\
@@ -56,21 +83,33 @@ longitudinal and latitudinal directions respectively, $g$ the acceleration due
 to gravity, $b$ the bathymetry, $f$ the Coriolis parameter, and $C_f$ the bottom 
 friction coefficient.  As is common in tsunami modeling, $C_f$ is calculated 
 given a Manning's $n$ parameterization such that:
-
 \begin{equation}
     C_f = \frac{g n^2}{h^{4/3}},
 \label{eq:coef}
 \end{equation}
 where $n$ is an empirically determined parameter known as Manning's $n$.  
 
-The primary computational kernel in \geoclaw is the evaluation of the solution to the Riemann problem at each grid cell interface.  The Riemann solver used includes the ability to handle inundation (wet-dry interfaces), well-balancing, even when the momentum is non-zero, \alert{and entropy corrections} \cite{George:2008aa}.
+The primary computational kernel in \geoclaw is the evaluation of the solution
+to the Riemann problem at each grid cell interface.  The Riemann solver used
+includes the ability to handle inundation (wet-dry interfaces), well-balancing,
+even when the momentum is non-zero, \alert{and entropy corrections}
+\cite{George:2008aa}.
 
-%\subsubsection{Adaptivity} \label{ssub:adaptivity}
-One unique feature that \geoclaw has is the ability to adaptively refine the grids used for the computation essentially following a region of interest as time progresses (in this case, the disturbance in the surface height $\eta$).  \geoclaw implements these schemes following \cite{Berger:1984ui,Berger:1998aa} and is described in detail in \cite{Berger:2011du} in the case of tsunami modeling.
+One unique feature that \geoclaw has is the ability to adaptively refine the
+grids used for the computation essentially following a region of interest as
+time progresses (in this case, the disturbance in the surface height $\eta$).
+\geoclaw implements these schemes following \cite{Berger:1984ui,Berger:1998aa}
+and is described in detail in \cite{Berger:2011du} in the case of tsunami
+modeling.
 
-For the simulations presented, refinement thresholds were used that matched what was presented in \cite{MacInnes:2013cr}.  As was done there, four levels of refinement were used staring with a resolution of 1 degree in both the latitudinal and longitudinal directions down to 0.5' resolution (approximately 900 meters) located around the observation locations.  The tolerance for the refinement criteria for sea-surface anomaly was 0.02 meters.
+For the simulations presented, refinement thresholds were used that matched what
+was presented in \cite{MacInnes:2013cr}.  As was done there, four levels of
+refinement were used staring with a resolution of 1 degree in both the
+latitudinal and longitudinal directions down to 0.5' resolution (approximately
+900 meters) located around the observation locations.  The tolerance for the
+refinement criteria for sea-surface anomaly was 0.02 meters.
 
-\subsection{DART Buoys Observations}
+\subsection{DART Buoy Observations}
 
 The observations used in this study are from the Deep-ocean Assessment and
 Reporting of Tsunamis (DART) buoy system developed and maintained by the
@@ -79,19 +118,24 @@ network is to provide early-warning detection and forecasting of tsunami
 propagation in the Pacific Ocean \cite{Milburn:1996wm}.  The DART buoys closest
 to the earthquake source of the \tohoku tsunami were buoys 21401, 21413, 21418,
 and 21419 whose locations are shown in Figure~\ref{fig:setup_buoy_locations} and
-whose de-tided water surface elevation data for the event are shown in Figure~\ref{fig:setup_buoy_data}.
-The time $t=0$ is set to be the start of the earthquake \comment{frequency of data}.  We can see that the
-primary tsunami waves generated reach the gauges between 40 minutes and 2 hours
-after the earthquake.  The large spikes later in time present in the data at
-gauge 21418 are data anomalies and not subsequent tsunami waves.
+whose de-tided water surface elevation data for the event are shown in
+Figure~\ref{fig:setup_buoy_data}. The time $t=0$ is set to be the start of the
+earthquake and is recorded every 15 seconds during the first few minutes of an
+event, otherwise recording every minute when triggered (a tsunami has occurred)
+or every 15 minutes when not.  We can see that the primary tsunami
+waves generated reach the gauges between 40 minutes and 2 hours after the
+earthquake.  The large spikes later in time present in the data at gauge 21418
+are data anomalies and not subsequent tsunami waves.
 
 \subsection{Bathymetry and Earthquake Source Model}
 
 The bathymetry used in the simulation is a combination of ETOPO 1' and 4'
-accurate bathymetry for the region \cite{Amante:2009ud}.  The additional finer
-resolution bathymetry data used in MacInnes \emph{et al.} were not used in this
-study since the simulations were not sensitive to the finer bathymetry at the
-DART buoy locations in the deep-water.
+accurate bathymetry for the region \cite{Amante:2009ud}.  While it is the case
+that the inundation region is the most sensitive to changes in the Manning's $n$
+coefficient, the finest bathymetry used in MacInnes \emph{et al.} were
+not included in the this study due to the availability of the data and the
+insensitivity of the simulation to the finer bathymetry at the DART buoy
+locations.    
 
 Two earthquake source models were run to test whether the friction UQ analysis
 was sensitive to different rupture models, the first is from Saito et al.
@@ -102,7 +146,13 @@ models were chosen as they take very different approaches to the reconstruction
 of the original fault and were shown to obtain the best un-shifted match to the
 observations at the DART buoys for their respective types of reconstruction.  As
 discussed in MacInnes \emph{et al.}, the source models used do not include rupture
-timing and this could have an impact on the accuracy of the simulation.
+timing which could have an impact on the accuracy of the simulation.
 
 \comment{Still working on getting the Saito \emph{et al.} source model, seems to do better at the DART buoys.}
 
+\comment{We need to address not using the finest bathymetry better}
+
+% This issue
+% is mitigated somewhat by the decreasing sensitivity of water elevation levels
+% to friction with deepening water but the near shore region, where the setup for
+% inundation occurs, still can be highly sensitive to the friction values chosen.

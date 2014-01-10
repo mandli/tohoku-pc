@@ -94,26 +94,23 @@ Hudson Hall, Durham, North Carolina 27708, USA}
 
 \begin{abstract}
 
-%Tsunamis have been lately catastrophic due to the warnings
-%issued late and to the inaccurate predictions of water elevations. 
-Tsunami computational models are employed to explore multiple 
-different scenarios and to predict water elevations 
-%due to the abundance of uncertainty in the input data. 
-However, accurate estimation of water elevations 
-requires accurate estimation of many model parameters,
-in particular the Manning's $n$ friction coefficient. 
-Our objective here is to develop an efficient approach for the 
-uncertainty quantification and inference of Manning's $n$ coefficient 
-which we characterize here by three different parameters 
-as being constant over three different regions: $n_1$ on-shore, $n_2$ near-shore and $n_3$ deep-water. 
-We use Polynomial Chaos (PC) to build an inexpensive surrogate for the 
-\geoclaw model and then employs Bayesian inference to estimate 
-and quantify the uncertainties to those uncertain parameters
-using the DART buoys data collected during \tohoku tsunami. 
-The surrogate model significantly reduces the computational burden of the Markov Chain Monte-Carlo (MCMC) 
-sampling of the Bayesian inference. The PC surrogate is also used to perform a sensitivity analysis. 
-Our results indicate that Manning's $n$ coefficients have a Maximum-A-Posteriori (MAP) values of $n_2=0.011$ and $n_3=0.180$, while for $n_1$ no meaningful MAP value can be determined from the available data. 
-
+Tsunami computational models are employed to explore multiple  different
+scenarios and to predict water elevations.  However, accurate estimation of
+water elevations  requires accurate estimation of many model parameters, in
+particular the Manning's $n$ friction coefficient.  Our objective here is to
+develop an efficient approach for the  uncertainty quantification and inference
+of the Manning's $n$ coefficient  which we characterize here by three different
+parameters  as being constant over three different regions: $n_1$ on-shore,
+$n_2$ near-shore and $n_3$ deep-water.  We use Polynomial Chaos (PC) to build an
+inexpensive surrogate for the  \geoclaw model and then employ Bayesian inference
+to estimate  and quantify the uncertainties to those uncertain parameters using
+the DART buoy data collected during the \tohoku tsunami.  The surrogate model
+significantly reduces the computational burden of the Markov Chain Monte-Carlo
+(MCMC)  sampling of the Bayesian inference. The PC surrogate is also used to
+perform a sensitivity analysis.  Our results indicate that Manning's $n$
+coefficients have a Maximum-A-Posteriori (MAP) values of $n_2=0.011$ and
+$n_3=0.180$, while for $n_1$ no meaningful MAP value can be determined from the
+available data.
 
 \end{abstract}
 
