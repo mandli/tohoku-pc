@@ -3,14 +3,15 @@
 
 The four-dimensional posterior in Equation~\eqref{eq:post_coef} can be explored via MCMC;
 this requires repeated simulations (tens of thousands) of the forward \geoclaw model, 
-once for every proposed set of parameters of the Markov chain \comment{add reference}. While a single \geoclaw simulation
+once for every proposed set of parameters of the Markov chain~\cite{MarzoukNajm2009,Malinverno2002}. While a single \geoclaw simulation
 takes $\sim 15~$mins, depending on the details of the MCMC algorithm used, it is desirable 
 to avoid forward model simulations altogether. This is achieved by constructing a 
 surrogate model that requires a much
 smaller ensemble of \geoclaw runs, and that can be used instead
 at a significantly reduced computational cost.  Here, we rely on
 Polynomial Chaos expansions for accelerating Bayesian inference in this context 
-by building a surrogate model, which, in addition can provide statistical properties, such as the mean, variance and sensitivities, efficiently. 
+by building a surrogate model, which, in addition can efficiently
+provide statistical properties, such as the mean, variance and sensitivities. 
 
 \subsubsection{Polynomial Chaos}
 
@@ -51,12 +52,12 @@ where $\delta_{ij}$ is the Kronecker delta.
 For uniform
 distributions the basis functions are hence scaled Legendre polynomials.
 For multi-dimensional problems the basis functions are
-tensor products of 1D basis functions \comment{add refer}.
+tensor products of 1D basis functions~\cite{LeMaitreKnio2010}.
 
 The series representation Equation~\eqref{eq:stochseries} can be viewed as a spectral expansion
 of $U$ along the stochastic dimensions. It can be also seen as
 combining approximation and probabilistic frameworks; a combination
-that has proven extremely useful in solving UQ problems\comment{add refer}. The existence and convergence of this series is asserted by the Cameron-Martin theorem \citep{Cameron:1947} with the condition of $U$ having a finite variance.
+that has proven extremely useful in solving UQ problems~\cite{Xiu:2003,Lin2009}. The existence and convergence of this series is asserted by the Cameron-Martin theorem \citep{Cameron:1947} with the condition of $U$ having a finite variance.
 The series rate of convergence, and hence the number of terms to retain, depends on the smoothness of
 $U$ with respect to $\xxi$. The series converges spectrally fast with $P$
 when $U$ is infinitely smooth; the convergence rate becomes algebraic
@@ -121,11 +122,20 @@ and \begin{equation}
 \left<\Psi_k,\Psi_k\right>.
 \end{equation}
 
-PC representations of random variables also enable efficient
-approximation of the corresponding variance-based, \comment{global
-sensitivity indices}. This can be done by computing the so-called {\it total} 
-sensitivity indices of random variables from the PC representations or Sobol decomposition~\citep{Sobol:1993,Homma:1996,Sobol:2001}. To get the total sensitivity corresponding to the uncertain
-input $\xi_i$ we compute the total index~\citep{LeMaitreKnio2010,Crestaux,Sudret}:
+PC representations of random variables also enable conducting
+efficient global sensitivity analysis that aims to quantify the
+contribution of different random input parameters to the model variability.
+This can be done by computing the so-called {\it total} 
+sensitivity index $T_i$ that measures the contribution of
+the $i^{th}$ random input to total model variability by
+computing the fraction of the total variance due to all the terms in the
+PC expansion that involve $\xi_i$~\citep{LeMaitreKnio2010,Crestaux,Sudret}
+as follows:
+
+% of random variables from the PC representations or Sobol decomposition~\citep{Sobol:1993,Homma:1996,Sobol:2001}. The total sensitivity index  
+%
+%To get the total sensitivity corresponding to the uncertain
+%input $\xi_i$ we compute the total index:
 
 \begin{equation} \label{eq:T-hard}
    T_i =
@@ -137,14 +147,9 @@ where we define \[
    K_i = \left\{ k \in \{1, \ldots, P\} :
            \vec{\alpha}^k_i > 0 \right\}
         \]
-        and $\vec{\alpha}^k$ is the
-multi-index associated with $k^{th}$ term in the
+        and $\vec{\alpha}^k$ is the multi-index associated with $k^{th}$ term in the
 PC expansion~\cite{LeMaitreKnio2010}.
 
-Using Equation~\eqref{eq:T-hard}, the computation of $T_i$ is straightforward.
-The total sensitivity index $T_i$ measures the contribution of
-the $i^{th}$ random input to total model variability by
-computing the fraction of the total variance due to all the terms in the
-PC expansion that involve $\xi_i$.
+%Using Equation~\eqref{eq:T-hard}, the computation of $T_i$ is straightforward.
 
 

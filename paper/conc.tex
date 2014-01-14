@@ -1,2 +1,42 @@
 \section{Discussion and conclusions}
 \label{sec:conc}
+
+The present study aimed at estimating Manning's $n$ friction coefficient 
+which is crucial in the accurate prediction of water surface elevation in 
+tsunami events modeling. We proposed a three-dimensional representation
+of Manning's $n$ friction coefficient that was characterized using iso-baths 
+to define three distinct regions in the domain and represented each region
+with a single Manning's $n$ coefficient. The three regions were as follows:
+an on-shore region (initially above sea-level), a near-shore region (between
+sea-level and the 200 meter iso-bath), and the deep-water region (deeper than
+200 meters) whose Manning's $n$ friction coefficient were denoted by $n_1$, $n_2$, 
+and $n_3$ respectively. The estimation relied on a Bayesian
+inference approach that sharpens the initial estimates of the three uncertain parameters
+using real observations. In our case, we used the DART buoys system data that provides water 
+surface elevation data. We specifically used the data collected at four different gauges 
+during \tohoku tsunami. To accelerate the Bayesian inference, we relied on the polynomial 
+chaos expansions to produce a faithful and efficient surrogate of the forward model \geoclaw. 
+The main results of this work were:
+\begin{itemize}
+
+\item We built a surrogate model using PC expansions that required 125 forward model runs of \geoclaw.
+The surrogate model was tested, validated and proved to be faithful.
+
+\item We used the PC surrogate to quantify the uncertainties in the predicted water surface elevation 
+due to the uncertainties in the Manning's $n$ coefficient. To this end, we estimated the mean and the standard deviation of water surface elevation and compared it with the measured data collected at found gauges.
+
+\item A global sensitivity analysis was performed to quantity the contribution of each uncertain parameter to the variance in water surface elevation.  We found that the Manning’s $n$ coefficient at the shore $n_2$ is dominant and
+contributes the most to the variance in the water surface elevation compared
+to the other two Manning’s $n$ coefficients $n_1$ and $n_3$ for almost the
+entire tsunami event.
+
+\item We used Bayesian inference and identified the following MAP
+estimates for the three $n$ parameters using MCMC, namely $n_2=0.011$ and
+$n_3=0.180$, while for $n_1$ no meaningful MAP value could be determined from the
+available data.
+
+\end{itemize}
+ 
+Finally, we note that the present study focused on formulating and estimating a low-dimensional representation
+of the Manning's $n$ coefficient using UQ techniques namely Bayesian inference and PC expansions.  A high-dimnensional representation of the Manning's $n$ coefficient would require a large number of forward runs that is computationally expensive. Alternatively, advanced techniques can be implemented to reduce the dimensionality of the problem 
+that is the objective of a future study.

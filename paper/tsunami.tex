@@ -2,9 +2,13 @@
 \section{Manning’s $n$ Friction Coefficient} \label{sec:manning}
 
 Manning's $n$ law provides a relationship between the friction coefficient
-\eqref{eq:coef} appearing in the shallow water equations \eqref{eq:swe}
-governing tsunamis and the empirically derived roughness parameter $n$.  The 
-value of $n$ can vary both spatially and temporally due to changes in the
+$C_f$ appearing in the shallow water equations (SWE) governing tsunamis and 
+the empirically derived roughness parameter $n$:
+\begin{equation}
+    C_f = \frac{g n^2}{h^{4/3}},
+\label{eq:coef}
+\end{equation}
+The value of $n$ can vary both spatially and temporally due to changes in the
 bottom roughness from wave action and other processes.  For tsunami modeling it
 is a common practice to assume a single value of Manning's $n$ for the areas
 that are initially below sea-level and sometimes use satellite images and 
@@ -25,13 +29,13 @@ especially in the most crucial area in risk assessments, the near-shore. In
 addition,  the prediction of these quantities of interest are often highly 
 sensitive to changes in these uncertain parameters.  We seek to therefore 
 quantify the parametric uncertainty due to the uncertainty in the Manning's $n$ 
-friction coefficient by characterizing the spatial variability by using
+friction coefficient by characterizing the spatial variability using
 iso-baths to define distinct regions in the domain that are characterized by a
 single Manning's $n$ coefficient.  In this study three regions were used, an
 on-shore region (initially above sea-level), a near-shore region (between
 sea-level and the 200 meter iso-bath), and the deep-water region (deeper than
-200 meters), denoted by $n_1$, $n_2$, and $n_3$ respectively and as shown in 
-Figure~\ref{fig:ceofs}. To quantify the uncertainties
+200 meters), whose Manning's $n$ coefficient is denoted by $n_1$, $n_2$, and $n_3$ respectively 
+as shown in Figure~\ref{fig:ceofs}. To quantify the uncertainties
 with respect to those three parameters we employ Polynomial Chaos (PC) 
 expansions as used in \cite{sraj:2013a,sraj:2013b}.  The method and its 
 application to our problem is
@@ -54,13 +58,13 @@ $n \in [0.005-0.2]$.
 The \tohoku earthquake and tsunami of 2011 have been the subject of a number of
 studies due to the wealth of observational evidence and severity of the tsunami.
 The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and
-caused massive devastation across Japan.  In our case study, the
+caused massive devastation across Japan. The source of the earthquake (epicenter)
+was located approximately 72 km east of \tohoku as indicated 
+in Figure~\ref{fig:ceofs}a. In our case study, the
 simulation used is based on work done in \cite{MacInnes:2013cr} and modified to 
 use the specified variable friction field. Hereafter, we briefly describe the
 forward computational model, \geoclaw, the  simulation setup used in the
 uncertainty analysis, and finally present the observations from NOAA DART buoys.
-
-\alert{describe a bit more the tsunami and its geophysical location}.
 
 \comment{Kyle - I kind of figured the MacInnes paper goes into detail on this
 so I am not sure what pertinent information should be included here.  We could
@@ -81,13 +85,14 @@ equations:
 where $h$ is the depth of the water column, $u$ and $v$ the velocities in the 
 longitudinal and latitudinal directions respectively, $g$ the acceleration due 
 to gravity, $b$ the bathymetry, $f$ the Coriolis parameter, and $C_f$ the bottom 
-friction coefficient.  As is common in tsunami modeling, $C_f$ is calculated 
-given a Manning's $n$ parameterization such that:
-\begin{equation}
-    C_f = \frac{g n^2}{h^{4/3}},
-\label{eq:coef}
-\end{equation}
-where $n$ is an empirically determined parameter known as Manning's $n$.  
+friction coefficient.  
+%As is common in tsunami modeling, $C_f$ is calculated 
+%given a Manning's $n$ parameterization such that:
+%\begin{equation}
+%    C_f = \frac{g n^2}{h^{4/3}},
+%\label{eq:coef}
+%\end{equation}
+%where $n$ is an empirically determined parameter known as Manning's $n$.  
 
 The primary computational kernel in \geoclaw is the evaluation of the solution
 to the Riemann problem at each grid cell interface.  The Riemann solver used
@@ -135,7 +140,8 @@ that the inundation region is the most sensitive to changes in the Manning's $n$
 coefficient, the finest bathymetry used in MacInnes \emph{et al.} were
 not included in the this study due to the availability of the data and the
 insensitivity of the simulation to the finer bathymetry at the DART buoy
-locations.    
+locations. The bathymetry of the considered regions (and topography) is 
+shown in Figure~\ref{fig:setup}a.   
 
 Two earthquake source models were run to test whether the friction UQ analysis
 was sensitive to different rupture models, the first is from Saito et al.
