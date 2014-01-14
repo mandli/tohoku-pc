@@ -4,6 +4,7 @@
 Manning's $n$ law provides a relationship between the friction coefficient
 $C_f$ appearing in the shallow water equations (SWE) governing tsunamis and 
 the empirically derived roughness parameter $n$:
+
 \begin{equation}
     C_f = \frac{g n^2}{h^{4/3}},
 \label{eq:coef}
@@ -66,10 +67,10 @@ use the specified variable friction field. Hereafter, we briefly describe the
 forward computational model, \geoclaw, the  simulation setup used in the
 uncertainty analysis, and finally present the observations from NOAA DART buoys.
 
-\comment{Kyle - I kind of figured the MacInnes paper goes into detail on this
-so I am not sure what pertinent information should be included here.  We could
-do some more info on the fault itself and some shore maximum inundations but we
-really aren't using any of that.}
+%\comment{Kyle - I kind of figured the MacInnes paper goes into detail on this
+%so I am not sure what pertinent information should be included here.  We could
+%do some more info on the fault itself and some shore maximum inundations but we
+%really aren't using any of that.}
 
 \subsection{\geoclaw} \label{ssub:geoclaw}
 The \geoclaw software package uses a finite volume, wave-propagation approach as
@@ -97,12 +98,12 @@ friction coefficient.
 The primary computational kernel in \geoclaw is the evaluation of the solution
 to the Riemann problem at each grid cell interface.  The Riemann solver used
 includes the ability to handle inundation (wet-dry interfaces), well-balancing,
-even when the momentum is non-zero, \alert{and entropy corrections}
+even when the momentum is non-zero, and entropy corrections
 \cite{George:2008aa}.
 
 One unique feature that \geoclaw has is the ability to adaptively refine the
 grids used for the computation essentially following a region of interest as
-time progresses (in this case, the disturbance in the surface height $\eta$).
+time progresses (in this case, the disturbance in the surface height).
 \geoclaw implements these schemes following \cite{Berger:1984ui,Berger:1998aa}
 and is described in detail in \cite{Berger:2011du} in the case of tsunami
 modeling.
@@ -154,9 +155,9 @@ observations at the DART buoys for their respective types of reconstruction.  As
 discussed in MacInnes \emph{et al.}, the source models used do not include rupture
 timing which could have an impact on the accuracy of the simulation.
 
-\comment{Still working on getting the Saito \emph{et al.} source model, seems to do better at the DART buoys.}
+%\comment{Still working on getting the Saito \emph{et al.} source model, seems to do better at the DART buoys.}
 
-\comment{We need to address not using the finest bathymetry better}
+%\comment{We need to address not using the finest bathymetry better}
 
 % This issue
 % is mitigated somewhat by the decreasing sensitivity of water elevation levels

@@ -41,7 +41,7 @@ Manning's $n$ coefficients and recovered it by assimilating synthetic water elev
 in a storm surge setting.
 
 In this work, we focus our attention on the uncertainty in the friction
-parameterization used in tsunami simulations. We present a \alert{three}-dimensional 
+parameterization used in tsunami simulations. We present a three-parameter 
 representation of Manning's $n$ coefficient and an efficient method
 to estimate this representation using real water elevation data. The method proposed here 
 is based on recent developments in Uncertainty Quantification (UQ) methods that allow 
@@ -50,8 +50,7 @@ without modifying the forward model and inferring those parameters
 from a number of observations.  In particular, we implement an inverse modeling
 approach that relies on the Bayesian inference technique.  We resort to
 Polynomial Chaos (PC) expansions to construct a faithful surrogate model of the
-response of the large and complex geophysical model simulations \cite{Najm:2009,Alexanderian2012,sraj:2013a,sraj:2013b}.
-The construction of the surrogate enables us to efficiently implement the Bayesian
+response of the large and complex geophysical model simulations \cite{Najm:2009,Alexanderian2012,sraj:2013a,sraj:2013b}. The construction of the surrogate enables us to efficiently implement the Bayesian
 inference technique as it dramatically reduces the cost of sampling the
 posterior distribution.
 
@@ -68,17 +67,17 @@ solved using two different techniques: the adjoint method and Markov Chain Monte
 
 In this work, we follow a similar procedure as in \cite{sraj:2013a,sraj:2013b}
 to estimate Manning's $n$ coefficient using the \tohoku tsunami
-event as a case-study. The quantity of interest is taken to be the surface
-elevation $\eta$ and is compared to the available NOAA Deep-ocean Assessment and
+event as a case-study. The quantity of interest is taken to be the water surface
+elevation and is compared to the available NOAA Deep-ocean Assessment and
 Reporting Tsunamis (DART) buoys.  The forward model runs are performed using the
 \geoclaw package following the setup in MacInnes \emph{et al.}~\cite{MacInnes:2013cr} 
 including the two source models analyzed there.
 
 The structure of this manuscript is as follows. First, we discuss the uncertainties 
 of the Manning'g $n$ coefficient to motivate the UQ problem in Section~\ref{sec:manning}
-and propose a \alert{three}-dimensional representation of $n$. 
+and propose a three-parameter representation of $n$. 
 Section~\ref{sec:tohoku} describes our case-study, the \tohoku tsunami,
-summarize the forward simulations setup, and present the DART buoys observational data. 
+summarizes the forward simulations setup, and presents the DART buoys observational data. 
 Section~\ref{sec:formu} presents the two main methods employed in the UQ analysis:
 Bayesian inference that brings together observations 
 and model results (Section~\ref{sec:inference}) 
@@ -90,11 +89,11 @@ perform a statistical analysis and compute the  sensitivity of simulated water e
 to the uncertain input parameters; and third, we present the results of the
 posterior distributions obtained using Bayesian inference by MCMC. A discussion of our findings and methodology is finally presented in Section~\ref{sec:conc}.
 
-\comment{
-\begin{itemize}
-    \item There are two places where we refer to the parameterization as three-dimensional, I am not sure if this is really three-dimensional.  I know that we are using depth contours but the parameterization is two-dimensional.  I have a feeling that readers would take issue with this.
-    \item Ihab: the representation is 3D meaning we used three different values of n in three regions. The same concept was presented in Mayo paper where they did 2D representation.
-    \item I think the order here needs to be revised to talk about the forward model and the equations we are solving first since the Manning's $n$ discussion refers to equations there. 
-    \item Ihab: Our main objective is to show the UQ techniques and how they work. The equations are known and we do not need to stress on them. We can even remove the whole equation or forward model section.
-\end{itemize}
-}
+%\comment{
+%\begin{itemize}
+%    \item There are two places where we refer to the parameterization as three-dimensional, I am not sure if this is really three-dimensional.  I know that we are using depth contours but the parameterization is two-dimensional.  I have a feeling that readers would take issue with this.
+%    \item Ihab: the representation is 3D meaning we used three different values of n in three regions. The same concept was presented in Mayo paper where they did 2D representation.
+%    \item I think the order here needs to be revised to talk about the forward model and the equations we are solving first since the Manning's $n$ discussion refers to equations there. 
+%    \item Ihab: Our main objective is to show the UQ techniques and how they work. The equations are known and we do not need to stress on them. We can even remove the whole equation or forward model section.
+%\end{itemize}
+%}
