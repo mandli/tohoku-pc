@@ -4,7 +4,6 @@
 Manning's $n$ law provides a relationship between the friction coefficient
 $C_f$ appearing in the shallow water equations (SWE) governing tsunamis and 
 the empirically derived roughness parameter $n$:
-
 \begin{equation}
     C_f = \frac{g n^2}{h^{4/3}},
 \label{eq:coef}
@@ -13,7 +12,7 @@ The value of $n$ can vary both spatially and temporally due to changes in the
 bottom roughness from wave action and other processes.  For tsunami modeling it
 is a common practice to assume a single value of Manning's $n$ for the areas
 that are initially below sea-level; while satellite images and 
-land-use data are used to determine the coefficient in areas above sea-level.  This
+land-use data are sometimes used to determine the coefficient in areas above sea-level.  This
 process both above and below sea-level has several sources of uncertainty, all
 of which can have an impact on the quantities of interest in tsunami modeling.   
 In MacInnes \emph{et al.}, for instance, they found that adopting a uniform value 
@@ -21,8 +20,7 @@ of $n = 0.025$ everywhere leads to poor performance of the forward model's predi
 inundation levels.  To address this they used $n = 0.035$ in the Sendai plane to 
 account for land-uses such as pasture, farmland, and rice paddies.  It is 
 uncertainties such as these that we wish to address in a systematic way so that
-better risk assessments 
-can be done.
+better risk assessments can be done.
 
 The direct result of the uncertainty in the Manning's $n$ coefficient lead to
 uncertainties in water elevation,
@@ -61,7 +59,7 @@ studies due to the wealth of observational evidence and severity of the tsunami~
 The earthquake itself had an estimated magnitude of $\text{M}_\text{w}$ 9.0 and
 caused massive devastation across Japan. The source of the earthquake (epicenter)
 was located approximately 72 km east of \tohoku as indicated 
-in Figure~\ref{fig:ceofs}a. In our case study, the
+in Figure~\ref{fig:ceofs}. In our case study, the
 simulation used is based on work done in \cite{MacInnes:2013cr} and modified to 
 use the specified variable friction field. Hereafter, we briefly describe the
 forward computational model, \geoclaw, the  simulation setup used in the
@@ -141,8 +139,9 @@ that the inundation region is the most sensitive to changes in the Manning's $n$
 coefficient, the finest bathymetry used in MacInnes \emph{et al.} were
 not included in the this study due to the availability of the data and the
 insensitivity of the simulation to the finer bathymetry at the DART buoy
-locations. The bathymetry of the considered regions (and topography) is 
-shown in Figure~\ref{fig:setup}a. }  
+locations.} The bathymetry and topography of the considered regions are 
+shown in Figure~\ref{fig:setup_buoy_locations}.
+
 Two earthquake source models were run to test whether the friction UQ analysis
 was sensitive to different rupture models. The first is from Saito et al.
 \cite{Saito:2011bh} and is based on an inversion analysis based on dispersive
