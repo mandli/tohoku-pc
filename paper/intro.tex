@@ -21,9 +21,7 @@ predicted water elevation  and employ a Bayesian inverse modeling approach to
 estimate the Manning's $n$ coefficient using observations of water elevation 
 measured during a tsunami event.
 
-\comment{Previous work looking into uncertainty in the input of tsunami models
-focused on the earthquake source models but primarily as a way of
-constraining the various proposed earthquake scenarios} (see
+Previous work concerning uncertainty in tsunami modeling has been primarily been focused on constraining the likely earthquake source models (see
 for example \cite{MacInnes:2013cr}).  A similar approach for landslide-generated
 tsunami was presented in Sarri \emph{et al.}~\cite{Sarri2012}, by building a statistical surrogate
 using an emulator. The implemented emulator was based on a Gaussian
@@ -32,8 +30,7 @@ and appropriate choices of functions and parameters. Their work was presented as
 a proof-of-concept case study where they only performed basic statistical and
 sensitivity analysis.  Changes to the friction parameterization has been shown in 
 the past to lead to significant changes in predicted inundation levels \cite{Myers:2001el, 
-Jakeman:2010hk}, but these previous studies were limited in the range of the 
-\comment{values and locations used in the parameterization}.  
+Jakeman:2010hk}, but these previous studies were limited in range and spatial variation of the values used in the parameterization.  
 In a recent work, Mayo \emph{et al.}~\cite{Mayo:2014} reformulated a statistical data assimilation method
 generally used in the estimation of model states to estimate the Manning's $n$
 coefficient. They used a low-dimensional representation of
@@ -71,11 +68,10 @@ to estimate Manning's $n$ coefficient using the \tohoku tsunami
 event as a case-study. The quantity of interest is taken to be the water surface
 elevation and is compared to the available NOAA Deep-ocean Assessment and
 Reporting Tsunamis (DART) buoys.  The forward model runs are performed using the
-\geoclaw package following the setup in MacInnes \emph{et al.}~\cite{MacInnes:2013cr} 
-including the \comment{source models analyzed there}.
+\geoclaw package following the setup in MacInnes \emph{et al.}~\cite{MacInnes:2013cr}.
 
 The structure of this manuscript is as follows. First, we discuss the uncertainties 
-of the Manning'g $n$ coefficient to motivate the UQ problem in Section~\ref{sec:manning}
+of the Manning's $n$ coefficient to motivate the UQ problem in Section~\ref{sec:manning}
 and propose a three-parameter representation of $n$. 
 Section~\ref{sec:tohoku} describes our case-study, the \tohoku tsunami,
 summarizes the forward simulations setup, and presents the DART buoys observational data. 
