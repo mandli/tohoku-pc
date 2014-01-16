@@ -1,23 +1,17 @@
 \subsection{Inverse Problem} 
 \label{sec:inverse}
 
-Before we attempt solving the inverse problem of parameter estimation, 
+Before we attempt to solve the inverse problem of parameter estimation, 
 we first check the ability of \geoclaw to simulate water surface elevation
 realistically. To this end, we present a comparison between the 
-(DART) buoys observations  and their \geoclaw model counterparts
-for a reference simulation in which the  the Manning's $n$ coefficients were set to their default values $n_1=n_2=n_3=0.025$. Figure~\ref{fig:scatter} 
+(DART) buoy observations and their \geoclaw model counterparts
+for a reference simulation in which the the Manning's $n$ coefficients were set to their default values $n_1=n_2=n_3=0.025$. Figure~\ref{fig:scatter} 
 shows a scatter plot that compares the observed 
-water surface elevation at the different gauges locations and the  \geoclaw model counterparts. 
-\comment{The plots show a good agreement between the simulations and the 
-observations at different locations and at different times. 
-The difference between the observations and simulations is attributed to the uncertainty in the 
-Manning's $n$ coefficients and to the measurement errors.
-An interesting observation is the more scatter in the data collection by gauge 21418 which is the closest to
-the epicenter of the earthquake and therefore receiving more impact by the tsunami.}
+water surface elevation at the different gauge locations and the \geoclaw model counterparts. The plots show a reasonable agreement between the simulation and the observations available.  The differences between the simulation and observations can be attributed to uncertainty in the Manning's $n$ coefficients, errors in the earthquake rupture model, and insufficiently accurate bathymetry in the near-shore region.  The high amount of scatter from gauge 21418 can probably be attributed to its proximity to the epicenter of the earthquake and shore region.
 
 \comment{Bayesian inference is now used to estimate the Manning's 
-$n$ coefficients ranges that minimize this scatter between 
-observed and modeled water surface elevation, and to estimate the variance of the noise in the measured data.
+$n$ coefficient's ranges that minimize this scatter between 
+observed and modeled water surface elevations and to estimate the variance of the noise in the measured data.
 To this end, an adaptive MCMC method is used to sample 
 the posterior distributions \citep{Gareth2009,Haario2001} and consequently 
 update the Manning's $n$ coefficients distributions in light of the 
@@ -30,15 +24,15 @@ for different values of the germ $\xxi$.}
 
 The MCMC algorithm required $50,000$ iterations to guarantee convergence
 and to obtain the posteriors of the Manning's $n$ coefficients: 
-$n_1$,$n_2$ and $n_3$ as well as for the variance $\sigma^2$. Figure \ref{fig:mcmc} 
+$n_1$, $n_2$ and $n_3$ as well as for the variance $\sigma^2$. Figure \ref{fig:mcmc} 
 shows the sample chains for the input parameters for different iterations of the MCMC algorithms. 
-The different panels shows well-mixed chains for all input parameters as well as the variance $\sigma^2$.
+The different panels show well-mixed chains for all input parameters as well as the variance $\sigma^2$.
 The chain of  $n_{1}$ spans the entire range of the prior, meaning that the observations are not informative 
 concerning this input.  In contrast, the $n_{2}$ chain appears to be concentrated in the 
 lower end of the parameter range, with values between 0.005 and 0.1. 
 For $n_{3}$, the chain appears to be concentrated in the 
 upper end of the parameter range. Finally, the chain for the variance 
-appears to be well mixed with a well defined posterior range between 0.02 and 0.022.\comment{discussion}.
+appears to be well mixed with a well defined posterior range between 0.02 and 0.022.  \comment{Add discussion}
 
 Next, the computed MCMC chains are used to determine the posterior 
 distributions using kernel density estimation (KDE)

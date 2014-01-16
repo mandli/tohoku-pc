@@ -2,7 +2,7 @@
 \label{sec:forward}
 The PC expansion created using an ensemble of 125 \geoclaw simulations
 is now used as a surrogate to propagate prior input parameter uncertainty 
-through the forward model. We here exploit the surrogate 
+through the forward model.  Here we exploit the surrogate 
 to study the statistics of the water surface elevation and conduct 
 a global sensitivity analysis of the impact of the uncertain input parameters.
 
@@ -15,11 +15,11 @@ bounds at the four gauges.
 Note that we only show the evolution after $t=6000~s$ where the uncertainty is significant,
 reflected in a significant standard deviation as seen earlier from the realizations shown 
 in Figure~\ref{fig:rlzs}. An interesting observations is that the
-standard deviation in water surface elevations vanishes at few times instances
-during the tsunami event. \comment{This can be attributed to the ...}
+standard deviation in water surface elevations vanishes at a few time instances
+during the tsunami event.  \comment{Why is this?}
 
 The predicted mean water surface elevation  and its standard deviation 
-can be used to compare with the (DART) buoys observations collected during
+can be used to compare with the (DART) buoy observations collected during
 the tsunami event. Figure~\ref{fig:compare} 
 plots the PC mean water surface elevation with the observed 
 water surface elevation at the different gauges locations
@@ -45,11 +45,7 @@ of each of the uncertain parameters is shown in Figure~\ref{fig:sens} at the fou
 The Manning's $n$ coefficient at the shore $n_2$ is clearly dominant and contributes
 the most to the variance in the water surface elevation compared to the other two 
 Manning's $n$ coefficients $n_1$ and $n_3$; this is true for almost the entire simulation time
-and at the four gauges. The Manning's $n$ coefficient
-in the bottom of ocean $n_{3}$ at gauge number 21419 exhibits small sensitivity index 
-during the second hour of simulation and Manning's $n$ coefficient
-at the land $n_1$ appears to be an insignificant contributor
-to the variance.
+and at the four gauges. The Manning's $n$ coefficient in the deep ocean $n_{3}$ at gauge number 21419 exhibits a higher sensitivity index during the first hour of simulation however, as noted previously, none of the gauge locations see a significant variance between simulations until after the first hour of simulation.
 
 In 2D, the sensitivity analysis shows also that $n_2$ is dominant
 at the same regions where we observe significant variance in water surface elevation. This is
@@ -60,12 +56,14 @@ at different times.
 \subsubsection{Response surface}
 In addition to the statistical and sensitivity analysis, the PC surrogate 
 can be used to construct a response surface for the uncertain input parameters.
-This is achieved by sampling the PC surrogate for different values of the germ $\xxi$ within the prior
+This is achieved by sampling the PC surrogate for different values of the term $\xxi$ within the prior
 range. Since $n_3$ shows insignificant contribution to the 
-uncertainty in the model output, we only consider the repsonse surface
+uncertainty in the model output, we only consider the response surface
 of $n_2$ versus $n_3$ for a fixed value of $n_1=0.1025$ as illustrated in Figure~\ref{fig:response2}
 and Figure~\ref{fig:response3} for different times as indicated. The most striking features are the relatively flat
 horizontal contours in the $n_3$ direction suggesting that water surface elevation depends
 only mildly on $n_3$ even during peak tsunami events. This is true for gauges 21401, 21413 and 21418. However,
 at gauge 21419, the horizontal contours are observed in the $n_2 $ direction
 and therefore water surface elevation depends mildly on $n_2$.
+
+\comment{Do you mean ``Since $n_1$ shows insignificant contribution...'' rather than $n_3$?  The value picked for $n_1$ also is quite high, can we pick something more reasonable such as 0.035?}

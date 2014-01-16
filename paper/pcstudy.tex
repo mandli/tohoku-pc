@@ -7,22 +7,21 @@ using \geoclaw for the 125 different realizations
 required to compute the PC expansions. We notice that the 
 variability in water surface elevation is insignificant in the first 
 hour at all gauges as the plots of the different realizations superimpose.
-Later in time, the variability starts to increase fro all gauges 
+Later in time, the variability starts to increase for all gauges 
 as indicated by the thickness of the bands formed by the plots of curves for the selected realizations.
 This variability appears to be significant at $t\sim$ 5400~s, 6000~s, 3600~s and 7200~s
 for gauges 21401, 21413, 21418, 21419, respectively.
-This is consistent with the distance from the gauge to the source of the earthquake
-(epicenter located approximately 72 km east of \tohoku) where gauge 21418 is the closest and gauge 21419 is the farthest as shown in Figure~\ref{fig:setup_buoy_locations}.
+This is consistent with the distance from the gauge to the epicenter of the earthquake located approximately 72 kilometer east of Japan where gauge 21418 is the closest and gauge 21419 is the farthest as shown in Figure~\ref{fig:setup_buoy_locations}.
 The uncertainty in the prediction of water surface  elevation persists till the end of the simulations
 at all gauges.
 
 In order to check the consistency of the PC approximation, we compare
 water surface elevation from the realizations 
 with those obtained from the PC surrogate. The different curves (not shown) 
-reveal an excellent agreement for all times and gauges locations.
+reveal excellent agreement for all times and gauge locations.
 To quantify this agreement, we define
 an error metric that measures the relative normalized root mean-square error between the left hand side function 
-in Equation~(\ref{eq:stochseries}) and its PC representation at the sampling points:
+in Equation~\eqref{eq:stochseries} and its PC representation at the sampling points:
 
 \begin{equation} 
    E = \frac{\displaystyle
