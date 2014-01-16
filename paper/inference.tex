@@ -10,7 +10,7 @@ in terms of probability. The first step in Bayesian inference
 is to formulate the forward problem (response surface/model) using 
 a suitable likelihood function and a product of conditional probability densities. 
 The prior distributions over the unknown parameters of the model
-are then formulated using our best belief. Lastly, given some observation data, Bayes rule 
+are then formulated using the best available knowledge of the parameters.  Lastly, given some observation data, Bayes rule 
 is used to obtain a posterior distribution for these unknown parameters
 \citep{sivia}. We review this approach briefly below.
 \subsubsection{Formalism}
@@ -52,8 +52,8 @@ In our application, we assume that the errors $\epsilon_i$ are independent
 and normally distributed with mean
 zero and variance $\sigma^2$, i.e. $\epsilon_i \sim N(0,\sigma^2)$. 
 While in general $\sigma^2$ depends on the observations, in cases where the error
-amplitude is generally small and does not change throughout space and time.
-Consequently, one may use assume single $\sigma^2$ value in Equation~\eqref{eq:likelihood},
+amplitude is generally small \comment{and} does not change throughout space and time.
+Consequently, one may assume a single $\sigma^2$ value in Equation~\eqref{eq:likelihood},
 resulting in:
 
 \begin{equation} 
@@ -72,7 +72,7 @@ p(\vec{\theta}| \vec d)
 \exp \left\lbrace \frac{-(d_i - G_i(\vec \theta))^2}{2 \sigma^2} \right\rbrace  
 \prod_{i=1}^n p(\theta_i).
 \end{equation}
-Since the variance $\sigma^2$ is unknown \emph{a priori}; we treat it as a hyper-parameter.
+Since the variance $\sigma^2$ is unknown \emph{a priori}\comment{;} we treat it as a hyper-parameter.
 In other words, $\sigma^2$ becomes an additional parameter for Bayesian inference and  
 therefore endowed with a prior which is updated based on available observations. In this 
 case the joint posterior is finally expressed as:
