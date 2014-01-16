@@ -8,14 +8,14 @@ realistically. To this end, we present a comparison between the
 for a reference simulation in which the  the Manning's $n$ coefficients were set to their default values $n_1=n_2=n_3=0.025$. Figure~\ref{fig:scatter} 
 shows a scatter plot that compares the observed 
 water surface elevation at the different gauges locations and the  \geoclaw model counterparts. 
-The plots show a good agreement between the simulations and the 
+\comment{The plots show a good agreement between the simulations and the 
 observations at different locations and at different times. 
 The difference between the observations and simulations is attributed to the uncertainty in the 
 Manning's $n$ coefficients and to the measurement errors.
 An interesting observation is the more scatter in the data collection by gauge 21418 which is the closest to
-the epicenter of the earthquake and therefore receiving more impact by the tsunami.
+the epicenter of the earthquake and therefore receiving more impact by the tsunami.}
 
-Bayesian inference is now used to estimate the Manning's 
+\comment{Bayesian inference is now used to estimate the Manning's 
 $n$ coefficients ranges that minimize this scatter between 
 observed and modeled water surface elevation, and to estimate the variance of the noise in the measured data.
 To this end, an adaptive MCMC method is used to sample 
@@ -26,7 +26,7 @@ observed data. This sampling requires tens of thousands of
 sample requires an independent \geoclaw realization. Instead,
 the surrogate model created using PC expansions provides a computationally
 efficient alternative that requires only evaluating the PC expansion
-for different values of the germ $\xxi$.
+for different values of the germ $\xxi$.}
 
 The MCMC algorithm required $50,000$ iterations to guarantee convergence
 and to obtain the posteriors of the Manning's $n$ coefficients: 
@@ -36,10 +36,9 @@ The different panels shows well-mixed chains for all input parameters as well as
 The chain of  $n_{1}$ spans the entire range of the prior, meaning that the observations are not informative 
 concerning this input.  In contrast, the $n_{2}$ chain appears to be concentrated in the 
 lower end of the parameter range, with values between 0.005 and 0.1. 
-While for $n_{3}$, the chain appears to be concentrated in the 
+For $n_{3}$, the chain appears to be concentrated in the 
 upper end of the parameter range. Finally, the chain for the variance 
-appears to be well mixed with a well defined posterior range between 0.02 and 0.022.
-
+appears to be well mixed with a well defined posterior range between 0.02 and 0.022.\comment{discussion}.
 
 Next, the computed MCMC chains are used to determine the posterior 
 distributions using kernel density estimation (KDE)
@@ -53,13 +52,13 @@ the observed data were not useful to refine our prior knowledge for $n_1$.,
 In contrast, the posterior pdf of $n_2$ exhibits well-defined peak, 
 with a Maximum A Posteriori (MAP) estimate of around 0.011
 and an extended tail towards the larger Manning's $n$ coefficient values.
-While for $n_3$, we observe a posterior that has a well defined peak
+For $n_3$, we observe a posterior that has a well defined peak
 of 0.18 but no clear pdf shape. The posterior distribution of the variance 
 appears to be well-defined of Gaussian-like shape. 
 The MAP value of $\sigma^2=0.021$ can be used to estimate the water surface elevation standard 
 deviation estimated to be 0.145~$m$. 
 This value is a reflection of the mismatch between the model and 
-observed data.
+observed data. \comment{marginal "", correlation ''', joint}.
 
 
 %   0.180222380841571   0.011347632046398   0.185486684362890   0.021050903421753
