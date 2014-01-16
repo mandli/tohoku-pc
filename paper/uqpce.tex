@@ -1,11 +1,11 @@
 \subsection{Accelerating Bayesian Inference}
 \label{sec:uqpce}
 
-The four-dimensional posterior in Equation~\eqref{eq:post_coef} can be explored via MCMC;
-this requires repeated simulations (tens of thousands) of the forward \geoclaw model, 
+The four-dimensional posterior in Equation~\eqref{eq:post_coef} can be directly
+explored via MCMC; this requires repeated simulations (tens of thousands) of the forward \geoclaw model, 
 once for every proposed set of parameters of the Markov chain~\cite{MarzoukNajm2009,Malinverno2002}. While a single \geoclaw simulation
 takes $\sim 15~$mins, depending on the details of the MCMC algorithm used, it is desirable 
-to avoid forward model simulations altogether. This is achieved by constructing a 
+to avoid running the forward model at every realization of the MCMC. This is achieved by constructing a 
 surrogate model that requires a much
 smaller ensemble of \geoclaw runs, and that can be used instead
 at a significantly reduced computational cost.  Here, we rely on
@@ -21,13 +21,14 @@ as a polynomial truncated expansion. This method has been developed in
 the engineering community to represent uncertainties in the output of 
 numerical simulations~\citep{Villegas2012,Lin2009,Xiu2004}
 due to the uncertainties in a model's input. We briefly describe the PC
-method below; for more details on this method, and other UQ methods
+method below; for more details 
 the reader is referred to \citep{LeMaitreKnio2010}.
 
-Let $U=U(\bm{x},t,\xxi)$ denotes a quantity of 
-interest (QoI) that is the output of certain model.
-$U$ is function of space $\bm{x}$ and time $t$, and 
-also on the vector of normalized uncertain model inputs $\xxi=(\xi_1,...,\xi_n)$ (called the germ). 
+Let $U=U(\bm{x},t,\xxi)$ denote a quantity of 
+interest (QoI) that is the output of a computational model.
+$U$ is function of space, $\bm{x}$, and time, $t$, and 
+also depends on the canonical vector of random variables $\xxi=(\xi_1,...,\xi_n)$
+that parameterize the uncertain inputs. 
 PC expresses $U$ in the form:
 
 \begin{equation}
@@ -37,12 +38,12 @@ PC expresses $U$ in the form:
 where $U_k(\xbold,t)$ are the polynomial coefficients, and
 $\Psi_k(\xxi)$ are functions that form an orthogonal basis of an underlying probability
 space. The total number of terms in the PC expansion is
-$P+1 = \frac{(d+p)! }{n!\ p!}$ where $n$ is the number of stochastic dimension and $p$ is the highest order
-of polynomials. 
+$P+1 = \frac{(d+p)! }{n!\ p!}$ where $n$ is the number of stochastic dimensions and $p$ is the highest order
+polynomial order. 
 
 The choice of the basis is dictated by the probability density
 function of the stochastic variable $\xxi$, which appears as a weight
-function in the stochastic space's inner product:
+function in the probability space's inner product:
 
 \begin{equation}
  \left<\Psi_i,\Psi_j\right> = \int \Psi_i(\xxi) \;\Psi_j(\xxi) \; \rho(\xxi) \; \mbox{d}\xxi=\delta_{ij}\ave{\Psi_i^2},
@@ -50,17 +51,17 @@ function in the stochastic space's inner product:
 \end{equation}
 where $\delta_{ij}$ is the Kronecker delta.
 For uniform
-distributions the basis functions are hence scaled Legendre polynomials.
+distributions, the basis functions are scaled Legendre polynomials.
 For multi-dimensional problems the basis functions are
 tensor products of 1D basis functions~\cite{LeMaitreKnio2010}.
 
-The series representation Equation~\eqref{eq:stochseries} can be viewed as a spectral expansion
-of $U$ along the stochastic dimensions. It can be also seen as
-combining approximation and probabilistic frameworks; a combination
-that has proven extremely useful in solving UQ problems~\cite{Xiu:2003,Lin2009}. The existence and convergence of this series is asserted by the Cameron-Martin theorem \citep{Cameron:1947} with the condition of $U$ having a finite variance.
+The series representation ~\eqref{eq:stochseries} can be viewed as a spectral expansion
+of $U$ along the stochastic dimensions. It can also be seen as
+combination of approximation and probabilistic frameworks; this
+ has proven extremely useful in solving UQ problems~\cite{Xiu:2003,Lin2009}. The existence and convergence of this series is asserted by the Cameron-Martin theorem \citep{Cameron:1947} with the condition of $U$ having a finite variance.
 The series rate of convergence, and hence the number of terms to retain, depends on the smoothness of
 $U$ with respect to $\xxi$. The series converges spectrally fast with $P$
-when $U$ is infinitely smooth; the convergence rate becomes algebraic
+when $U$ is smooth; the convergence rate becomes algebraic
 when $U$ has finite smoothness \citep{Canuto:2006}. In practice the series convergence is monitored 
 via various error metrics as discussed in the results section.
 
@@ -68,9 +69,9 @@ via various error metrics as discussed in the results section.
 The computation of the coefficients of the PC expansions $U_k$
 can be done using a number of procedures. Here we adopt a non-intrusive
 approach that allows the use of the forward model \geoclaw as a black box
-with no code modifications required. PC expansion coefficients are thus determined
+with no code modifications required. PC expansion coefficients are determined
 based on a set of response \geoclaw simulations at specified set of the uncertain parameters. 
-In particular, we rely on the Non-Intrusive Spectral Projection (NISP) method that exploits the orthogonality of the basis and applies the Galerkin projection to find the PC expansion coefficients as follows:
+Specifically, we rely on the Non-Intrusive Spectral Projection (NISP) method that exploits the orthogonality of the basis and applies the Galerkin projection to find the PC expansion coefficients as follows:
 
 \begin{equation}
  U_k(\bm{x},t) = \frac{\left< U, \Psi_k \right>}{\left< \Psi_k, \Psi_k \right>} = 
@@ -87,13 +88,13 @@ Using NISP the stochastic integrals are solved using a numerical quadrature to o
 \end{equation}
 where the subscript $Q$ refers to approximating the inner product integral with
 quadrature, and $\xxi_q$ and $\omega_q$ are multi-dimensional quadrature points and weights,
-respectively. The quadrature order should be commensurated with the
+respectively. The quadrature order should be commensurate with the
 truncation order, and should be high enough to avoid aliasing artifacts.
 The choice of quadrature rule is hence critical to the performance
-of the PC (in its NISP version at least). In the current work, we employ the 
+of the PC (in its NISP version at least). \comment{In the current work, we employ the 
 tensorized Gaussian quadrature that yields 125 quadrature points for the set of three input parameters.
 The computational cost of this ensemble is low compared to the cost of the 
-tens of thousands of runs using the forward model.
+tens of thousands of runs using the forward model.}
 
 The computation of the ${U}_k$ can thus be expressed as a matrix-vector product of the form:
 
@@ -108,8 +109,8 @@ the quadrature value $\xxi_q$.
 
 \subsubsection{Statistical moments and sensitivity analysis}
 The identification of the inner product weight function
-with the probability distribution of $\xxi$ simplifies the calculations of $U$'s statistical moments. 
-Noting that since $\Psi_0(\xxi)$ is a constant that can be normalized to satisfy 
+with the probability distribution of $\xxi$ simplifies the calculations of statistical moments of $U$. 
+Noting that since $\Psi_0(\xxi)$ is a constant that is normalized so that 
 $\left<\Psi_0,\Psi_0\right>=1$, the expectation and variance of $U$ can be computed as:
 
 \begin{equation}
@@ -122,9 +123,9 @@ and \begin{equation}
 \left<\Psi_k,\Psi_k\right>.
 \end{equation}
 
-PC representations of random variables also enable conducting
-efficient global sensitivity analysis that aims to quantify the
-contribution of different random input parameters to the model variability.
+PC representations also enable conducting
+efficient global sensitivity analysis that quantify the
+contribution of different random input parameters to the variance in the output.
 This can be done by computing the so-called {\it total} 
 sensitivity index $T_i$ that measures the contribution of
 the $i^{th}$ random input to total model variability by
@@ -143,7 +144,7 @@ as follows:
                \sum_{k \in K_i} U_k^2 \ave{\Psi_k^2}}
               {\displaystyle\sum_{k = 1}^P U_k^2 \ave{\Psi_k^2}},
 \end{equation}
-where we define \[
+where \[
    K_i = \left\{ k \in \{1, \ldots, P\} :
            \vec{\alpha}^k_i > 0 \right\}
         \]

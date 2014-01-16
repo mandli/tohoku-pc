@@ -36,9 +36,9 @@ and finally $p(\vec{\theta}| \vec d)$ is the posterior,
 representing the probability of occurrence of $\vec{\theta}$ given the data $\vec d $.
 
 To formulate the likelihood function, we let $\vec \epsilon = \vec d - \vec{G}$
-represents the discrepancy between the model and observations.
+represent the discrepancy between the model and observations.
 Here, the components of $\vec \epsilon $ are assumed to be i.i.d. random variables with density $p_{\epsilon}$.
-In this case the likelihood function can be written as:
+The likelihood function can thus be written as:
 
 \begin{equation} 
 p(\vec d |  \vec{\theta}) 
@@ -50,12 +50,11 @@ p_\epsilon (d_i - G_i(\vec \theta)).
 
 In our application, we assume that the errors $\epsilon_i$ are independent
 and normally distributed with mean
-zero and variance $\sigma^2$, i.e. 
-$\epsilon_i \sim N(0,\sigma^2)$. 
+zero and variance $\sigma^2$, i.e. $\epsilon_i \sim N(0,\sigma^2)$. 
 While in general $\sigma^2$ depends on the observations, in cases where the error
-amplitude is generally small and does not change throughout space and time, one may use
-a simplified model and assume single $\sigma^2$ value.
-Consequently, Equation~\eqref{eq:likelihood} becomes:
+amplitude is generally small and does not change throughout space and time.
+Consequently, one may use assume single $\sigma^2$ value in Equation~\eqref{eq:likelihood},
+resulting in:
 
 \begin{equation} 
 p(\vec d |  \vec{\theta}) 
@@ -73,9 +72,9 @@ p(\vec{\theta}| \vec d)
 \exp \left\lbrace \frac{-(d_i - G_i(\vec \theta))^2}{2 \sigma^2} \right\rbrace  
 \prod_{i=1}^n p(\theta_i).
 \end{equation}
-The variance $\sigma^2$ is unknown \emph{a priori}; thus we treat it as a hyper-parameter.
-In other words, $\sigma^2$ may become an additional parameter for Bayesian inference and  
-therefore endowed with a prior and estimated from data. In this case the joint posterior is finally written as follows:
+Since the variance $\sigma^2$ is unknown \emph{a priori}; we treat it as a hyper-parameter.
+In other words, $\sigma^2$ become an additional parameter for Bayesian inference and  
+therefore endowed with a prior which is updated based on available observations. In this case the joint posterior is finally expressed as:
 
 \begin{equation} 
 p(\vec{\theta},\sigma^2 | \vec d)
