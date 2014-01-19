@@ -213,7 +213,18 @@ burn-in iterations.}
 \includegraphics[width=0.475\textwidth]{./figures/pdf_p3.pdf} &
 \includegraphics[width=0.475\textwidth]{./figures/pdf_s1.pdf}
         \end{tabular}
-        \caption{Posterior distributions for the three Manning's $n$ coefficients $n_1,n_2,n_3$ 
+        \caption{KDE of the marginalized posterior distributions for the three Manning's $n$ coefficients $n_1,n_2,n_3$ 
 and $\sigma^2$ the variance between simulations and observations.}
+\label{fig:pdfs} 
+        \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{figure}[ht]
+        \begin{tabular}{clc}
+\includegraphics[width=0.475\textwidth]{./figures/sample.pdf} &
+\includegraphics[width=0.475\textwidth]{./figures/jpdf.pdf} \\
+        \end{tabular}
+        \caption{Left: scatter plots of $n_2$ and $n_3$ obtained from the
+chain samples (Figure~\ref{fig:mcmc}). 
+Right column: contour plot of the marginalized joint posterior distribution of  $n_2$ and $n_3$.}
 \label{fig:pdfs} 
         \end{figure}
