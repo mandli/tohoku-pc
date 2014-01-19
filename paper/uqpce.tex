@@ -92,16 +92,14 @@ quadrature, and $\xxi_q$ and $\omega_q$ are multi-dimensional quadrature points 
 respectively. The quadrature order should be commensurate with the
 truncation order, and should be high enough to avoid aliasing artifacts.
 The choice of quadrature rule is hence critical to the performance
-of the PC (in its NISP version at least). \comment{In the current work, we employ a 
-tensorized Gaussian quadrature that yields 125 quadrature points for the set of three input parameters.
-The computational cost of this ensemble is low compared to the cost of the 
-tens of thousands of runs using the forward model.}
+of the PC (in its NISP version at least).
 
 The computation of the ${U}_k$ can thus be expressed as a matrix-vector product of the form:
 
 \begin{equation} 
  U_k(\bm{x},t)=\sum_q \Pi_{kq} U(\bm{x},t,\xxi_q),\;\;\;
  \Pi_{kq}=\frac{\Psi_k(\xxi_q)\omega_q}{\left< \Psi_k, \Psi_k \right>},
+\label{eq:nisp}
 \end{equation} 
 where $\Pi_{kq}$ is the projection matrix and $U(\bm{x},t,\xxi_q)$ is obtained
 from an ensemble of the deterministic model realizations with the uncertain parameters set at

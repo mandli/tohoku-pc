@@ -16,7 +16,11 @@ Note that we only show the evolution after $t=6000~s$ where the uncertainty is s
 reflected in a significant standard deviation as seen earlier from the realizations shown 
 in Figure~\ref{fig:rlzs}. An interesting observations is that the
 standard deviation in water surface elevations vanishes at a few time instances
-during the tsunami event.  \comment{Why is this?}
+during the tsunami event.  \comment{The narrowing of the variance at these instances
+is possibility due to the waves that are arriving
+during these times and reflected from a single source or from a region
+where the Manning's $n$ values have little influence over these waves (as
+opposed to those being reflected off the Japanese coast).}
 
 The predicted mean water surface elevation  and its standard deviation 
 can be used to compare with the (DART) buoy observations collected during
@@ -56,14 +60,13 @@ at different times.
 \subsubsection{Response surface}
 In addition to the statistical and sensitivity analysis, the PC surrogate 
 can be used to construct a response surface for the uncertain input parameters.
-This is achieved by sampling the PC surrogate for different values of the term $\xxi$ within the prior
-range. Since $n_3$ shows insignificant contribution to the 
+This is achieved by sampling the PC surrogate for different values of the 
+canonical vector of random variables  $\xxi$ within the prior
+range. Since $n_1$ shows insignificant contribution to the 
 uncertainty in the model output, we only consider the response surface
-of $n_2$ versus $n_3$ for a fixed value of $n_1=0.1025$ as illustrated in Figure~\ref{fig:response2}
-and Figure~\ref{fig:response3} for different times as indicated. The most striking features are the relatively flat
+of $n_2$ versus $n_3$ for a fixed value of $n_1=0.035$ as illustrated in Figure~\ref{fig:response2}
+at $t=7200~s$. The most striking features are the relatively flat
 horizontal contours in the $n_3$ direction suggesting that water surface elevation depends
 only mildly on $n_3$ even during peak tsunami events. This is true for gauges 21401, 21413 and 21418. However,
 at gauge 21419, the horizontal contours are observed in the $n_2 $ direction
 and therefore water surface elevation depends mildly on $n_2$.
-
-\comment{Do you mean ``Since $n_1$ shows insignificant contribution...'' rather than $n_3$?  The value picked for $n_1$ also is quite high, can we pick something more reasonable such as 0.035?}

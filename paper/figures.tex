@@ -41,7 +41,9 @@
 \includegraphics[width=0.5\textwidth]{./figures/error_gauge4.pdf} 
 
 \end{tabular}
-\caption{125 \geoclaw realizations at different gauge locations.\comment{fix y label}}
+\caption{Relative normalized error between realizations and 
+the corresponding PC surrogates at different gauge locations
+calculated using Equation~(\ref{eq:error}).}
 \label{fig:error}
 \end{figure}   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,26 +165,27 @@ and observed data of water surface elevation with time at the four gauges.}
 \includegraphics[width=0.5\textwidth]{./figures/response_i3_t2.pdf} &
 \includegraphics[width=0.5\textwidth]{./figures/response_i4_t2.pdf}
 \end{tabular}
-\caption{Response surface of water surface elevation at the different gauge locations at t = 7200 s.}
+\caption{Response surface of water surface elevation at the different gauge locations at t = 7200 s
+as function of $n_2$ and $n_3$, with fixed $n_1=0.035$}.
 \label{fig:response2}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[ht]
-\centering
-
-\begin{tabular}{clcl}
-\includegraphics[width=0.5\textwidth]{./figures/response_i1_t3.pdf} &
-\includegraphics[width=0.5\textwidth]{./figures/response_i2_t3.pdf} \\
-\includegraphics[width=0.5\textwidth]{./figures/response_i3_t3.pdf} &
-\includegraphics[width=0.5\textwidth]{./figures/response_i4_t3.pdf}
-\end{tabular}
-\caption{Response surface of water surface elevation at the different gauge locations at t = 14400 s.}
-\label{fig:response3}
-\end{figure}
+%\begin{figure}[ht]
+%\centering
+%
+%\begin{tabular}{clcl}
+%\includegraphics[width=0.5\textwidth]{./figures/response_i1_t3.pdf} &
+%\includegraphics[width=0.5\textwidth]{./figures/response_i2_t3.pdf} \\
+%\includegraphics[width=0.5\textwidth]{./figures/response_i3_t3.pdf} &
+%\includegraphics[width=0.5\textwidth]{./figures/response_i4_t3.pdf}
+%\end{tabular}
+%\caption{Response surface of water surface elevation at the different gauge locations at t = 14400 s.}
+%\label{fig:response3}
+%\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.475\textwidth]{./figures/scatter.pdf} 
+\includegraphics[width=0.575\textwidth]{./figures/scatter.pdf} 
 \caption{Scatter plot of measured water surface elevation against their \geoclaw
 model counterparts during Tsunami \tohoku. The data points are colored 
 differently for the different gauges as indicated in the legend. }

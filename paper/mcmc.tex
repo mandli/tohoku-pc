@@ -9,7 +9,7 @@ for a reference simulation in which the the Manning's $n$ coefficients were set 
 shows a scatter plot that compares the observed 
 water surface elevation at the different gauge locations and the \geoclaw model counterparts. The plots show a reasonable agreement between the simulation and the observations available.  The differences between the simulation and observations can be attributed to uncertainty in the Manning's $n$ coefficients, errors in the earthquake rupture model, and insufficiently accurate bathymetry in the near-shore region.  The high amount of scatter from gauge 21418 can probably be attributed to its proximity to the epicenter of the earthquake and shore region.
 
-\comment{Bayesian inference is now used to estimate the Manning's 
+Bayesian inference is now used to estimate the Manning's 
 $n$ coefficient's ranges that minimize this scatter between 
 observed and modeled water surface elevations and to estimate the variance of the noise in the measured data.
 To this end, an adaptive MCMC method is used to sample 
@@ -20,7 +20,7 @@ observed data. This sampling requires tens of thousands of
 sample requires an independent \geoclaw realization. Instead,
 the surrogate model created using PC expansions provides a computationally
 efficient alternative that requires only evaluating the PC expansion
-for different values of the germ $\xxi$.}
+for different values of the canonical vector of random variables $\xxi$.
 
 The MCMC algorithm required $50,000$ iterations to guarantee convergence
 and to obtain the posteriors of the Manning's $n$ coefficients: 
@@ -50,11 +50,11 @@ For $n_3$, we observe a posterior that has a well defined peak
 of 0.18 but no clear pdf shape. The posterior distribution of the variance 
 appears to be well-defined of Gaussian-like shape. 
 The MAP value of $\sigma^2=0.021$ can be used to estimate the water surface elevation standard 
-deviation estimated to be 0.145~$m$. 
-This value is a reflection of the mismatch between the model and 
+deviation estimated to be 0.145~$m$. This value is a reflection of the mismatch between the model and 
 observed data. \comment{marginal "", correlation ''', joint}.
 
-
+With the MCMC chains computed, we can now con- struct the joint posterior distributions of the parameters
+using KDE. Since the posterior of m is close to the prior, we show in Fig. 17 the joint posterior distribu- tions of a and Vmax (left panel), and of a and a2 on 17–18 September (right panel). These pdfs clearly show a single peak located at a 5 1.026 and Vmax 5 34 m s21, and that can be identified with the MAP estimates from the marginalized pdfs. The right panel also clearly shows a tight estimate for a with little spread around it. Setting m 5 0 (default HYCOM value), and substituting the MAP estimates for Vmax and a in Eq. (5), we obtain the ‘‘optimal’’ (most likely) curve describing the drag co- efficient CD’s dependence on wind speed; this curve is shown in Fig. 18. In addition to decreasing the variance between simulations and observations, the impact of the MAP values on temperature can be assessed with the help of the surrogate. The results for the area-averaged SST and mixed layer depth (other quantities of interest can be treated similarly) are displayed in Fig. 19. The default drag parameters underestimate the cooling by 0.58C and the mixed layer depth by as much as 15 m; note that the mixed layer depth feels the impact of the in- creased drag from 18 to 20 September, otherwise, the two curves overlap.
 %   0.180222380841571   0.011347632046398   0.185486684362890   0.021050903421753
 
 
