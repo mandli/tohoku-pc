@@ -34,27 +34,56 @@ For $n_{3}$, the chain appears to be concentrated in the
 upper end of the parameter range. Finally, the chain for the variance 
 appears to be well mixed with a well defined posterior range between 0.02 and 0.022.  \comment{Add discussion}
 
-Next, the computed MCMC chains are used to determine the posterior 
-distributions using kernel density estimation (KDE)
-~\citep{Parzen1962,Silverman1986}.  The resulting posterior pdfs 
-of the three Manning's $n$ coefficients $n_1,n_2,n_3$ are shown 
-in Figure~\ref{fig:pdfs} in addition to the pdfs of $\sigma^2$. 
+Next, the computed MCMC chains are used to determine the marginalized posterior 
+distributions using kernel density estimation (KDE)~\citep{Parzen1962,Silverman1986}.  
+The resulting marginalized posterior pdfs of the three Manning's $n$ coefficients 
+$n_1,n_2,n_3$ are shown in Figure~\ref{fig:pdfs} in addition to the pdfs of $\sigma^2$. 
 Note that the first 10000 iterates, associated with the burn-in period, were discarded.  
-As expected from the chains shown in Figure~\ref{fig:mcmc}, the posterior pdfs of $n_1$ appear to be fairly flat, 
-and similar to the uniform prior; an indication that 
-the observed data were not useful to refine our prior knowledge for $n_1$.,
-In contrast, the posterior pdf of $n_2$ exhibits well-defined peak, 
-with a Maximum A Posteriori (MAP) estimate of around 0.011
-and an extended tail towards the larger Manning's $n$ coefficient values.
-For $n_3$, we observe a posterior that has a well defined peak
-of 0.18 but no clear pdf shape. The posterior distribution of the variance 
-appears to be well-defined of Gaussian-like shape. 
-The MAP value of $\sigma^2=0.021$ can be used to estimate the water surface elevation standard 
-deviation estimated to be 0.145~$m$. This value is a reflection of the mismatch between the model and 
-observed data. \comment{marginal "", correlation ''', joint}.
+As expected from the chains shown in Figure~\ref{fig:mcmc}, the marginalized posterior 
+pdfs of $n_1$ appear to be fairly flat, and similar to the uniform prior; an indication 
+that the observed data were not useful to refine our prior knowledge for $n_1$. In 
+contrast, the posterior pdf of $n_2$ exhibits well-defined peak, with a Maximum A 
+Posteriori (MAP) estimate of around 0.011 and an extended tail towards the larger 
+Manning's $n$ coefficient values. For $n_3$, we observe a posterior that has a well 
+defined peak of 0.18 but no clear pdf shape. The posterior distribution of the variance 
+appears to be well-defined of Gaussian-like shape. The MAP value of $\sigma^2=0.021$ 
+can be used to estimate the water surface elevation standard deviation estimated to 
+be 0.145~$m$. This value is a reflection of the mismatch between the model and 
+observed data.
 
-With the MCMC chains computed, we can now con- struct the joint posterior distributions of the parameters
-using KDE. Since the posterior of m is close to the prior, we show in Fig. 17 the joint posterior distribu- tions of a and Vmax (left panel), and of a and a2 on 17–18 September (right panel). These pdfs clearly show a single peak located at a 5 1.026 and Vmax 5 34 m s21, and that can be identified with the MAP estimates from the marginalized pdfs. The right panel also clearly shows a tight estimate for a with little spread around it. Setting m 5 0 (default HYCOM value), and substituting the MAP estimates for Vmax and a in Eq. (5), we obtain the ‘‘optimal’’ (most likely) curve describing the drag co- efficient CD’s dependence on wind speed; this curve is shown in Fig. 18. In addition to decreasing the variance between simulations and observations, the impact of the MAP values on temperature can be assessed with the help of the surrogate. The results for the area-averaged SST and mixed layer depth (other quantities of interest can be treated similarly) are displayed in Fig. 19. The default drag parameters underestimate the cooling by 0.58C and the mixed layer depth by as much as 15 m; note that the mixed layer depth feels the impact of the in- creased drag from 18 to 20 September, otherwise, the two curves overlap.
+We finally investigate the existence of any correlation arising between the inferred parameters.
+This study is motivated by the fact that the Manning's $n$ coefficients have an important role 
+in characterizing the tsunami model predictions. Moreover, it is instructive to analyze the 
+correlation between the various $n$ parameters to gain some insight into their mutual dependence.
+To this end, we compute the two-dimensional marginalized joint posteriors for each 
+possible combination of the parameters $n_1$, $n_2$ and $n_3$, namely $p(n_1, n_2), p(n_1, n_3)$ and $p(n_2, n_3)$. 
+Figure~\ref{fig:joint}(left) shows the scatter plots of the MCMC samples of the combinations of 
+inferred parameters obtained from the chain samples of the marginalized posterior excluding 
+the burn-in iterations. The plots reveal no clear correlation in all three cases. 
+These samples can be readily exploited to reconstruct the joint density for each combination of parameters. 
+The right column of Figure~\ref{fig:joint} shows the contour plots of the marginalized joint posteriors 
+$p(n_1, n_2)$, $p(n_1, n_3)$ and $p(n_2, n_3)$. The contours are obtained from the
+distribution reconstructed via KDE and shown for the cases corresponding to greater than $10\%$
+of the maximum probability.
+
+To quantify the degree of no-correlation between each possible pair of parameters, we compute 
+the corresponding correlation coefficient which is a unitless scalar that falls in the range 
+$(-1, 1)$, with $1$ indicating a perfect positive correlation, $−1$ a perfect negative correlation and $0$ for
+a no-correlation case.
+% $R(n_2, n_3)$, $R(n_2, \sigma^2)$, and $R(n_3, \sigma^2)$.
+The correlation coefficient, $R(X, Y )$, between two random variables $X$ and $Y$ is defined as:
+
+\begin{equation}
+R(X,Y) = \frac{E[(X - \mu_X)(Y - \mu_Y )]}{\sigma_X \sigma_Y} 
+\end{equation}
+where $\sigma_X$ and  $\sigma_Y$ are the standard deviations of  $X$ and $Y$, $\mu_X$
+and $\mu_Y$  are the means of  $X$ and $Y$ respectively;
+and $E$ is the expectation operator.  In our case, the correlation coefficient
+was less than $0.06$ for all possible combinations of parameters; again indicating no correlation
+existing between the inferred parameters.
+
+
+
 %   0.180222380841571   0.011347632046398   0.185486684362890   0.021050903421753
 
 

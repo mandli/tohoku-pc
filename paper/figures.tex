@@ -220,11 +220,30 @@ and $\sigma^2$ the variance between simulations and observations.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \begin{figure}[ht]
         \begin{tabular}{clc}
-\includegraphics[width=0.475\textwidth]{./figures/sample.pdf} &
-\includegraphics[width=0.475\textwidth]{./figures/jpdf.pdf} \\
+\includegraphics[width=0.475\textwidth]{./figures/sample12.pdf} &
+\includegraphics[width=0.475\textwidth]{./figures/jpdf12.pdf} \\
+\includegraphics[width=0.475\textwidth]{./figures/sample13.pdf} &
+\includegraphics[width=0.475\textwidth]{./figures/jpdf13.pdf} \\
+\includegraphics[width=0.475\textwidth]{./figures/sample23.pdf} &
+\includegraphics[width=0.475\textwidth]{./figures/jpdf23.pdf}
         \end{tabular}
-        \caption{Left: scatter plots of $n_2$ and $n_3$ obtained from the
+\caption{Left: scatter plots of the pairs $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$ obtained from the
 chain samples (Figure~\ref{fig:mcmc}). 
-Right column: contour plot of the marginalized joint posterior distribution of  $n_2$ and $n_3$.}
-\label{fig:pdfs} 
+Right: contour plots of the marginalized joint posterior distribution of $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$.  Contours of greater than $10\%$ of the maximum probability are shown.}
+\label{fig:joint} 
+        \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{figure}[ht]
+        \begin{tabular}{clc}
+\includegraphics[width=0.475\textwidth]{./figures/2sample12.pdf} &
+\includegraphics[width=0.475\textwidth]{./figures/2jpdf12.pdf} \\
+\includegraphics[width=0.475\textwidth]{./figures/2sample13.pdf} &
+\includegraphics[width=0.475\textwidth]{./figures/2jpdf13.pdf} \\
+\includegraphics[width=0.475\textwidth]{./figures/2sample23.pdf} &
+\includegraphics[width=0.475\textwidth]{./figures/2jpdf23.pdf}
+        \end{tabular}
+\caption{\alert{This is for the case of secound source model} Left: scatter plots of the pairs $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$ obtained from the
+chain samples (Figure~\ref{fig:mcmc}). 
+Right: contour plots of the marginalized joint posterior distribution of $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$.  Contours of greater than $10\%$ of the maximum probability are shown.}
+\label{fig:joint} 
         \end{figure}
