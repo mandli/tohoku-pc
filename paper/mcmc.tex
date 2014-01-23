@@ -22,17 +22,19 @@ the surrogate model created using PC expansions provides a computationally
 efficient alternative that requires only evaluating the PC expansion
 for different values of the canonical vector of random variables $\xxi$.
 
-The MCMC algorithm required $50,000$ iterations to guarantee convergence
-and to obtain the posteriors of the Manning's $n$ coefficients: 
-$n_1$, $n_2$ and $n_3$ as well as for the variance $\sigma^2$. Figure \ref{fig:mcmc} 
-shows the sample chains for the input parameters for different iterations of the MCMC algorithms. 
-The different panels show well-mixed chains for all input parameters as well as the variance $\sigma^2$.
-The chain of  $n_{1}$ spans the entire range of the prior, meaning that the observations are not informative 
-concerning this input.  In contrast, the $n_{2}$ chain appears to be concentrated in the 
-lower end of the parameter range, with values between 0.005 and 0.1. 
-For $n_{3}$, the chain appears to be concentrated in the 
-upper end of the parameter range. Finally, the chain for the variance 
-appears to be well mixed with a well defined posterior range between 0.02 and 0.022.  \comment{Add discussion}
+The MCMC algorithm required $50,000$ iterations to guarantee convergence and to
+obtain the posteriors of the Manning's $n$ coefficients:  $n_1$, $n_2$ and $n_3$
+as well as for the variance $\sigma^2$. Figure \ref{fig:mcmc}  shows the sample
+chains for the input parameters for different iterations of the MCMC algorithms.
+The different panels show well-mixed chains for all input parameters as well as
+the variance $\sigma^2$. The chain of  $n_{1}$ spans the entire range of the
+prior, meaning that the observations are not informative  concerning this input.
+In contrast, the $n_{2}$ chain appears to be concentrated in the  lower end of
+the parameter range, with values between 0.005 and 0.1.  For $n_{3}$, the chain
+appears to be concentrated in the  upper end of the parameter range. Finally,
+the chain for the variance  appears to be well mixed with a well defined
+posterior range between 0.02 and 0.022.  These values align well with what is
+commonly considered physically relevant for near-shore and deep-water regions.
 
 Next, the computed MCMC chains are used to determine the marginalized posterior 
 distributions using kernel density estimation (KDE)~\citep{Parzen1962,Silverman1986}.  
