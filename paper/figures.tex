@@ -201,7 +201,7 @@ differently for the different gauges as indicated in the legend. }
 \includegraphics[width=0.475\textwidth]{./figures/chain_s1.pdf}
 \end{tabular}
 \caption{Chain samples for the three Manning's $n$ coefficients $n_1,n_2,n_3$ and $\sigma^2$
-the variance between simulations and observations. The vertical dotted lines corresponds to the
+the noise variance. The vertical dotted lines corresponds to the
 burn-in iterations.}
 \label{fig:mcmc} 
 \end{figure}
@@ -213,11 +213,24 @@ burn-in iterations.}
 \includegraphics[width=0.475\textwidth]{./figures/pdf_p3.pdf} &
 \includegraphics[width=0.475\textwidth]{./figures/pdf_s1.pdf}
         \end{tabular}
-        \caption{KDE of the marginalized posterior distributions for the three Manning's $n$ coefficients $n_1,n_2,n_3$ 
-and $\sigma^2$ the variance between simulations and observations.}
+        \caption{KDE of the marginalized posterior distributions for the three Manning's $n$ coefficients 
+        $\Pi(n_1)$, $\Pi(n_2)$ and $\Pi(n_3)$, 
+and the marginalized posterior distribution of the noise variance 
+$\Pi(\sigma^2)$.}
 \label{fig:pdfs} 
         \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{figure}[ht]
+%        \begin{tabular}{clc}
+%\includegraphics[width=0.475\textwidth]{./figures/pdf_p1.pdf} &
+%\includegraphics[width=0.475\textwidth]{./figures/pdf_p2.pdf} \\
+%\includegraphics[width=0.475\textwidth]{./figures/n3pdf.pdf} &
+%\includegraphics[width=0.475\textwidth]{./figures/pdf_s1.pdf}
+%        \end{tabular}
+%        \caption{This is for the case of second (Saito) source model}
+%\label{fig:pdfs} 
+%        \end{figure}
+%        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \begin{figure}[ht]
         \begin{tabular}{clc}
 \includegraphics[width=0.475\textwidth]{./figures/sample12.pdf} &
@@ -227,23 +240,23 @@ and $\sigma^2$ the variance between simulations and observations.}
 \includegraphics[width=0.475\textwidth]{./figures/sample23.pdf} &
 \includegraphics[width=0.475\textwidth]{./figures/jpdf23.pdf}
         \end{tabular}
-\caption{Left: scatter plots of the pairs $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$ obtained from the
+\caption{Left: Scatter plots of the pairs $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$ obtained from the
 chain samples (Figure~\ref{fig:mcmc}). 
-Right: contour plots of the marginalized joint posterior distribution of $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$.  Contours of greater than $10\%$ of the maximum probability are shown.}
+Right: Contour plots of the marginalized joint posterior distribution $\Pi(n_1,n_2)$, $\Pi(n_1,n_3)$ and $\Pi(n_2,n_3)$.  Contours of greater than $10\%$ of the maximum probability are shown.}
 \label{fig:joint} 
         \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \begin{figure}[ht]
-        \begin{tabular}{clc}
-\includegraphics[width=0.475\textwidth]{./figures/2sample12.pdf} &
-\includegraphics[width=0.475\textwidth]{./figures/2jpdf12.pdf} \\
-\includegraphics[width=0.475\textwidth]{./figures/2sample13.pdf} &
-\includegraphics[width=0.475\textwidth]{./figures/2jpdf13.pdf} \\
-\includegraphics[width=0.475\textwidth]{./figures/2sample23.pdf} &
-\includegraphics[width=0.475\textwidth]{./figures/2jpdf23.pdf}
-        \end{tabular}
-\caption{\comment{This is for the case of second (Saito) source model} Left: scatter plots of the pairs $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$ obtained from the
-chain samples (Figure~\ref{fig:mcmc}). 
-Right: contour plots of the marginalized joint posterior distribution of $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$.  Contours of greater than $10\%$ of the maximum probability are shown.}
-\label{fig:joint} 
-        \end{figure}
+% \begin{figure}[ht]
+%        \begin{tabular}{clc}
+%\includegraphics[width=0.475\textwidth]{./figures/2sample12.pdf} &
+%\includegraphics[width=0.475\textwidth]{./figures/2jpdf12.pdf} \\
+%\includegraphics[width=0.475\textwidth]{./figures/2sample13.pdf} &
+%\includegraphics[width=0.475\textwidth]{./figures/2jpdf13.pdf} \\
+%\includegraphics[width=0.475\textwidth]{./figures/2sample23.pdf} &
+%\includegraphics[width=0.475\textwidth]{./figures/2jpdf23.pdf}
+%        \end{tabular}
+%\caption{\comment{This is for the case of second (Saito) source model} Left: scatter plots of the pairs $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$ obtained from the
+%chain samples (Figure~\ref{fig:mcmc}). 
+%Right: contour plots of the marginalized joint posterior distribution of $(n_1,n_2)$,$(n_1,n_3)$ and $(n_2,n_3)$.  Contours of greater than $10\%$ of the maximum probability are shown.}
+%\label{fig:joint} 
+%        \end{figure}

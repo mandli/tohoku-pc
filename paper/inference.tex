@@ -24,15 +24,15 @@ the parameters such that:
 Applying the Bayes' rule yields:
 
 \begin{equation}
- p(\vec{\theta}| \vec d) \propto 
- p(\vec d | \vec{\theta}) \ p(\vec{\theta}), 
+ \Pi(\vec{\theta}| \vec d) \propto 
+ L(\vec d | \vec{\theta}) \ q(\vec{\theta}), 
 \label{eq:bayes}
 \end{equation}
-where $p(\vec{\theta})$ is the prior of $\vec{\theta}$, representing the \emph{a priori} knowledge
+where $q(\vec{\theta})$ is the prior of $\vec{\theta}$, representing the \emph{a priori} knowledge
 about the parameters; 
-$p(\vec d| \vec{\theta})$ is the likelihood function representing
+$L(\vec d| \vec{\theta})$ is the likelihood function representing
 the probability of obtaining the data given the set of parameters $\vec{\theta}$;
-and finally $p(\vec{\theta}| \vec d)$ is the posterior,
+and finally $\Pi(\vec{\theta}| \vec d)$ is the posterior,
 representing the probability of occurrence of $\vec{\theta}$ given the data $\vec d $.
 
 To formulate the likelihood function, we let $\vec \epsilon = \vec d - \vec{G}$
@@ -41,7 +41,7 @@ Here, the components of $\vec \epsilon $ are assumed to be i.i.d. random variabl
 The likelihood function can thus be written as:
 
 \begin{equation} 
-p(\vec d |  \vec{\theta}) 
+L(\vec d |  \vec{\theta}) 
 = 
 \prod_{i=1}^m  
 p_\epsilon (d_i - G_i(\vec \theta)).  	
@@ -51,13 +51,13 @@ p_\epsilon (d_i - G_i(\vec \theta)).
 In our application, we assume that the errors $\epsilon_i$ are independent
 and normally distributed with mean
 zero and variance $\sigma^2$, i.e. $\epsilon_i \sim N(0,\sigma^2)$. 
-While in general $\sigma^2$ depends on the observations, in our case we assume that the error
+While in general $\sigma^2$ (the variance of the noise in the measured data) depends on the observations, in our case we assume that the error
 amplitude is generally small and does not change throughout space and time.
 Consequently, one may assume a single $\sigma^2$ value in Equation~\eqref{eq:likelihood},
 resulting in:
 
 \begin{equation} 
-p(\vec d |  \vec{\theta}) 
+L(\vec d |  \vec{\theta}) 
 = 
 \frac{1}{\sqrt{2 \pi \sigma^2}}\prod_{i=1}^m   
 \exp \left\lbrace \frac{-(d_i - G_i(\vec \theta))^2}{2 \sigma^2} \right\rbrace. 	
@@ -66,23 +66,23 @@ p(\vec d |  \vec{\theta})
 The joint posterior from Bayes' rule can be given as:
 
 \begin{equation} 
-p(\vec{\theta}| \vec d)
+\Pi(\vec{\theta}| \vec d)
 \propto
 \frac{1}{\sqrt{2 \pi \sigma^2}}   \prod_{i=1}^m  
 \exp \left\lbrace \frac{-(d_i - G_i(\vec \theta))^2}{2 \sigma^2} \right\rbrace  
-\prod_{i=1}^n p(\theta_i).
+\prod_{i=1}^n q(\theta_i).
 \end{equation}
-Since the variance $\sigma^2$ is unknown \emph{a priori} we treat it as a hyper-parameter.
+Since $\sigma^2$ is unknown \emph{a priori} we treat it as a hyper-parameter.
 In other words, $\sigma^2$ becomes an additional parameter for Bayesian inference and  
 therefore endowed with a prior which is updated based on available observations. In this 
 case the joint posterior is finally expressed as:
 
 \begin{equation} 
-p(\vec{\theta},\sigma^2 | \vec d)
+\Pi(\vec{\theta},\sigma^2 | \vec d)
 \propto
 \frac{1}{\sqrt{2 \pi \sigma^2}}   \prod_{i=1}^m  
 \exp \left\lbrace \frac{-(d_i - G_i(\vec \theta))^2}{2 \sigma^2} \right\rbrace
-\ p(\sigma^2) \prod_{i=1}^n p(\theta_i).
+\ q(\sigma^2) \prod_{i=1}^n q(\theta_i).
 \label{eq:post}
 \end{equation}
 
