@@ -12,30 +12,30 @@ three Manning's coefficients treated as the unknown parameters and assumed indep
 This enables us to rewrite Equation~\eqref{eq:post} as:
 
 \begin{equation} 
-p(n_1,n_2,n_3,\sigma^2 | \vec d) 
+\Pi(n_1,n_2,n_3,\sigma^2 | \vec d) 
 \propto \frac{1}{\sqrt{2 \pi \sigma^2}} 
  \prod_{i=1}^m  
 \exp \left\lbrace \frac{-(d_i - G_i)^2}{2 \sigma^2} \right\rbrace
-\ p(\sigma^2)p(n_1)p(n_2) p(n_3).
+\ q(\sigma^2)q(n_1)q(n_2) q(n_3).
 \label{eq:post_coef}
 \end{equation}
 
 To complete the definition of the posterior, we need to choose proper priors that should be based 
 on some \emph{a priori} knowledge about the parameters. In our case, a uniform
-prior for all three Manning's $n$ parameters is assumed, with $n_i$ in the range  $[0.005,0.2]$; therefore:
+prior for all three Manning's $n$ parameters is assumed, with $n_i$ in the range  $[0.005 - 0.2]$; therefore:
 
 \begin{equation} 
-p(n_i) = \begin{cases}
+q(n_i) = \begin{cases}
 		\displaystyle \frac{1}{0.2-0.005} &\text{for~} 0.005 <  n_i \leq 0.2 ,  \\
 		0 &\text{otherwise}.
 \end{cases}
 \end{equation}
-Regarding the variance, the only information we know 
+Regarding the noise variance, the only information we know 
 is that $\sigma^2$ is always positive.
 We thus assume a Jeffreys prior \citep{sivia} for $\sigma^2$, expressed as:
 
 \begin{equation} 
-p(\sigma^2) =  \begin{cases}
+q(\sigma^2) =  \begin{cases}
 		\displaystyle \frac{1}{\sigma^2} &\text{for~} \sigma^2 > 0,  \\
 		0 &\text{otherwise}. 
 		\end{cases}.

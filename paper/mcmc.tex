@@ -24,15 +24,15 @@ for different values of the canonical vector of random variables $\xxi$.
 
 The MCMC algorithm required $50,000$ iterations to guarantee convergence and to
 obtain the posteriors of the Manning's $n$ coefficients:  $n_1$, $n_2$ and $n_3$
-as well as for the variance $\sigma^2$. Figure \ref{fig:mcmc}  shows the sample
+as well as for the noise variance $\sigma^2$. Figure \ref{fig:mcmc}  shows the sample
 chains for the input parameters for different iterations of the MCMC algorithms.
 The different panels show well-mixed chains for all input parameters as well as
-the variance $\sigma^2$. The chain of  $n_{1}$ spans the entire range of the
+the noise variance $\sigma^2$. The chain of  $n_{1}$ spans the entire range of the
 prior, meaning that the observations are not informative  concerning this input.
 In contrast, the $n_{2}$ chain appears to be concentrated in the  lower end of
 the parameter range, with values between 0.005 and 0.1.  For $n_{3}$, the chain
 appears to be concentrated in the  upper end of the parameter range. Finally,
-the chain for the variance  appears to be well mixed with a well defined
+the chain for the noise variance  appears to be well mixed with a well defined
 posterior range between 0.02 and 0.022.  These values align well with what is
 commonly considered physically relevant for near-shore and deep-water regions.
 
@@ -47,7 +47,7 @@ that the observed data were not useful to refine our prior knowledge for $n_1$. 
 contrast, the posterior pdf of $n_2$ exhibits a well-defined peak, with a Maximum A 
 Posteriori (MAP) estimate of around 0.011 and an extended tail towards the larger 
 Manning's $n$ coefficient values. For $n_3$, we observe a posterior that has a well 
-defined peak of 0.18 but no clear pdf shape. The posterior distribution of the variance 
+defined peak of 0.18 but no clear pdf shape. The posterior distribution of the noise variance 
 appears to be well-defined of Gaussian-like shape. The MAP value of $\sigma^2=0.021$ 
 can be used to estimate the water surface elevation standard deviation estimated to 
 be 0.145~$m$. This value is a reflection of the mismatch between the model and 
@@ -58,13 +58,13 @@ This study is motivated by the fact that the Manning's $n$ coefficients have an 
 in characterizing the tsunami model predictions. Moreover, it is instructive to analyze the 
 correlation between the various $n$ parameters to gain some insight into their mutual dependence.
 To this end, we compute the two-dimensional marginalized joint posteriors for each 
-possible combination of the parameters $n_1$, $n_2$ and $n_3$, namely $p(n_1, n_2), p(n_1, n_3)$ and $p(n_2, n_3)$. 
+possible combination of the parameters $n_1$, $n_2$ and $n_3$, namely $\Pi(n_1, n_2), \Pi(n_1, n_3)$ and $\Pi(n_2, n_3)$. 
 Figure~\ref{fig:joint}(left) shows the scatter plots of the MCMC samples of the combinations of 
 inferred parameters obtained from the chain samples of the marginalized posterior excluding 
 the burn-in iterations. The plots reveal no clear correlation in all three cases. 
 These samples can be readily exploited to reconstruct the joint density for each combination of parameters. 
 The right column of Figure~\ref{fig:joint} shows the contour plots of the marginalized joint posteriors 
-$p(n_1, n_2)$, $p(n_1, n_3)$ and $p(n_2, n_3)$. The contours are obtained from the
+$\Pi(n_1, n_2)$, $\Pi(n_1, n_3)$ and $\Pi(n_2, n_3)$. The contours are obtained from the
 distribution reconstructed via KDE and shown for the cases corresponding to greater than $10\%$
 of the maximum probability.
 
