@@ -1,5 +1,5 @@
 %!TEX root = paper.tex
-\section{Discussion and conclusions}
+\section{Discussion and Conclusions}
 \label{sec:conc}
 
 The present study aimed at estimating Manning's $n$ friction coefficient  which
@@ -23,49 +23,36 @@ performed in order to quantify the contribution of each uncertain parameter to
 the variance in surface elevation.  It was found that the Manning's $n$
 coefficient in the near-shore region $n_2$ contributed the most to the variance
 in the surface elevations compared to the other two Manning's $n$ coefficients
-in the on-shore and deep-water regions.  Finally, using Bayesian inference, MAP
-estimates were found for the three region's $n$ parameters using MCMC.  These
-values (excluding $n_1$ where no meaningful MAP value was found), $n_2=0.011$
-and $n_3=0.180$, are \comment{unexpected and different from the expected values
-used commonly in tsunami modeling.  This may be due to a number of other sources
-of uncertainty not taken into account in this analysis.}
+in the on-shore and deep-water regions.  This is expected as the deep-water
+friction has little effect on the overall column.  On the other hand, the
+sensitivity of the analysis to the on-shore value being less than that in the
+deep-water was unexpected and we suspect is due primarily to the use of the
+DART buoy gauges used as they are far enough away from land regions that they
+would not have had as large of an impact as say if data from inundation zones
+was used.
 
-\comment{Also add discussion of source differences.}
+Using Bayesian inference, MAP estimates were found for the three region's $n$
+parameters using MCMC.  These values were (excluding $n_1$ where no meaningful
+MAP value was found), $n_2=0.011$ and $n_3=0.180$.  The values and their
+corresponding marginalized PDFs (Figure~\ref{fig:pdfs}) tell perhaps the most
+complete story in this analysis.  As was mentioned above, $n_2$ is the most
+sensitive and has the most clear MAP value.  Although the value was lower than
+expected, the tail includes the most commonly used values (0.022-0.025).  The
+deep-water value $n_3$ has a peak that is much higher than expected but a tail
+that does not taper off particularly quickly.  This is not altogether unexpected
+due to the low sensitivity of the simulations to this region's friction.  The
+on-shore value $n_1$ shows again how insensitive the simulations and
+observations used were to on-shore values.
 
-
-% The main results of this work were:
-% \begin{itemize}
-
-% \item We built a surrogate model using PC expansions that required 125 forward model runs of \geoclaw.
-% The surrogate model was tested, validated and proved to be faithful.
-
-% \item We used the PC surrogate to quantify the uncertainties in the predicted water surface elevation 
-% due to the uncertainties in the Manning's $n$ coefficient. To this end, we estimated the mean and the standard deviation of water surface elevation and compared it with the measured data collected at found gauges.
-
-% \item A global sensitivity analysis was performed to quantity the contribution of each uncertain parameter to the variance in water surface elevation.  We found that the Manning’s $n$ coefficient at the shore $n_2$ is dominant and
-% contributes the most to the variance in the water surface elevation compared
-% to the other two Manning’s $n$ coefficients $n_1$ and $n_3$ for almost the
-% entire tsunami event.
-
-% \item We used Bayesian inference and identified the following MAP
-% estimates for the three $n$ parameters using MCMC, namely $n_2=0.011$ and
-% $n_3=0.180$, while for $n_1$ no meaningful MAP value could be determined from the
-% available data.
-
-% \end{itemize}
- 
-Finally, we note that the present study focused on formulating and estimating a
-low-dimensional representation of the Manning's $n$ coefficient using UQ
-techniques namely Bayesian inference and PC expansions.  A high-dimensional
-representation of the Manning's $n$ coefficient would require a large number of
-forward runs that is computationally expensive.  Alternative methods can be
-implemented to reduce the dimensionality of the problem and will be the
-objective of a future study.
-
-\comment{A list of final changes needed before submissions}
- \begin{itemize}
- \item \comment{Reducing number of figures}
- \item \comment{Adding to discussion the MAP values explanation}
- \item \comment{Restricting the prior maybe}
- \item \comment{Discussing the uncertainty in the bathymetry and possible effects on the results}
- \end{itemize}
+Finally, it should be noted that the friction source term is only one of a
+number of other sources of uncertainty.  In particular, the rupture model and
+bathymetry used can often have a larger influence on the tsunami than friction
+does.  In the future, this type of analysis would be more illustrative if
+propagation of uncertainties in both the bathymetry and source models were
+included in each Manning's $n$ estimate.  We would also like to note that the
+present study focused on formulating and estimating a low-dimensional
+representation of the Manning's $n$ coefficient using UQ techniques namely
+Bayesian inference and PC expansions.  A high-dimensional representation of the
+Manning's $n$ coefficient would require a large number of forward runs that is
+computationally expensive.  Alternative methods can be implemented to reduce the
+dimensionality of the problem and will be the objective of a future study.
