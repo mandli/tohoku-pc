@@ -1,0 +1,7 @@
+*.aux
+*.fdb_latexmk
+paper.bbl
+paper.blg
+paper.out
+paper.pdf
+paper.spl
