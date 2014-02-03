@@ -5,7 +5,7 @@
 %
 
 % \documentclass[12pt]{article}
-\documentclass[preprint,12pt]{elsarticle}
+\documentclass[review,12pt]{elsarticle}
 
 \usepackage{graphicx}
 \usepackage{bm}
@@ -79,19 +79,18 @@
 
 \author[kaust1]{Ihab Sraj}
 \author[ut]{Kyle T. Mandli}
-% \ead{kyle@ices.utexas.edu}
-% \ead[http://users.ices.utexas.edu/~kyle]{http://users.ices.utexas.edu/~kyle}
 \author[duke,kaust2]{Omar M. Knio}
 \author[ut]{Clint N. Dawson}
-\author[kaust]{Ibrahim Hoteit}
+\author[kaust1]{Ibrahim Hoteit\corref{cor1}}
 \ead{ibrahim.hoteit@kaust.edu.sa}
-\ead{Division of Physical Sciences and Engineering, King Abdullah University for Science and Technology, Thuwal, Saudi Arabia}
+%\ead{Division of Physical Sciences and Engineering, King Abdullah University for Science and Technology, Thuwal, Saudi Arabia}
 \address[kaust1]{Division of Physical Sciences and Engineering, King Abdullah University for Science and Technology, Thuwal, Saudi Arabia}
 
 \address[ut]{Institute for Computational Engineering and Science, University of Texas at Austin, 201 E 24th ST. Stop C0200, Austin, TX 78712-1229, USA}
 \address[duke]{Department of Mechanical Engineering and Materials Science, Duke University, 144
 Hudson Hall, Durham, North Carolina 27708, USA}
 \address[kaust2]{Division of Computer, Electrical and Mathematical Sciences and Engineering, King Abdullah University for Science and Technology, Thuwal, Saudi Arabia}
+\cortext[cor1]{Corresponding author}
 \date{\today}
 
 \begin{abstract}
@@ -135,11 +134,8 @@ tsunami \sep Manning's $n$ friction coefficient \sep sensitivity analysis \sep p
 \input{results}
 \input{conc}
 
-\clearpage
-
-\input{figures} 
-
-\clearpage
 \bibliographystyle{elsarticle-num}
 \bibliography{biblio}
+\clearpage
+\input{figures} 
 \end{document}
