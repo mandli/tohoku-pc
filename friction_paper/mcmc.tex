@@ -7,7 +7,7 @@ surface elevation. To this end, we present a comparison between the
 (DART) buoy observations and their \geoclaw model counterparts
 for a reference simulation in which the the Manning's $n$ coefficients were set to their default values $n_1=n_2=n_3=0.025$. Figure~\ref{fig:scatter} 
 shows a scatter plot that compares the observed 
-water surface elevation at the different gauge locations and the \geoclaw model counterparts. The plots show a reasonable agreement between the simulation and the observations available.  The differences between the simulation and observations can be attributed to uncertainty in the Manning's $n$ coefficients, errors in the earthquake rupture model, and insufficiently accurate bathymetry in the near-shore region.  The high amount of scatter from gauge 21418 can probably be attributed to its proximity to the epicenter of the earthquake and shore region.
+water surface elevation at the different gauge locations and the \geoclaw model counterparts. The plots show a reasonable agreement between the simulation and the observations.  The differences between the simulation and observations can be attributed to uncertainty in the Manning's $n$ coefficients, errors in the earthquake rupture model, and insufficiently accurate bathymetry in the near-shore region.  The high amount of scatter from gauge 21418 can probably be attributed to its proximity to the epicenter of the earthquake and shore region.
 
 Bayesian inference is now used to estimate the Manning's 
 $n$ coefficient's ranges that minimize this scatter between 
@@ -49,7 +49,7 @@ Posteriori (MAP) estimate of around 0.011 and an extended tail towards the large
 Manning's $n$ coefficient values. For $n_3$, we observe a posterior that has a well 
 defined peak of 0.18 but no clear pdf shape. The posterior distribution of the noise variance 
 appears to be well-defined of Gaussian-like shape. The MAP value of $\sigma^2=0.021$ 
-can be used to estimate the water surface elevation standard deviation estimated to 
+can be used to estimate the water surface elevation standard deviation that was found to 
 be 0.145~$m$. This value is a reflection of the mismatch between the model and 
 observed data.
 
@@ -65,7 +65,7 @@ the burn-in iterations. The plots reveal no clear correlation in all three cases
 These samples can be readily exploited to reconstruct the joint density for each combination of parameters. 
 The right column of Figure~\ref{fig:joint} shows the contour plots of the marginalized joint posteriors 
 $\Pi(n_1, n_2)$, $\Pi(n_1, n_3)$ and $\Pi(n_2, n_3)$. The contours are obtained from the
-distribution reconstructed via KDE and shown for the cases corresponding to greater than $10\%$
+distribution reconstructed via KDE, and depict values that are greater than $10\%$
 of the maximum probability.
 
 To quantify the degree of no-correlation between each possible pair of parameters, we compute 
@@ -81,7 +81,7 @@ R(X,Y) = \frac{E[(X - \mu_X)(Y - \mu_Y )]}{\sigma_X \sigma_Y}
 where $\sigma_X$ and  $\sigma_Y$ are the standard deviations of  $X$ and $Y$, $\mu_X$
 and $\mu_Y$  are the means of  $X$ and $Y$ respectively;
 and $E$ is the expectation operator.  In our case, the correlation coefficient
-was less than $0.06$ for all possible combinations of parameters; again indicating no correlation
+was in the range $(-0.002 , 0.06)$ for all possible combinations of parameters; again indicating no correlation
 between the inferred parameters.
 
 
