@@ -3,8 +3,8 @@
 
 In the current work, we employ a tensorized Gaussian quadrature to construct the PC surrogate
 model. To this end, 125 \geoclaw simulations were used to compute the PC coefficients using Equation~\ref{eq:nisp}.
-The computational cost of running this ensemble is low compared to the cost of the tens of thousands of 
-runs of the forward model.  Figure~\ref{fig:rlzs} plots the evolution of the
+The computational cost of running this ensemble is low compared to the cost of the thousands of 
+runs of the forward model that would have been required if a standard Monte-Carlo uncertainty propagation technique was to be adopted.  Figure~\ref{fig:rlzs} plots the evolution of the
 water surface elevation predicted at the four different gauges 
 using \geoclaw for the 125 different realizations 
 required to compute the PC expansions. We notice that the 

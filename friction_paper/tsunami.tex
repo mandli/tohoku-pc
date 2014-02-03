@@ -1,55 +1,5 @@
 %!TEX root = paper.tex
-\section{Manning's $n$ Friction Coefficient} \label{sec:manning}
 
-Manning's $n$ law provides a relationship between the friction coefficient
-$C_f$ appearing in the shallow water equations (SWE) governing tsunamis and 
-the empirically derived roughness parameter $n$:
-\begin{equation}
-    C_f = \frac{g n^2}{h^{4/3}},
-\label{eq:coef}
-\end{equation}
-The value of $n$ can vary both spatially and temporally due to changes in the
-bottom roughness from wave action and other processes.  For tsunami modeling it
-is a common practice to assume a single value of Manning's $n$ for the areas
-that are initially below sea-level; while satellite images and 
-land-use data are sometimes used to determine the coefficient in areas above sea-level.  This
-process both above and below sea-level has several sources of uncertainty, all
-of which can have an impact on the quantities of interest in tsunami modeling.   
-In MacInnes \emph{et al.}, for instance, they found that adopting a uniform value 
-of $n = 0.025$ everywhere leads to poor performance of the forward model's predicted 
-inundation levels.  To address this they used $n = 0.035$ in the Sendai plane to 
-account for land-uses such as pasture, farmland, and rice paddies.  It is 
-uncertainties such as these that we wish to address in a systematic way so that
-better risk assessments can be done.
-
-The direct result of the uncertainty in the Manning's $n$ coefficient lead to
-uncertainties in water elevation,
-especially in the most crucial area in risk assessments, the near-shore. In 
-addition,  the prediction of this and other quantities of interest are often highly 
-sensitive to changes in these uncertain parameters.  We seek to therefore 
-quantify the parametric uncertainty due to the uncertainty in the Manning's $n$ 
-friction coefficient by characterizing the spatial variability using
-iso-baths to define distinct regions in the domain that are characterized by a
-single Manning's $n$ coefficient.  In this study three regions were used, an
-on-shore region (initially above sea-level), a near-shore region (between
-sea-level and the 200 meter iso-bath), and the deep-water region (deeper than
-200 meters), whose Manning's $n$ coefficient is denoted by $n_1$, $n_2$, and $n_3$ respectively 
-as shown in Figure~\ref{fig:ceofs}. To quantify the uncertainties
-in these three parameters we employ Polynomial Chaos (PC) 
-expansions as used in \cite{sraj:2013a,sraj:2013b}.  The method and its 
-application to our problem is
-described in Section~\ref{sec:uqpce}.  To represent the uncertainty in the
-Manning's $n$ coefficients an uninformative uniform distribution was assumed as 
-the prior with physically relevant values of $n$ sampled from the interval 
-$n \in [0.005-0.2]$.
-
-% This Manning's $n$
-% coefficient is allowed to vary spatially by defining a set of isobaths that 
-% partition the domain into disjoint regions where a single value of $n$ can be 
-% used.  The values used for $n$ can be chosen using satellite images and
-% land-use data but this is impractical for the values used in regions
-% below sea-level or in the case of highly variable land-use regions.  As a
-% result, values used for $n$ contain large amounts of uncertainty. 
 
 \section{The \tohoku Tsunami} 
 \label{sec:tohoku}
@@ -72,8 +22,8 @@ uncertainty analysis, and finally present the observations from NOAA DART buoys.
 
 \subsection{\geoclaw} \label{ssub:geoclaw}
 The \geoclaw software package uses a finite volume, wave-propagation approach as
-described in \cite{LeVeque:1997eg} to solve the two-dimensional shallow water \
-equations:
+described in \cite{LeVeque:1997eg} to solve the two-dimensional shallow water
+equations (SWE):
 \begin{equation} \label{eq:swe}
     \begin{aligned}
     &\pd{}{t} h + \pd{}{x} (hu) + \pd{}{y} (hv) = 0, \\
@@ -129,7 +79,7 @@ event, otherwise recording every minute when triggered (a tsunami has occurred)
 or every 15 minutes when not.  We can see that the primary tsunami
 waves generated reach the gauges between 40 minutes and 2 hours after the
 earthquake.  The large spikes later in time present in the data at gauge 21418
-are data anomalies and not subsequent tsunami waves.
+are data anomalies and not subsequent tsunami waves \textbf{any refrs}.
 
 \subsection{Bathymetry and Earthquake Source Model}
 
@@ -148,3 +98,55 @@ done using established techniques and did include tsunami inversion data.  The
 latter it was felt may introduce bias into the reported results of this study.
 As discussed in MacInnes \emph{et al.}, the source models used do not include
 rupture timing which could have an impact on the accuracy of the simulation.
+
+
+\section{Manning's $n$ Friction Coefficient} \label{sec:manning}
+
+Manning's $n$ law provides a relationship between the friction coefficient
+$C_f$ appearing in the SWE governing tsunamis (Equation \ref{eq:swe}) and 
+the empirically derived roughness parameter $n$:
+\begin{equation}
+    C_f = \frac{g n^2}{h^{4/3}},
+\label{eq:coef}
+\end{equation}
+The value of $n$ may vary both spatially and temporally due to changes in the
+bottom roughness from wave action and other processes.  For tsunami modeling it
+is a common practice to assume a single value of Manning's $n$ for the areas
+that are initially below sea-level; while satellite images and 
+land-use data are sometimes used to determine the coefficient in areas above sea-level.  
+Both above and below sea-level, this process has several sources of uncertainty, all
+of which can have an impact on the quantities of interest in tsunami modeling.   
+MacInnes \emph{et al.}, for instance, found that adopting a uniform value 
+of $n = 0.025$ everywhere leads to poor performance of the forward model's predicted 
+inundation levels.  To address this they used $n = 0.035$ in the Sendai plane to 
+account for land-uses such as pasture, farmland, and rice paddies.  We aim to address such
+uncertainties in a systematic way in order to better study risk assessments can be done.
+
+The direct result of the uncertainty in the Manning's $n$ coefficient leads to
+uncertainties in water elevation,
+especially in the most crucial area in risk assessments, the near-shore. In 
+addition,  the prediction of this and other quantities of interest are often highly 
+sensitive to changes in these uncertain parameters.  We therefore seek to 
+quantify the parametric uncertainty due to the uncertainty in the Manning's $n$ 
+friction coefficient by characterizing the spatial variability using
+iso-baths to define distinct regions in the domain that are characterized by a
+single Manning's $n$ coefficient.  In this study three regions were used, an
+on-shore region (initially above sea-level), a near-shore region (between
+sea-level and the 200 meter iso-bath), and the deep-water region (deeper than
+200 meters), whose Manning's $n$ coefficient is denoted by $n_1$, $n_2$, and $n_3$ respectively 
+as shown in Figure~\ref{fig:ceofs}. To quantify the uncertainties
+in these three parameters we employ Polynomial Chaos (PC) 
+expansions as used in \cite{sraj:2013a,sraj:2013b}.  The method and its 
+application to our problem is
+described in Section~\ref{sec:uqpce}.  To represent the initial uncertainty in the
+Manning's $n$ coefficients an uninformative uniform distribution was assumed as 
+the prior with physically relevant values of $n$ sampled from the interval 
+$n \in [0.005-0.2]$.
+
+% This Manning's $n$
+% coefficient is allowed to vary spatially by defining a set of isobaths that 
+% partition the domain into disjoint regions where a single value of $n$ can be 
+% used.  The values used for $n$ can be chosen using satellite images and
+% land-use data but this is impractical for the values used in regions
+% below sea-level or in the case of highly variable land-use regions.  As a
+% result, values used for $n$ contain large amounts of uncertainty. 

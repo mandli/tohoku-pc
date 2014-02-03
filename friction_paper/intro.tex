@@ -7,7 +7,7 @@ and costly natural disasters ever recorded. Coastal communities have faced this
 hazard by assessing the risk they pose, attempting  to make informed decisions
 about the likelihood that such an event would  occur.
 Toward this goal, computational models of  tsunami events are often
-employed to explore multiple scenarios to predict the water elevation
+employed to explore multiple scenarios and to predict the water elevation
 caused by the tsunamis. The accurate prediction  of water elevations, however,
 requires accurate estimation of many model parameters that are either measured
 directly, defined empirically, or estimated from a collection of observed data.
@@ -21,7 +21,8 @@ predicted water elevation  and employ a Bayesian inverse modeling approach to
 estimate the Manning's $n$ coefficient using observations of water elevation 
 measured during a tsunami event.
 
-Previous work concerning uncertainty in tsunami modeling has been primarily been focused on constraining the likely earthquake source models (see
+Previous work concerning uncertainty quantification in tsunami modeling has been primarily 
+focused on constraining the likely earthquake source models (see
 for example \cite{MacInnes:2013cr}).  A similar approach for landslide-generated
 tsunami was presented in Sarri \emph{et al.}~\cite{Sarri2012}, by building a statistical surrogate
 using an emulator. The implemented emulator was based on a Gaussian
@@ -48,12 +49,12 @@ approach that relies on a Bayesian inference technique.  We resort to
 Polynomial Chaos (PC) expansions to build a surrogate model ~\cite{Najm:2009,Alexanderian2012,Elsheikh2014,Young2013}
 of the response of the tsunami complex geophysical model \geoclaw used in this work.
 The PC surrogate enables us to avoid using the forward model in
-the Bayesian inference thus dramatically reducing the cost of sampling the
+the Bayesian inference, thus dramatically reducing the cost of sampling the
 posterior distribution.
 
 PC expansions have been developed and applied in the engineering community to
 quantify uncertainties in numerical simulations.  The main advantage of
-using PC expansions is the ability of propagating input uncertainties through 
+using PC expansions is the ability of efficiently propagating input uncertainties through 
 large, complex and non-linear models leading to the corresponding output uncertainties. 
 Several studies already investigated the efficiency of PC expansions for 
 UQ in oceanic simulations~\citep{thacker2012,ashwanth2010,Alexanderian2012,sraj:2013a}. 
@@ -69,11 +70,10 @@ elevation and is compared to the available NOAA Deep-ocean Assessment and
 Reporting Tsunamis (DART) buoys.  The forward model runs are performed using the
 \geoclaw package following the setup in MacInnes \emph{et al.}~\cite{MacInnes:2013cr}.
 
-The structure of this manuscript is as follows. First, we discuss the uncertainties 
-of the Manning's $n$ coefficient to motivate the UQ problem in Section~\ref{sec:manning}
-and propose a three-parameter representation of $n$. 
-Section~\ref{sec:tohoku} describes our case-study, the \tohoku tsunami,
-summarizes the forward simulations setup, and presents the DART buoys observational data. 
+The structure of this manuscript is as follows. First, we describe our case-study, the \tohoku tsunami,
+summarize the forward simulations setup, and present the DART buoys observational data
+in Section~\ref{sec:tohoku}. Section~\ref{sec:manning} discusses the uncertainties 
+of the Manning's $n$ coefficient to motivate the UQ problem and propose a three-parameter representation of $n$. 
 Section~\ref{sec:formu} presents the two main methods employed in the UQ analysis:
 Bayesian inference that brings together observations 
 and model results (Section~\ref{sec:inference}) 

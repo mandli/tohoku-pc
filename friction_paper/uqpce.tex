@@ -4,10 +4,10 @@
 
 The four-dimensional posterior in Equation~\eqref{eq:post_coef} can be directly
 explored via MCMC; this requires repeated simulations (tens of thousands) of the forward \geoclaw model, 
-once for every proposed set of parameters of the Markov chain~\cite{MarzoukNajm2009,Malinverno2002}. While a single \geoclaw simulation
-takes $\sim 15~$mins, depending on the details of the MCMC algorithm used, it is desirable 
-to avoid running the forward model at every realization of the MCMC. This is achieved by constructing a 
-surrogate model that requires a much
+once for every proposed set of parameters of the Markov chain~\cite{MarzoukNajm2009,Malinverno2002}. 
+While a single \geoclaw simulation takes about $15~$mins, depending on the details of the MCMC algorithm used, 
+it is desirable to avoid running the forward model at every realization of the MCMC. 
+This is achieved by constructing a surrogate model that requires a much
 smaller ensemble of \geoclaw runs, and that can be used instead
 at a significantly reduced computational cost.  Here, we rely on
 Polynomial Chaos expansions for accelerating Bayesian inference in this context 
@@ -18,11 +18,8 @@ provide statistical properties, such as the mean, variance and sensitivities.
 
 Polynomial Chaos (PC) is a probabilistic methodology that expresses the 
 dependencies of model outputs on the uncertain model inputs
-as a polynomial truncated expansion. This method has been developed in 
-the engineering community to represent uncertainties in the output of 
-numerical simulations~\citep{Villegas2012,Lin2009,Xiu2004}
-due to the uncertainties in a model's input. We briefly describe the PC
-method below; for more details 
+as a polynomial truncated expansion~\citep{Villegas2012,Lin2009,Xiu2004}.
+We briefly describe the PC method below; for more details 
 the reader is referred to \citep{LeMaitreKnio2010}.
 
 Let $U=U(\bm{x},t,\xxi)$ denote a quantity of 
@@ -108,7 +105,7 @@ the quadrature value $\xxi_q$.
 
 \subsubsection{Statistical moments and sensitivity analysis}
 The identification of the inner product weight function
-with the probability distribution of $\xxi$ simplifies the calculations of statistical moments of $U$. 
+with the probability distribution of $\xxi$ simplifies the calculations of the statistical moments of $U$. 
 Noting that since $\Psi_0(\xxi)$ is a constant that is normalized so that 
 $\left<\Psi_0,\Psi_0\right>=1$, the expectation and variance of $U$ can be computed as:
 
@@ -145,9 +142,9 @@ as follows:
 \end{equation}
 where \[
    K_i = \left\{ k \in \{1, \ldots, P\} :
-           \vec{\alpha}^k_i > 0 \right\}
+           \vec{\alpha}^k_i > 0 \right\},
         \]
-        and $\vec{\alpha}^k$ is the multi-index associated with the $k^{th}$ term in the
+and $\vec{\alpha}^k$ is the multi-index associated with the $k^{th}$ term in the
 PC expansion~\cite{LeMaitreKnio2010}.
 
 %Using Equation~\eqref{eq:T-hard}, the computation of $T_i$ is straightforward.

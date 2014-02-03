@@ -2,8 +2,8 @@
 \label{sec:inverse}
 
 Before we attempt to solve the inverse problem of parameter estimation, 
-we first check the ability of \geoclaw to simulate water surface elevation
-realistically. To this end, we present a comparison between the 
+we first check the ability of \geoclaw to realistically simulate water 
+surface elevation. To this end, we present a comparison between the 
 (DART) buoy observations and their \geoclaw model counterparts
 for a reference simulation in which the the Manning's $n$ coefficients were set to their default values $n_1=n_2=n_3=0.025$. Figure~\ref{fig:scatter} 
 shows a scatter plot that compares the observed 
@@ -12,7 +12,7 @@ water surface elevation at the different gauge locations and the \geoclaw model 
 Bayesian inference is now used to estimate the Manning's 
 $n$ coefficient's ranges that minimize this scatter between 
 observed and modeled water surface elevations and to estimate the variance of the noise in the measured data.
-To this end, an adaptive MCMC method is used to sample 
+To this end, an adaptive MCMC method is implemented to sample 
 the posterior distributions \citep{Gareth2009,Haario2001} and consequently 
 update the Manning's $n$ coefficients distributions in light of the 
 observed data. This sampling requires tens of thousands of 
@@ -30,11 +30,11 @@ The different panels show well-mixed chains for all input parameters as well as
 the noise variance $\sigma^2$. The chain of  $n_{1}$ spans the entire range of the
 prior, meaning that the observations are not informative  concerning this input.
 In contrast, the $n_{2}$ chain appears to be concentrated in the  lower end of
-the parameter range, with values between 0.005 and 0.1.  For $n_{3}$, the chain
-appears to be concentrated in the  upper end of the parameter range. Finally,
-the chain for the noise variance  appears to be well mixed with a well defined
-posterior range between 0.02 and 0.022.  These values align well with what is
+the parameter range, with values between 0.005 and 0.1. For $n_{3}$, the chain
+appears to be concentrated in the  upper end of the parameter range. These values align well with what is
 commonly considered physically relevant for near-shore and deep-water regions.
+Finally, the chain for the noise variance  appears to be well mixed with a well defined
+posterior range between 0.02 and 0.022.  
 
 Next, the computed MCMC chains are used to determine the marginalized posterior 
 distributions using kernel density estimation (KDE)~\citep{Parzen1962,Silverman1986}.  
@@ -54,12 +54,12 @@ be 0.145~$m$. This value is a reflection of the mismatch between the model and
 observed data.
 
 We finally investigate the existence of any correlation arising between the inferred parameters.
-This study is motivated by the fact that the Manning's $n$ coefficients have an important role 
-in characterizing the tsunami model predictions. Moreover, it is instructive to analyze the 
+%This study is motivated by the fact that the Manning's $n$ coefficients have an important role 
+%in characterizing the tsunami model predictions. 
+It is indeed instructive to analyze the 
 correlation between the various $n$ parameters to gain some insight into their mutual dependence.
 To this end, we compute the two-dimensional marginalized joint posteriors for each 
-possible combination of the parameters $n_1$, $n_2$ and $n_3$, namely $\Pi(n_1, n_2), \Pi(n_1, n_3)$ and $\Pi(n_2, n_3)$. 
-Figure~\ref{fig:joint}(left) shows the scatter plots of the MCMC samples of the combinations of 
+possible combination of the parameters $n_1$, $n_2$ and $n_3$, namely $\Pi(n_1, n_2), \Pi(n_1, n_3)$ and $\Pi(n_2, n_3)$. Figure~\ref{fig:joint} (left) shows the scatter plots of the MCMC samples of the combinations of 
 inferred parameters obtained from the chain samples of the marginalized posterior excluding 
 the burn-in iterations. The plots reveal no clear correlation in all three cases. 
 These samples can be readily exploited to reconstruct the joint density for each combination of parameters. 
@@ -82,7 +82,7 @@ where $\sigma_X$ and  $\sigma_Y$ are the standard deviations of  $X$ and $Y$, $\
 and $\mu_Y$  are the means of  $X$ and $Y$ respectively;
 and $E$ is the expectation operator.  In our case, the correlation coefficient
 was less than $0.06$ for all possible combinations of parameters; again indicating no correlation
-existing between the inferred parameters.
+between the inferred parameters.
 
 
 

@@ -15,14 +15,14 @@ bounds at the four gauges.
 Note that we only show the evolution after $t=6000~s$ where the uncertainty is significant,
 reflected in a significant standard deviation as seen earlier from the realizations shown 
 in Figure~\ref{fig:rlzs}. An interesting observations is that the
-standard deviation in water surface elevations vanishes at a few time instances
+standard deviation in water surface elevations narrows at a few time instances
 during the tsunami event.  The narrowing of the variance at these instances is
-possibly due to the waves the arrive due to reflections from a single source or
+possibly due to the waves that arrive due to reflections from a single source or
 from a region where Manning's $n$ values have little influence over these
 waves.
 
 The predicted mean water surface elevation  and its standard deviation 
-can be used to compare with the (DART) buoy observations collected during
+can be used for comparison with the (DART) buoy observations collected during
 the tsunami event. Figure~\ref{fig:compare} 
 plots the PC mean water surface elevation with the observed 
 water surface elevation at the different gauges locations
@@ -49,6 +49,8 @@ The Manning's $n$ coefficient at the shore $n_2$ is clearly dominant and contrib
 the most to the variance in the water surface elevation compared to the other two 
 Manning's $n$ coefficients $n_1$ and $n_3$; this is true for almost the entire simulation time
 and at the four gauges. The Manning's $n$ coefficient in the deep ocean $n_{3}$ at gauge number 21419 exhibits a higher sensitivity index during the first hour of simulation however, as noted previously, none of the gauge locations see a significant variance between simulations until after the first hour of simulation.
+The on-shore Manning's $n$ coefficient, $n_{1 }$, has no effect on the variance in
+the water surface elevation for the entire simulation time at all gauges.
 
 In 2D, the sensitivity analysis shows also that $n_2$ is dominant
 at the same regions where we observe significant variance in water surface elevation. This is
@@ -68,4 +70,4 @@ at $t=7200~s$. The most striking features are the relatively flat
 horizontal contours in the $n_3$ direction suggesting that water surface elevation depends
 only mildly on $n_3$ even during peak tsunami events. This is true for gauges 21401, 21413 and 21418. However,
 at gauge 21419, the horizontal contours are observed in the $n_2 $ direction
-and therefore water surface elevation depends mildly on $n_2$.
+meaning that water surface elevation depends only mildly on $n_2$.
