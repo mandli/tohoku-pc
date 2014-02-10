@@ -1,0 +1,68 @@
+%
+%  highlights.tex
+%
+\documentclass[]{article}
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+% Setup for fullpage use
+\usepackage{fullpage}
+
+% Uncomment some of the following if you use the features
+%
+% Running Headers and footers
+%\usepackage{fancyhdr}
+
+% Multipart figures
+%\usepackage{subfigure}
+
+% More symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+
+% URL and linking help
+\usepackage{hyperref}
+
+% Surround parts of graphics with box
+\usepackage{boxedminipage}
+
+% Package for including code in the document
+\usepackage{listings}
+
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\else
+\usepackage{graphicx}
+\fi
+
+% Graphics
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\graphicspath{{/Users/mandli/Documents/Research/figures/}}
+\usepackage{epstopdf}
+
+\title{Highlights}
+\author{}
+\date{\today}
+
+% Commands 
+\include{commands}
+
+\begin{document}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+\begin{itemize}
+    \item Use a polynomial chaos approach to create a surrogate of the GeoClaw.
+    \item Attempts to infer spatially varying (based on iso-baths) Manning's $n$ coefficients.
+    \item The DART gauges are insufficient to reliably infer coefficients everywhere.
+\end{itemize}
+\end{document}
