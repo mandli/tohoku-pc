@@ -1,0 +1,191 @@
+%
+%  Reviewer Responses Revision 1
+%  6 April, 2014
+%
+\documentclass[]{article}
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+% Setup for fullpage use
+\usepackage{fullpage}
+
+% Uncomment some of the following if you use the features
+%
+% Running Headers and footers
+%\usepackage{fancyhdr}
+
+% Multipart figures
+%\usepackage{subfigure}
+
+% More symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+
+\usepackage{url}
+
+% Surround parts of graphics with box
+\usepackage{boxedminipage}
+
+% Package for including code in the document
+\usepackage{listings}
+
+% If you want to generate a toc for each chapter (use with book)
+\usepackage{minitoc}
+
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\else
+\usepackage{graphicx}
+\fi
+
+% Commands 
+\include{commands}
+
+% Graphics
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\usepackage{epstopdf}
+
+\title{Response to Reviewers of ``Uncertainty Quantication and Inference of Manning's Friction Coefficient using DART Buoys Data during Tohoku Tsunami''}
+\author{I. Sraj, K.T. Mandli, O.M. Knio, Dawson, C.N., Hoteit, I.}
+\date{\today}
+
+\begin{document}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+\makesmalltitle{Response to Reviewers of ``Adaptive Mesh Refinement for Storm Surge''}{Revision 1 - \today}
+
+\section*{Reviewer 1}
+\begin{quote}
+The article presents an uncertainty analysis for a tsunami propagation model (GeoClaw) using the method of polynomial chaos. The focus is on the uncertainty in specifying the roughness parameter (aka Manning coefficient) controlling the amount of momentum lost to bottom drag, and on its ensuing effect on sea surface height prediction. The uncertainty analysis involves the forward propagation of the uncertainty via an ensemble type calculation, the validation of the uncertainty representation, the analysis of the statistical output, and the use of observational data to infer the likely distribution of the roughness parameter. The work presented highlight the benefits of incorporating newly developed tools for uncertainty quantification within the framework of risk assessment and disaster preparation.
+
+The major concern of inundation model is to predict the tsunami run-up once it hits the shore, as the authors point out correctly in the introduction. Yet most of the figures concern the off-shore buoy data; only figure 11 show on-shore result. I would urge the authors to present the forward uncertainty propagation (and the uncertainty analysis) for an on-shore location, even in the absence of verification data, because inundation is the major practical concern. This would highlight the practical side of PC methods for risk assessment.
+
+It is somewhat surprising to me that the near-shore roughness is so important to off-shore SSH, particularly given its small surface extent compared to deep-water roughness. It this unique to the Tohoku tsunami since it was generated in the near shore? Also are the high sensitivities for $n_1$ and $n_3$ (figure 11 and compare to the front location in figure 9) reliable? They seem to be beyond the tsunami reach after 1 hour of propagation (assuming an average gravity wave speed of 200 m/s would give it a radius of 720 km, and these regions seem twice as far ~1500 km). Likewise for figure 10, is the sensitivity index meaningful at the buoys prior to the tsunami arrival time? Some clarification of this point is needed.
+
+I would like to see some more physical interpretation of the mathematical results and assumptions. For example a rational for using 3 roughness parameters, a dynamical explanation for the non-monotonic behavior of the SSH standard deviation in time (the explanation given are somewhat speculative and it would be nice to strengthen them with simple analysis, I am referring to figure 7 and lines 393-395 in the text).
+
+I am a little confused about figure 16 and what it represents. I was expecting somewhat of a maximum around the 2D MAP values, but instead the contours are spread out. Could the authors elaborate on this point some more? Is it a problem with the colormap with only blue appearing? It could be useful to normalize the scales of these distribution to simplify their interpretation as joint pdfs.
+\end{quote}
+
+\subsection*{Detailed Comments}
+\begin{enumerate}
+\item Use either Manning’s coefficient or simply n, not “Manning’s n coefficient”
+\item In abstract fix “T ohoku” to “Tohoku”
+\item Lines 3-8: Suggestion: Coastal communities have faced these hazard by assessing the risk they pose, and by attempting to make informed decisions about their likely impacts. Computational models of tsunami events are often employed to explore various tsunami disaster scenarios and their ensuing inundation levels.
+\item Line 24: change “The implemented emulator” to “This emulator”
+\item Line 31: remove the comma after “In a recent work”
+\item Line 33 and 34: Use either “Manning’s coefficient” or n.
+\item Lines 51-54: Change to: Their main advantage is the efficient propagation of input uncertainties through large, complex and non-linear models to calculate the corresponding output uncertainties.
+\item Line 81: The section title should be changed as it does not reflect the content to something like:  “Simulating the Tohoku Tsunami”
+\item Line 85: Change “The source of the earthquake (epicenter)” to “The epicenter”
+\item Lines 95-99: the sea surface anomaly does not appear anywhere in the equations or the explanation even though it is the primary quantity of interest here.
+\item Lines 100-115 should be a single paragraph describing GEOCLAW. I suggest the following :
+\begin{quote}
+GeoClaw was originally designed to solve systems of hyperbolic equations where the primary computational kernel is the solution to the Riemann problem at each grid cell interface. The model’s main features which are relevant for tsunami modeling include: the ability to handle inundation (wet-dry interfaces), implementing a well-balanced scheme to suppress spurious motion induced by topographic variations even when the momentum is non-zero, and entropy corrections [16]. One of the unique features of GeoClaw is the ability to adaptively refine the computational grid to resolve particular dynamical features as they evolve in time (the surface height disturbance in the present case). GeoClaw implements the adaptive schemes in [17, 18] and described in detail in [19] for the case of tsunami modeling. The refinement thresholds of [1] were adopted: four levels of refinement were used starting with a resolution of 1 degree in both the latitudinal and longitudinal directions down to 0.5 resolution (approximately 900 meters) located around the observation locations. The tolerance for the refinement criteria for sea-surface anomaly was 0.02 meters.  
+\end{quote}
+It would be useful if more details are given about the adaptive procedure since it tracks the inundation front.
+
+\item Lines 124-127:
+\begin{enumerate}
+    \item move the time-reference and the description of the buoy recording protocol to the figure caption as they detract from the main narrative.
+    \item rewrite the buoy recording protocol, e.g.  The buoys record SSH every 15 minutes in normal operating conditions; once an earthquake is reported they record SSH every 15 seconds during the first few minutes of the even, and every minute after that (how long...).
+\end{enumerate}
+\item Lines 128 - remove the word ``generated''
+\item Lines 129–131 - awkward, suggested:  The large spikes reported by gauge 21418 at later time are data anomalies and not subsequent tsunami waves as observed in [1].  The text as written is confusing, it is not clear whether reference [1] reported the spikes as data anomalies or though they were tsunamis. If it is the former the ``as observed in [1]'' should be moved to the beginning of the sentence.  If these are indeed data anomalies were they included in the inversion, and if not would the PC machinery have flagged them as anomalies?.
+\item Line 142–145 - This sentence seems to contradict the previous one where the Ammon model was praised for including tsunami data. Please clarify.
+\item Section 3 the end of the 1st paragraph and the beginning of the second paragraphs have several interdependent sentences. I would reorganize them to flow more naturally and logically. For example, and starting at line 155–167:  In either case this process introduces uncertainty in model output, most importantly in the forecasted water elevation in the most important at-risk zones, namely the near-shore. MacInnes et al., for instance, found that adopting a uniform value of n = 0.025 everywhere leads to poor performance of the forward models predicted inundation levels. To address this they used n = 0.035 in the Sendai plane to account for land-uses such as pasture, farmland, and rice paddies. We aim to address such uncertainties systematically by quantifying their impact on water elevations.  We seek to quantify the parametric uncertainty in Mannings friction coefficient by characterizing its spatial variability and its depth-dependence; we thus define distinct regions in the domain that are characterized by a single coefficient.
+\item Line 188 - missing reference.
+\item Line 192 - I thought the response surface was connected with the PC expansion and not with the Bayesian inference. I would remove the parenthetical remark as it raises more question than conveys information.
+\item Line 196 - Change ``computer'' to ``compute''
+\item Line 192 - delete ``the''
+\item subsection Formalism: I would avoid introducing more notation in the paper when explaining Bayesian inference. So instead of a 0 use directly $n = (n_1 , n_2 , n_3 )$ and instead of $d$ use whatever notation is appropriate for surface elevation. I would also urge the authors to compress this section as much as possible and to strengthen its links to other sections (by avoiding extra notations for example).
+\item Line 153 - delete "accelerating Bayesian inference in this context by” and replace the ``for'' by ``to''.
+\item Line 154 - misplaced commas ``, which, in addition'' should be ``which, in addition,''.
+\item polynomial chaos subsection The authors should either not use $\xi$ or explain how it is related to n.
+\item Line 296 ``Using NISP the stochastic integrals are solved '' should read ``The stochastic integrals are then approximated''
+\item Line 332: ``input uncertain parameters'' should be ``uncertain input parameters''
+\item Line 335: The polynomial degree was never mentioned.
+\item line 347: ``the plots of curves for the selected realizations'' should be ``the curves of different realizations''
+\item line 349: It is not clear in which way the onset of variability is consistent with distance.
+\item Figures 2 and 3: It is hard to distinguish data for gauges 21413 and 21419 as they both appear green.
+Please use a different color for one of the gauges.
+\item Figure 4: Can the spikeness in the error curves be explained?
+\item Figures 5 and 6: since the different curves are distinguished by color it would be easier on the readers
+eyes if a solid line is used instead of a dashed line.
+\item Line 385 There is no reason to use QoI since the only model output here is sea surface elevation.
+\item Line 389 change the ``where'' to a ``when'', the ``is'' to ``becomes'' and delete the rest of the sentence.
+\item Line 391–392 The description ``narrows at a few time instances during the tsunami event'' is a little
+awkward, how about ``waxes and wanes as the tsunami evolves''?
+\item Line 393–395 Sentence does not really explain the dynamical reason behind the non-monotonic behavior of the standard deviation. The sentence needs to be rewritten, e.g. the waxing is probably caused by waves reflecting off a single source and arriving at the gauge simultaneously while the waning is associated with waves propagating away from the gauges.
+\end{enumerate}
+
+\section*{Reviewer 2}
+\begin{quote}      
+Overview
+
+This paper uses Bayesian inference and polynomial chaos modelling of the Tohoku tsunami to attempt inferences of nearshore, offshore, and onshore Manning's n friction coefficients. The GEOCLAW model is used as training set for the polynomial chaos modelling. The writing quality is quite high and I found few grammatical mistakes.
+
+Results of the study show that the nearshore Manning's n has a MAP estimate of 0.011, and the offshore MAP value is 0.018. No good estimate could be made for Manning's n over land. The nearshore Manning's n value is lower than is used by most models but is not impossible.
+
+The quality of work in this paper shows a good technical level and is clearly presented. Nonetheless, as I was reading it I kept asking: ``how can the authors neglect the effects of source uncertainty and other factors in favor of Manning's n''? It is not until the last paragraph of the conclusions that the authors address this point which to me seems central to the entire inference. Source models are known differ significantly between various inversions. Why do the authors believe that Manning's n is the controlling parameter? The world is full of models that where coefficients are calibrated to account for other processes. Is this happening here? This point needs to be addressed early and rigorously.
+
+Other Points
+
+A comparison is needed between error levels before and after Bayesian inference. It is not possible to determine how much the simulation was improved. This comparison should be clearly made.
+
+Bad reference line 188.
+
+Figure 16 does not have contour plots as stated in the text and caption.
+
+For Figures 3 and 10, it would be better to plot the lines with different styles, not just different colours. Now they are impossible to distinguish when printed on a BW laser printer.
+\end{quote}
+ 
+
+\section*{Reviewer 3}
+\begin{quote}
+This paper uses a polynomial chaos (PC) approximation of a tsunami model in order to perform Bayesian estimation of the friction coefficient used in the model. Although the tsunami model is a distributed parameter system, the dimensionality of the estimation problem is reduced by allowing the friction coefficient to take on separate values in an on-shore region, a near-shore region, and in the deep water. The results of the investigation are an analysis of the probability distribution of the a posteriori friction coefficients, and an analysis of sensitivity.
+
+It seems that the main innovation of this paper is the use of a PC expansion for parameter estimation in a water level model. I like that the Results section begins with an error and convergence study of the PC expansion. But I think the over-all approach of the paper may be mis-guided, and, at a minimum, it needs more commentary to justify the approach taken and significance of results.
+\end{quote}
+
+\subsection*{Major comments:}
+\begin{enumerate}
+\item Model justification and setup - Eqn 1: The authors should provide some comments about the applicability of the Manning formula, vs., say, the Chezy formula, for bottom stress in a tsunami model. Since the tsunami in deep water (or on the continental shelf) is not in a state of fully-developed turbulence, neither friction formula is physically justified. Perhaps this fact can be used to develop more appropriate priors for the friction coefficients. At lines, 443-456, the ability of GeoClaw to realistically simulate the water surface elevation is discussed, but I think this should appear earlier in the paper. Lines 451-454 mention important factors, topography and the source model, which should be compared to the influence of the friction coefficients. Lines 454-456 mention the high scatter for gauge 21418 which might justify the use of a different sigma values for this gauge if a representation error is included in sigma. The literature review in the introduction should probably mention older work of the
+Dutch groups to infer friction coefficients and bottom depth in water elevation models (e.g., see Lardner et al papers in early 1990's, Heemink et al 2002, etc.).
+
+\item Treatment of the coastline - It seems that the high model resolution is used around the measurement sites, rather than at the coastline where it might be dynamically significant. Could this be related to why $n_1$ was not influential in the results? Although the model includes inundation effects, it seems that the resolution at the coastline was too coarse to include this process.
+
+\item It seems that the Metropolis algorithm is over-used - The response surfaces illustrated in Figure 12 are very smooth. It would seem that a gradient-based search method would be very efficient at finding optimal values of the unknown parameters ($n_1$, $n_2$, $n-3$, and $\sigma$). Cannot the a posteriori pdf's be approximated (Fig 15) using a PC-like quadrature formula? It is because an importance sampling technique is used here that I disagree with the first point concerning ``efficiency'' in the ``Highlights''.
+
+\item Analysis of significance - Perhaps I missed it, but I did not see any evaluation of the a posteriori goodness-of-fit to the DART buoy data. Is the improvement significant compared to the estimated measurement error, sigma? Is the two-parameter fit (using $n_1$ and $n_2$) a statistically significant improvement over a one-parameter fit? Can you incorporate a low-dimensional representation of the source model parameters or topography in your approach? Even a cursory evaluation of the size of these effects would do a lot to justify your emphasis on identification of the friction coefficient.
+\end{enumerate}
+
+\subsection*{Minor comments:}
+\begin{enumerate}
+\item title: ``Buoys Data'' --> ``Buoys'' or ``Buoy Data''
+\item Highlights: [see Major comment 3] I do not agree with the first point, that they ``present an efficient approach''.
+\item line 99: The units of $C_f$ should be stated and it should be distinguished from the non-dimensional friction coefficient used in other water level model (e.g., POM).
+\item lines 113-114: Why was the model resolution refined at the observation locations? Shouldn't it be refined at the coastline or in regions of complex and shallow topography?
+\item line 129: Why are data anomalies shown? The spurious data should be omitted.
+\item line 150: Manning's n is presented in dimensional form, but the units are missing. I would suggest that you use a non-dimensional presentation; although, I realize that dimensional values are commonly used in the engineering literature.
+\item line 188: missing citation
+\item line 236: I disagree with the use of a Jeffrey's prior. The accuracy of of DART instruments is known or could be inferred from the harmonic analysis used to de-tide the data.
+\item Figure 16, right: caption mentions ``contour plots'' but I see only dots in the figure panels.
+\item References: [13] missing date; [14] capitalization; etc.
+\end{enumerate}
+
+
+
+\bibliographystyle{plain}
+\bibliography{database}
+\end{document}
