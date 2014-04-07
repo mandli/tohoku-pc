@@ -1,5 +1,4 @@
-Tohoku Variable Friction Sensitivity Study
-==========================================
+# Tohoku Polynomial Chaos Study Setup
 
 Repository contains code and run scripts for generating the forward model data
 using the Tohoku 2011 tsunami as a base.
