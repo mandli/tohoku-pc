@@ -23,30 +23,30 @@ import clawpack.geoclaw.surge as surge
 # Grab dart data
 dart_data_path = os.path.expandvars("$SRC/tohoku2011-paper1/dart/")
 
-dartdata = {}
-for gaugeno in [21401, 21413, 21414, 21415,  21418, 21419, 51407, 52402]:
-    files = glob.glob(os.path.join(dart_data_path, '%s*_notide.txt' % gaugeno))
-    if len(files) != 1:
-        print "*** Warning: found %s files for gauge number %s" \
-                   % (len(files),gaugeno)
-        #raise Exception("*** found %s files for gauge number %s" \
-        #           % (len(files),gaugeno)   )
-    try:
-        fname = files[0]
-        dartdata[gaugeno] = numpy.loadtxt(fname)
-    except:
-        pass
+# dartdata = {}
+# for gaugeno in [21401, 21413, 21414, 21415,  21418, 21419, 51407, 52402]:
+#     files = glob.glob(os.path.join(dart_data_path, '%s*_notide.txt' % gaugeno))
+#     if len(files) != 1:
+#         print "*** Warning: found %s files for gauge number %s" \
+#                    % (len(files),gaugeno)
+#         #raise Exception("*** found %s files for gauge number %s" \
+#         #           % (len(files),gaugeno)   )
+#     try:
+#         fname = files[0]
+#         dartdata[gaugeno] = numpy.loadtxt(fname)
+#     except:
+#         pass
 
-tlimits = {}
-tlimits[21401] = [0,28800]
-tlimits[21413] = [0,28800]
-tlimits[21414] = [8000,28800]
-tlimits[21415] = [7200,28800]
-tlimits[21416] = [0,14400]
-tlimits[21418] = [0,28800]
-tlimits[21419] = [0,28800]
-tlimits[51407] = [8000,28800]
-tlimits[52402] = [8000,28800]
+# tlimits = {}
+# tlimits[21401] = [0,28800]
+# tlimits[21413] = [0,28800]
+# tlimits[21414] = [8000,28800]
+# tlimits[21415] = [7200,28800]
+# tlimits[21416] = [0,14400]
+# tlimits[21418] = [0,28800]
+# tlimits[21419] = [0,28800]
+# tlimits[51407] = [8000,28800]
+# tlimits[52402] = [8000,28800]
 
 #--------------------------
 def setplot(plotdata):
@@ -142,7 +142,7 @@ def setplot(plotdata):
     # Figure for zoom plot
     #-----------------------------------------
     plotfigure = plotdata.new_plotfigure(name='Zoom', figno=1)
-    plotfigure.show = False
+    plotfigure.show = True
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes('pcolor')
