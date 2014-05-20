@@ -2,7 +2,6 @@ subroutine setprob()
 
     use geoclaw_module
     use topo_module
-    use dtopo_module
     use qinit_module
     use fixedgrids_module
     use refinement_module

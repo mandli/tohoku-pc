@@ -42,10 +42,11 @@ MODULES = \
  $(GEOLIB)/qinit_module.f90 \
  $(GEOLIB)/refinement_module.f90 \
  $(GEOLIB)/fixedgrids_module.f90 \
- $(GEOLIB)/fgmax_module.f90
+ $(GEOLIB)/fgmax_module.f90 \
+ $(GEOLIB)/surge/friction_module.f90
 
 SOURCES = \
-  $(GEOLIB)/setprob.f90 \
+  ./setprob.f90 \
   $(GEOLIB)/qinit.f90 \
   $(GEOLIB)/topo_update.f90 \
   $(GEOLIB)/cellgridintegrate2.f \
@@ -55,8 +56,8 @@ SOURCES = \
   $(CLAW)/riemann/src/rpn2_geoclaw.f \
   $(CLAW)/riemann/src/rpt2_geoclaw.f \
   $(CLAW)/riemann/src/geoclaw_riemann_utils.f \
-  $(GEOLIB)/src2.f90 \
-  $(GEOLIB)/src1d.f90 \
+  ./src2.f90 \
+  ./src1d.f90 \
   $(GEOLIB)/step2.f90 \
   $(GEOLIB)/flux2fw.f \
   $(GEOLIB)/qad.f \
@@ -69,7 +70,7 @@ SOURCES = \
   $(AMRLIB)/intfil.f \
   $(GEOLIB)/bc2amr.f \
   $(GEOLIB)/update.f \
-  $(GEOLIB)/setaux.f90 \
+  ./setaux.f90 \
   $(GEOLIB)/flag2refine2.f90  \
   $(AMRLIB)/flagregions2.f90  \
   $(GEOLIB)/allowflag.f90  \

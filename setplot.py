@@ -66,8 +66,8 @@ def setplot(plotdata):
     # Import useful run data
     clawdata = data.ClawInputData(2)
     clawdata.read(os.path.join(plotdata.outdir, 'claw.data'))
-    friction_data = surge.data.FrictionData()
-    friction_data.read(os.path.join(plotdata.outdir, 'friction.data'))
+    # friction_data = surge.data.FrictionData()
+    # friction_data.read(os.path.join(plotdata.outdir, 'friction.data'))
 
     # To plot gauge locations on pcolor or contour plot, use this as
     # an afteraxis function:
@@ -273,7 +273,8 @@ def setplot(plotdata):
     #  Plot Friction Field
     # =====================
     plotfigure = plotdata.new_plotfigure('Friction')
-    plotfigure.show = friction_data.variable_friction and True
+    # plotfigure.show = friction_data.variable_friction and True
+    plotfigure.show = True
 
     plotaxes = plotfigure.new_plotaxes()
     plotaxes.xlimits = 'auto'

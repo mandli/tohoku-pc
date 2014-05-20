@@ -8,16 +8,12 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
 !     If coordinate_system=2 then lat-lon coordinates on the sphere and
 !        aux(2,i,j) = area ratio (capacity function -- set mcapa = 2)
 !        aux(3,i,j) = length ratio for edge
-!     
-!     aux(4,i,j) = seems to allow for variable friction
-!     ripped out 5:4+num_layers   for multi-layer  - only one layer code for
-!     tsunamis
 !
-
+!
 
     use geoclaw_module, only: coordinate_system, earth_radius, deg2rad
     use geoclaw_module, only: sea_level
-    use amr_module, only: mcapa
+    use amr_module, only: mcapa, xupper, yupper, xlower, ylower
 
     use friction_module, only: friction_index, set_friction_field
 
@@ -31,10 +27,10 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
     real(kind=8), intent(inout) :: aux(maux,1-mbc:mx+mbc,1-mbc:my+mbc)
     
     ! Locals
-    integer :: i,j,m
+    integer :: i,j,m, iint,jint
     real(kind=8) :: x,y,xm,ym,xp,yp,topo_integral
     character(len=*), parameter :: aux_format = "(2i4,4d15.3)"
-    
+
     ! Lat-Long coordinate system in use, check input variables
     if (coordinate_system == 2) then
         if (mcapa /= 2 .or. maux < 3) then
@@ -44,7 +40,7 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
             stop
         endif
     endif
-    
+
     ! Set default values for aux variables
     aux(1,:,:) = 0.d0 ! Bathymetry
     aux(2,:,:) = 1.d0 ! Grid cell area
@@ -68,13 +64,20 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
             xm = xlow + (i - 1.d0) * dx
             x = xlow + (i - 0.5d0) * dx
             xp = xlow + real(i,kind=8) * dx
-            
+
             ! Set lat-long cell info
             if (coordinate_system == 2) then
                 aux(2,i,j) = deg2rad * earth_radius**2 * (sin(yp * deg2rad) - sin(ym * deg2rad)) / dy
                 aux(3,i,j) = ym * deg2rad
             endif
             
+            ! skip setting aux(1,i,j) in ghost cell if outside physical domain
+            ! since topo files may not cover ghost cell, and values
+            ! should be extrapolated, which is done in next set of loops.
+            if ((y>yupper) .or. (y<ylower) .or. &
+                (x>xupper) .or. (x<xlower)) cycle
+
+
             ! Use input topography files if available
             if (mtopofiles > 0 .and. test_topography == 0) then
                 topo_integral = 0.d0
@@ -82,10 +85,39 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
                     xlowtopo,ylowtopo,xhitopo,yhitopo,dxtopo,dytopo, &
                     mxtopo,mytopo,mtopo,i0topo,mtopoorder, &
                     mtopofiles,mtoposize,topowork)
-                
+
                     aux(1,i,j) = topo_integral / (dx * dy * aux(2,i,j))
             endif
         enddo
+    enddo
+
+    ! Copy topo to ghost cells if outside physical domain
+    do j=1-mbc,my+mbc
+        y = ylow + (j-0.5d0) * dy
+        if ((y < ylower) .or. (y>yupper)) then
+            do i=1-mbc,mx+mbc
+                x = xlow + (i-0.5d0) * dx 
+                iint = i + max(0, ceiling((xlower-x)/dx)) &
+                         - max(0, ceiling((x-xupper)/dx))
+                jint = j + max(0, ceiling((ylower-y)/dy)) &
+                         - max(0, ceiling((y-yupper)/dy))
+                aux(1,i,j) = aux(1,iint,jint)
+            enddo
+        endif
+    enddo
+
+    do i=1-mbc,mx+mbc
+        x = xlow + (i-0.5d0) * dx
+        if ((x < xlower) .or. (x > xupper)) then
+            do j=1-mbc,my+mbc
+                y = ylow + (j-0.5d0) * dy 
+                iint = i + max(0, ceiling((xlower-x)/dx)) &
+                         - max(0, ceiling((x-xupper)/dx))
+                jint = j + max(0, ceiling((ylower-y)/dy)) &
+                         - max(0, ceiling((y-yupper)/dy))
+                aux(1,i,j) = aux(1,iint,jint)
+            enddo
+        endif
     enddo
 
     ! Set friction field

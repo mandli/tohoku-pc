@@ -348,9 +348,22 @@ def setrun(claw_pkg='geoclaw'):
     rundata.gaugedata.gauges.append([21419, 155.736, 44.455,  1800., 1.e10])  
     # rundata.gaugedata.gauges.append([51407, 203.484, 19.642, 22000., 1.e10])
     # rundata.gaugedata.gauges.append([52402, 154.116, 11.883, 10000., 1.e10])
-    rundata.gaugedata.gauges.append([1, 141.04, 38.20, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([3, 141.20, 38.12, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([2, 141.10, 38.16, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([1,  140.846971, 36.351141, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([2,  141.115000, 37.420000, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([3,  141.100000, 38.160000, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([4,  141.328223, 38.325000, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([5,  141.510000, 38.425000, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([6,  141.525000, 38.575000, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([7,  141.545000, 38.660000, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([8,  141.730000, 38.880000, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([9,  142.115489, 39.752675, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([10, 142.140317, 39.752675, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([11, 141.626825, 40.989026, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([12, 141.133576, 42.133955, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([13, 143.739806, 42.535828, 0.0, 1e10])
+      
+     
+
 
     # =====================
     #  Set friction values
