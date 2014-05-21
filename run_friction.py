@@ -33,9 +33,9 @@ class FrictionJob(batch.Job):
         self.rundata.friction_data.variable_friction = True
 
         # Region based friction
-        self.rundata.friction_data.friction_regions.append([
+        self.rundata.friction_data.friction_regions = [[
                        self.rundata.clawdata.lower, self.rundata.clawdata.upper,
-                       contours, values])
+                       contours, values]]
 
         # Set earthquake source model
         dtopo_data = self.rundata.dtopo_data
@@ -56,8 +56,8 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         path = sys.argv[1]
 
-    # source_path = '$SRC/tohoku2011-paper1/sources/Ammon.txydz'
-    source_path = os.path.abspath(os.path.join(os.getcwd(),'saito.xyzt'))
+    source_path = '$SRC/tohoku2011-paper1/sources/Ammon.txydz'
+    # source_path = os.path.abspath(os.path.join(os.getcwd(),'saito.xyzt'))
 
     # Read in friction test values
     friction_values = numpy.loadtxt(path)
@@ -68,5 +68,5 @@ if __name__ == '__main__':
         jobs.append(FrictionJob(n, friction_values[n,:], source_path))
     
     controller = batch.BatchController(jobs)
-    # controller.run()
     print controller
+    controller.run()
