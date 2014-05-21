@@ -107,7 +107,7 @@ def setplot(plotdata):
     plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
     #plotitem.plot_var = geoplot.surface
     plotitem.plot_var = geoplot.surface_or_depth
-    plotitem.pcolor_cmap = geoplot.tsunami_colormap
+    plotitem.pcolor_cmap = colormaps.make_colormap({1.0:'r',0.5:'w',0.0:'b'})
     plotitem.pcolor_cmin = -0.1
     plotitem.pcolor_cmax = 0.1
     plotitem.add_colorbar = True
@@ -286,8 +286,8 @@ def setplot(plotdata):
     plotitem.plot_var = lambda cd: cd.aux[3,:,:]
     plotitem.pcolor_cmap = plt.get_cmap('YlOrRd')
     plotitem.colorbar_shrink = 0.9
-    plotitem.pcolor_cmin = 0.04
-    plotitem.pcolor_cmax = 0.1    
+    plotitem.pcolor_cmin = 0.01
+    plotitem.pcolor_cmax = 0.1   
     plotitem.add_colorbar = True
     plotitem.colorbar_label = "Manning's-$n$ Coefficient"
     plotitem.amr_celledges_show = [0,0,0]

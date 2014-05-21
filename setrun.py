@@ -416,9 +416,9 @@ def setgeo(rundata):
     # for topography, append lines of the form
     #   [topotype, minlevel, maxlevel, t1, t2, fname]
     topodir = os.path.expandvars('$SRC/tohoku2011-paper1/topo')
-    topo_data.topofiles.append([3, 1, 1, 0., 1.e10,
+    topo_data.topofiles.append([3, 1, 4, 0., 1.e10,
                            os.path.join(topodir,'etopo1min139E147E34N41N.asc')])
-    topo_data.topofiles.append([3, 1, 1, 0., 1.e10,
+    topo_data.topofiles.append([3, 1, 4, 0., 1.e10,
                             os.path.join(topodir,'etopo4min120E72W40S60N.asc')])
 
     # == setdtopo.data values ==
@@ -455,7 +455,10 @@ def set_friction(rundata):
     data = rundata.friction_data
 
     # Variable friction
-    data.variable_friction = False
+    data.variable_friction = True
+    data.friction_regions.append([rundata.clawdata.lower, rundata.clawdata.upper,
+                                  (numpy.infty, 0.0, -200.0, -numpy.infty),
+                                  (0.035, 0.025, 0.015)])
 
     return data
 

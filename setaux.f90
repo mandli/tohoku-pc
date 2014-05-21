@@ -14,13 +14,13 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
     use geoclaw_module, only: coordinate_system, earth_radius, deg2rad
     use geoclaw_module, only: sea_level
     use amr_module, only: mcapa, xupper, yupper, xlower, ylower
-
+    
     use friction_module, only: friction_index, set_friction_field
 
     use topo_module
-    
+
     implicit none
-    
+
     ! Arguments
     integer, intent(in) :: mbc,mx,my,maux
     real(kind=8), intent(in) :: xlow,ylow,dx,dy
@@ -45,8 +45,8 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
     aux(1,:,:) = 0.d0 ! Bathymetry
     aux(2,:,:) = 1.d0 ! Grid cell area
     aux(3,:,:) = 1.d0 ! Length ratio for edge
-    aux(friction_index,:,:) = 0.d0 ! Friction field
-    
+    aux(4,:,:) = 0.d0 ! Friction coefficient
+
     ! Set analytical bathymetry here if requested
     if (test_topography > 0) then
         forall (i=1-mbc:mx+mbc,j=1-mbc:my+mbc)
@@ -54,7 +54,7 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
                                    ylow + (j - 0.5d0) * dy)
         end forall
     endif
-    
+
     ! Set bathymetry
     do j=1-mbc,my+mbc
         ym = ylow + (j - 1.d0) * dy
@@ -92,6 +92,7 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
     enddo
 
     ! Copy topo to ghost cells if outside physical domain
+
     do j=1-mbc,my+mbc
         y = ylow + (j-0.5d0) * dy
         if ((y < ylower) .or. (y>yupper)) then
@@ -105,6 +106,7 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
             enddo
         endif
     enddo
+
 
     do i=1-mbc,mx+mbc
         x = xlow + (i-0.5d0) * dx
@@ -123,17 +125,22 @@ subroutine setaux(mbc,mx,my,xlow,ylow,dx,dy,maux,aux)
     ! Set friction field
     call set_friction_field(mx, my, mbc, maux, xlow, ylow, dx, dy, aux)
 
-    ! Output for debugging
+    ! Output for debugging to fort.23
     if (.false.) then
-        open(23, file='fort.aux',status='unknown',form='formatted')
         print *,'Writing out aux arrays'
         print *,' '
-        do j=1,my
-            do i=1,mx
-                write(23,*) i,j,(aux(m,i,j),m=1,maux)
+        write(23,230)  mbc,mx,my,dx,dy,xlow,ylow
+ 230    format('==> mbc, mx, my:  ',3i5,'  dx, dy:',2f10.6, &
+                '  xlow,ylow:', 2f10.6)
+        do j=1-mbc,my+mbc
+            do i=1-mbc,mx+mbc
+                x = xlow + (i-0.5d0)*dx
+                y = ylow + (j-0.5d0)*dy
+                if ((x>223) .and. (x<232) .and. (y<37)) &
+                write(23,231) i,j,x,y,(aux(m,i,j),m=1,maux)
+ 231            format(2i4,2f10.3,3e20.10)
             enddo
         enddo
-        close(23)
     endif
-    
+
 end subroutine setaux
