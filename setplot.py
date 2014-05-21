@@ -74,7 +74,7 @@ def setplot(plotdata):
 
     def addgauges(current_data):
         gaugetools.plot_gauge_locations(current_data.plotdata, \
-             gaugenos='all', format_string='ko', add_labels=True)
+             gaugenos=[21401, 21413, 21418, 21419], format_string='ko', add_labels=True)
     
 
     #-----------------------------------------
