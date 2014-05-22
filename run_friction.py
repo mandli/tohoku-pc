@@ -52,7 +52,7 @@ class FrictionJob(batch.Job):
 
 
 if __name__ == '__main__':
-    path = os.path.join(os.getcwd(), 'coef_quad.txt')
+    path = os.path.join(os.getcwd(), 'new_quad.txt')
     if len(sys.argv) > 1:
         path = sys.argv[1]
 
