@@ -18,10 +18,10 @@ import clawpack.visclaw.geoplot as geoplot
 import clawpack.visclaw.gaugetools as gaugetools
 
 import clawpack.clawutil.data as data
-import clawpack.geoclaw.surge as surge
+import clawpack.geoclaw.surge.data as surge_data
 
 # Grab dart data
-dart_data_path = os.path.expandvars("$SRC/tohoku2011-paper1/dart/")
+dart_data_path = os.path.expandvars("$SRC/2011tohoku_paper/dart/")
 
 # dartdata = {}
 # for gaugeno in [21401, 21413, 21414, 21415,  21418, 21419, 51407, 52402]:
@@ -66,7 +66,7 @@ def setplot(plotdata):
     # Import useful run data
     clawdata = data.ClawInputData(2)
     clawdata.read(os.path.join(plotdata.outdir, 'claw.data'))
-    friction_data = surge.data.FrictionData()
+    friction_data = surge_data.FrictionData()
     friction_data.read(os.path.join(plotdata.outdir, 'friction.data'))
 
     # To plot gauge locations on pcolor or contour plot, use this as
@@ -293,6 +293,53 @@ def setplot(plotdata):
     plotitem.amr_celledges_show = [0,0,0]
     plotitem.amr_patchedges_show = [0,0,0,0,0,0,0]
     plotitem.colorbar_label = r"$n$"
+
+    # ==========================
+    #  Plot Fault Configuration
+    # ==========================
+    def plot_dtopo(plotdata):
+        import matplotlib.pyplot as plt
+        import clawpack.geoclaw.dtopotools as dtopotools
+
+        with open('fault.html', 'w') as out_html:
+            out_html.write("<html>\n")
+            out_html.write("    <header>\n")
+            out_html.write("        <title>Fault Specification</title>\n")
+            out_html.write("    </header>\n")
+            out_html.write("    <body>\n")
+            out_html.write("        <h1>Fault Specification</h1>\n")
+            out_html.write("        <img src='fault.png'>\n")
+            out_html.write("        <img src='uplift.png'>\n")
+            out_html.write("    </body>\n")
+            out_html.write("</html>")
+
+        # Find dtopo file in _output directory
+        try:
+            dtopo_paths = glob.glob(os.path.join(plotdata.outdir, "fault*.tt3"))
+            if len(dtopo_paths) == 0:
+                raise IOError("Could not find a suitable dtopo file for ",
+                              "plotting of the fault.")
+        except IOError as e:
+            print e.message
+        else:
+            dtopo = dtopotools.DTopography(path=dtopo_paths[0])
+            # fault = dtopotools.Fault()
+
+            # fig = plt.figure()
+            # axes = fig.add_subplot(1, 1, 1)
+            
+            # fault.plot_subfaults(axes, slip_color=True, cmin_slip=0.0, 
+                                                        # cmax_slip=120.0)
+            # fig.savefig('fault.png')
+
+            fig = plt.figure()
+            axes = fig.add_subplot(1, 1, 1)
+            dtopo.plot(axes)
+            fig.savefig("uplift.png")
+
+
+    plotfigure = plotdata.new_otherfigure("Fault", "fault.html")
+    plotfigure.makefig = plot_dtopo
 
 
     #-----------------------------------------
