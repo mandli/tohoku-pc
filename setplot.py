@@ -17,8 +17,11 @@ import clawpack.visclaw.colormaps as colormaps
 import clawpack.visclaw.geoplot as geoplot
 import clawpack.visclaw.gaugetools as gaugetools
 
+
 import clawpack.clawutil.data as data
-import clawpack.geoclaw.surge.data as surge_data
+import clawpack.geoclaw.data
+import clawpack.geoclaw.surge.data
+import clawpack.geoclaw.dtopotools as dtopotools
 
 # Grab dart data
 dart_data_path = os.path.expandvars("$SRC/2011tohoku_paper/dart/")
@@ -66,7 +69,9 @@ def setplot(plotdata):
     # Import useful run data
     clawdata = data.ClawInputData(2)
     clawdata.read(os.path.join(plotdata.outdir, 'claw.data'))
-    friction_data = surge_data.FrictionData()
+    dtopo_data = clawpack.geoclaw.data.DTopoData()
+    dtopo_data.read(os.path.join(plotdata.outdir, 'dtopo.data'))
+    friction_data = clawpack.geoclaw.surge.data.FrictionData()
     friction_data.read(os.path.join(plotdata.outdir, 'friction.data'))
 
     # To plot gauge locations on pcolor or contour plot, use this as
@@ -298,9 +303,8 @@ def setplot(plotdata):
     #  Plot Fault Configuration
     # ==========================
     def plot_dtopo(plotdata):
-        import matplotlib.pyplot as plt
-        import clawpack.geoclaw.dtopotools as dtopotools
 
+        print "Creating html for other figures."
         with open('fault.html', 'w') as out_html:
             out_html.write("<html>\n")
             out_html.write("    <header>\n")
@@ -313,29 +317,19 @@ def setplot(plotdata):
             out_html.write("    </body>\n")
             out_html.write("</html>")
 
-        # Find dtopo file in _output directory
-        try:
-            dtopo_paths = glob.glob(os.path.join(plotdata.outdir, "fault*.tt3"))
-            if len(dtopo_paths) == 0:
-                raise IOError("Could not find a suitable dtopo file for ",
-                              "plotting of the fault.")
-        except IOError as e:
-            print e.message
-        else:
-            dtopo = dtopotools.DTopography(path=dtopo_paths[0])
-            # fault = dtopotools.Fault()
+        # Need to save this in the run_faults section, cannot do yet
+        # fault = dtopotools.Fault(path="./fault_params.txt")
+        # fig = plt.figure()
+        # axes = fig.add_subplot(1, 1, 1)
+        # fault.plot_subfaults(axes, slip_color=True, cmin_slip=0.0, 
+                                                    # cmax_slip=120.0)
+        # fig.savefig('fault.png')
 
-            # fig = plt.figure()
-            # axes = fig.add_subplot(1, 1, 1)
-            
-            # fault.plot_subfaults(axes, slip_color=True, cmin_slip=0.0, 
-                                                        # cmax_slip=120.0)
-            # fig.savefig('fault.png')
-
-            fig = plt.figure()
-            axes = fig.add_subplot(1, 1, 1)
-            dtopo.plot(axes)
-            fig.savefig("uplift.png")
+        dtopo = dtopotools.DTopography(path=dtopo_data.dtopofiles[0][3])
+        fig = plt.figure()
+        axes = fig.add_subplot(1, 1, 1)
+        dtopo.plot_dZ_colors(t=1.0, axes=axes)
+        fig.savefig("uplift.png")
 
 
     plotfigure = plotdata.new_otherfigure("Fault", "fault.html")

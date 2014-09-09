@@ -102,7 +102,7 @@ class FaultJob(batch.Job):
         self.base_subfault.width = 10 * 20.0 * 1000.0
         self.base_subfault.depth = 7.50520 * 1000.0
         self.base_subfault.slip = slip
-        self.base_subfault.rake = ave_rake
+        self.base_subfault.rake = 90.0
         self.base_subfault.dip = 10.0
         self.base_subfault.latitude = 37.64165
         self.base_subfault.longitude = 143.72745
@@ -140,6 +140,15 @@ class FaultJob(batch.Job):
         x, y = self.fault.create_dtopo_xy()
         dtopo = self.fault.create_dtopography(x, y)
         dtopo.write(path=self.dtopo_path, dtopo_type=3)
+
+        # Also write out fault so that we can plot it later
+        # column_list = ['latitude', 'longitude', 'depth', 'slip', 'rake', 
+        #                'strike', 'dip', 'rupture_initial_time', 
+        #                'rise_time_starting', 'rise_time_ending', 'rigidity']
+        # output_units={'slip':'cm'}
+        # Does not work yet
+        # self.fault.write("./fault_params.txt", column_list=column_list,
+        #                                        output_units=output_units)
 
         # Write other data files
         super(FaultJob, self).write_data_objects()

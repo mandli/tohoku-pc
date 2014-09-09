@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 
+import numpy
 import matplotlib.pyplot as plt
 
 import clawpack.geoclaw.dtopotools as dtopotools
@@ -36,24 +37,32 @@ subfault.length = 19 * 25.0 * 1000.0
 subfault.width = 10 * 20.0 * 1000.0
 subfault.depth = 7.50520 * 1000.0
 subfault.slip = ave_slip
-subfault.rake = ave_rake
+subfault.rake = 90.0
 subfault.dip = 10.0
 subfault.latitude = 37.64165
 subfault.longitude = 143.72745
 subfault.coordinate_specification = "top center"
-
-import os
 fault = dtopotools.SubdividedPlaneFault(subfault)
+
+# Create dtopo for comparison
+x, y = UCSB_fault.create_dtopo_xy()
+UCSB_dtopo = UCSB_fault.create_dtopography(x, y)
 x, y = fault.create_dtopo_xy()
 dtopo = fault.create_dtopography(x, y)
-dtopo.write(path=os.path.join(os.getcwd(), "fault.tt3"), dtopo_type=3)
 
 # Plot results
 fig = plt.figure()
 axes = fig.add_subplot(121)
-UCSB_fault.plot_subfaults(axes, slip_color=True, cmin_slip=0.0, cmax_slip=60.0)
+UCSB_dtopo.plot_dZ_colors(t=numpy.max(UCSB_dtopo.times), axes=axes)
 axes = fig.add_subplot(122)
-fault.plot_subfaults(axes, slip_color=True, cmin_slip=0.0, cmax_slip=60.0)
+dtopo.plot_dZ_colors(t=numpy.max(dtopo.times), axes=axes)
+
+fig = plt.figure()
+axes = fig.add_subplot(121)
+UCSB_fault.plot_subfaults(axes, plot_centerline=True, plot_rake=True, slip_color=True, cmin_slip=0.0, cmax_slip=60.0)
+axes = fig.add_subplot(122)
+fault.plot_subfaults(axes, plot_centerline=True, plot_rake=True, slip_color=True, cmin_slip=0.0, cmax_slip=60.0)
+
 
 plt.show()
 
