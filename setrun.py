@@ -11,7 +11,8 @@ import os
 import numpy
 
 import clawpack.clawutil.data as data
-import clawpack.geoclaw.surge as surge
+import clawpack.geoclaw.surge.data as surge
+import clawpack.geoclaw.data
 
 #------------------------------
 def setrun(claw_pkg='geoclaw'):
@@ -37,7 +38,7 @@ def setrun(claw_pkg='geoclaw'):
     # Problem-specific parameters to be written to setprob.data:
     #------------------------------------------------------------------
 
-    rundata.add_data(surge.data.FrictionData(),'friction_data')
+    rundata.add_data(surge.FrictionData(),'friction_data')
 
     #------------------------------------------------------------------
     # GeoClaw specific parameters:
@@ -415,7 +416,7 @@ def setgeo(rundata):
     topo_data = rundata.topo_data
     # for topography, append lines of the form
     #   [topotype, minlevel, maxlevel, t1, t2, fname]
-    topodir = os.path.expandvars('$SRC/tohoku2011-paper1/topo')
+    topodir = os.path.expandvars('$SRC/2011tohoku_paper/topo')
     topo_data.topofiles.append([3, 1, 4, 0., 1.e10,
                            os.path.join(topodir,'etopo1min139E147E34N41N.asc')])
     topo_data.topofiles.append([3, 1, 4, 0., 1.e10,
@@ -425,7 +426,7 @@ def setgeo(rundata):
     dtopo_data = rundata.dtopo_data
     # for moving topography, append lines of the form:  (<= 1 allowed for now!)
     #   [topotype, minlevel,maxlevel,fname]
-    dtopodir = os.path.expandvars('$SRC/tohoku2011-paper1/sources/')
+    dtopodir = os.path.expandvars('$SRC/2011tohoku_paper/sources/')
     dtopo_data.dtopofiles.append([1, 4, 4,
                                        os.path.join(dtopodir, 'Ammon.txydz')])
     # dtopodir = os.getcwd()
@@ -467,9 +468,9 @@ if __name__ == '__main__':
     # Set up run-time parameters and write all data files.
     import sys
     if len(sys.argv) == 2:
-	rundata = setrun(sys.argv[1])
+        rundata = setrun(sys.argv[1])
     else:
-	rundata = setrun()
+        rundata = setrun()
 
     rundata.write()
 
