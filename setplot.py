@@ -26,30 +26,30 @@ import clawpack.geoclaw.dtopotools as dtopotools
 # Grab dart data
 dart_data_path = os.path.expandvars("$SRC/2011tohoku_paper/dart/")
 
-# dartdata = {}
-# for gaugeno in [21401, 21413, 21414, 21415,  21418, 21419, 51407, 52402]:
-#     files = glob.glob(os.path.join(dart_data_path, '%s*_notide.txt' % gaugeno))
-#     if len(files) != 1:
-#         print "*** Warning: found %s files for gauge number %s" \
-#                    % (len(files),gaugeno)
-#         #raise Exception("*** found %s files for gauge number %s" \
-#         #           % (len(files),gaugeno)   )
-#     try:
-#         fname = files[0]
-#         dartdata[gaugeno] = numpy.loadtxt(fname)
-#     except:
-#         pass
+dartdata = {}
+for gaugeno in [21401, 21413, 21414, 21415,  21418, 21419, 51407, 52402]:
+    files = glob.glob(os.path.join(dart_data_path, '%s*_notide.txt' % gaugeno))
+    if len(files) != 1:
+        print "*** Warning: found %s files for gauge number %s" \
+                   % (len(files),gaugeno)
+        #raise Exception("*** found %s files for gauge number %s" \
+        #           % (len(files),gaugeno)   )
+    try:
+        fname = files[0]
+        dartdata[gaugeno] = numpy.loadtxt(fname)
+    except:
+        pass
 
-# tlimits = {}
-# tlimits[21401] = [0,28800]
-# tlimits[21413] = [0,28800]
-# tlimits[21414] = [8000,28800]
-# tlimits[21415] = [7200,28800]
-# tlimits[21416] = [0,14400]
-# tlimits[21418] = [0,28800]
-# tlimits[21419] = [0,28800]
-# tlimits[51407] = [8000,28800]
-# tlimits[52402] = [8000,28800]
+tlimits = {}
+tlimits[21401] = [0,28800]
+tlimits[21413] = [0,28800]
+tlimits[21414] = [8000,28800]
+tlimits[21415] = [7200,28800]
+tlimits[21416] = [0,14400]
+tlimits[21418] = [0,28800]
+tlimits[21419] = [0,28800]
+tlimits[51407] = [8000,28800]
+tlimits[52402] = [8000,28800]
 
 #--------------------------
 def setplot(plotdata):
@@ -242,23 +242,16 @@ def setplot(plotdata):
     plotitem.plotstyle = 'g-'
 
     def add_zeroline(current_data):
-        from pylab import plot, legend, xticks, floor
         t = current_data.t
-        #legend(('surface','topography'),loc='lower left')
-        plot([0,10800],[0,0],'k')
-        n = int(floor(t.max()/3600.)) + 2
-        #xticks([3600*i for i in range(n)])
+        plt.plot([0,10800],[0,0],'k')
 
     def plot_dart(current_data):
         import pylab
         gaugeno = current_data.gaugeno
         try:
             dart = dartdata[gaugeno]
-            pylab.plot(dart[:,0],dart[:,1],'k')
-            if dart_data_path is None:
-                pylab.legend(['GeoClaw','DART data'])
-            else:
-                pylab.legend(['GeoClaw','dart_data_path','DART data'])
+            pylab.plot(dart[:,0],dart[:,1],'k')    
+            pylab.legend(['GeoClaw','DART data'])
         except:
             if dart_data_path is None:
                 pylab.legend(['GeoClaw'])
