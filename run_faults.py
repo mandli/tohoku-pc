@@ -7,12 +7,13 @@ from __future__ import print_function
 import sys
 
 import numpy
+import matplotlib.pyplot as plt
 
 import batch
 
 import clawpack.geoclaw.dtopotools as dtopotools
 
-def calculate_quadrature(param_range):
+def calculate_1parameter_quadrature(param_range):
     r"""Calculates quadrature in parameter space from the stochastic space
 
     Stochastic space is [-1, 1].  This is specific for 6 gaussian qadrature 
@@ -31,6 +32,11 @@ def calculate_quadrature(param_range):
 
     return mu + sigma * quadrature_weights
 
+
+def plot_fault(fault):
+
+    fault.plot_subfaults(slip_color=True)
+
 class FaultJob(batch.Job):
 
     r"""Job describing a single Okada based fault relization.
@@ -39,7 +45,7 @@ class FaultJob(batch.Job):
 
     """
 
-    def __init__(self, slip):        
+    def __init__(self, slips):        
         r"""
         Initialize a FaultJob object.
         
@@ -109,7 +115,10 @@ class FaultJob(batch.Job):
         self.base_subfault.coordinate_specification = "top center"
 
         # Create base subdivided fault
-        self.fault = dtopotools.SubdividedPlaneFault(self.base_subfault)
+        self.fault = dtopotools.SubdividedPlaneFault(self.base_subfault, 
+                                                     nstrike=3, ndip=2)
+        for (k, subfault) in enumerate(self.fault.subfaults):
+            subfault.slip = slips[k]
 
         self.type = "tohoku"
         self.name = "okada-fault-PC-analysis"
@@ -130,7 +139,10 @@ class FaultJob(batch.Job):
     def __str__(self):
         output = super(FaultJob, self).__str__()
         output += "\n  Fault Parameters:\n"
-        output += "      slip=%s\n" % self.base_subfault.slip
+        output += "      slips = "
+        for subfault in self.fault.subfaults:
+            output += "%s " % subfault.slip
+        output += "\n"
         return output
 
 
@@ -164,8 +176,9 @@ if __name__ == '__main__':
         # Load fault parameters
         slips = numpy.loadtxst(path)
     else:
-        slip_range = (0.0, 120.0)
-        slips = calculate_quadrature(slip_range)
+        slips = numpy.loadtxt("./slip_quads.txt")
+        # slip_range = (0.0, 120.0)
+        # slips = calculate_quadrature(slip_range)
     
     # Create all jobs
     jobs = []
@@ -173,4 +186,5 @@ if __name__ == '__main__':
         jobs.append(FaultJob(slip))
 
     controller = batch.BatchController(jobs)
+    print(controller)
     controller.run()
