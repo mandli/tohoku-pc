@@ -14,29 +14,31 @@ import batch
 
 import clawpack.geoclaw.dtopotools as dtopotools
 
-def calculate_1parameter_quadrature(param_range):
-    r"""Calculates quadrature in parameter space from the stochastic space
+# def calculate_1parameter_quadrature(param_range):
+#     r"""Calculates quadrature in parameter space from the stochastic space
 
-    Stochastic space is [-1, 1].  This is specific for 6 gaussian qadrature 
-    nodes.  Input needed is the minimum and maximum of the range of the 
-    parameter.
-    """
-    quadrature_weights = numpy.array([-0.932469514203152,
-                                      -0.661209386466264,
-                                      -0.238619186083197,
-                                       0.238619186083197,
-                                       0.661209386466264,
-                                       0.932469514203152])
+#     Stochastic space is [-1, 1].  This is specific for 6 gaussian qadrature 
+#     nodes.  Input needed is the minimum and maximum of the range of the 
+#     parameter.
+#     """
+#     quadrature_weights = numpy.array([-0.932469514203152,
+#                                       -0.661209386466264,
+#                                       -0.238619186083197,
+#                                        0.238619186083197,
+#                                        0.661209386466264,
+#                                        0.932469514203152])
 
-    mu = (param_range[0] + param_range[1]) / 2
-    sigma = (param_range[1] - param_range[0]) / 2
+#     mu = (param_range[0] + param_range[1]) / 2
+#     sigma = (param_range[1] - param_range[0]) / 2
 
-    return mu + sigma * quadrature_weights
+#     return mu + sigma * quadrature_weights
 
 
-def plot_fault(fault):
-
-    fault.plot_subfaults(slip_color=True)
+# Fault Parameter Search
+#  Fault Inversions
+#
+#
+#
 
 class FaultJob(batch.Job):
 
@@ -170,6 +172,7 @@ class FaultJob(batch.Job):
         self.fault.plot_subfaults(axes=axes, slip_color=True, cmap_slip=cmap, 
                                   cmin_slip=FaultJob.cmin_slip, cmax_slip=FaultJob.cmax_slip,
                                   plot_rake=True)
+        axes.set_title("$M_o = %s$, $M_w = %s$" % (str(self.fault.Mo()), str(self.fault.Mw())))
         fig.savefig("fault_slip.png")
 
         # Write other data files
