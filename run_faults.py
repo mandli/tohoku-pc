@@ -5,6 +5,7 @@
 from __future__ import print_function
 
 import sys
+import os
 
 import numpy
 import matplotlib.pyplot as plt
@@ -45,7 +46,11 @@ class FaultJob(batch.Job):
 
     """
 
-    def __init__(self, slips):        
+    # Class instances used for plotting using the same bounds
+    cmin_slip = 0.0
+    cmax_slip = 120.0
+
+    def __init__(self, slips, run_number=1): 
         r"""
         Initialize a FaultJob object.
         
@@ -54,6 +59,8 @@ class FaultJob(batch.Job):
         """ 
 
         super(FaultJob, self).__init__()
+
+        self.run_number = run_number
 
         # Create fault
         # Based on UCSB reconstruction and assumption of single subfault
@@ -107,7 +114,7 @@ class FaultJob(batch.Job):
         self.base_subfault.length = 19 * 25.0 * 1000.0
         self.base_subfault.width = 10 * 20.0 * 1000.0
         self.base_subfault.depth = 7.50520 * 1000.0
-        self.base_subfault.slip = slip
+        self.base_subfault.slip = ave_slip
         self.base_subfault.rake = 90.0
         self.base_subfault.dip = 10.0
         self.base_subfault.latitude = 37.64165
@@ -122,7 +129,7 @@ class FaultJob(batch.Job):
 
         self.type = "tohoku"
         self.name = "okada-fault-PC-analysis"
-        self.prefix = "fault_s%s" % (self.base_subfault.slip)
+        self.prefix = "fault_%s" % self.run_number
         self.executable = 'xgeoclaw'
 
         # Data objects
@@ -136,9 +143,11 @@ class FaultJob(batch.Job):
         self.dtopo_path = 'fault_s%s.tt3' % self.base_subfault.slip
         self.rundata.dtopo_data.dtopofiles = [[3, 4, 4, self.dtopo_path]]
 
+
     def __str__(self):
         output = super(FaultJob, self).__str__()
         output += "\n  Fault Parameters:\n"
+        output += "      run_number = %s\n" % self.run_number
         output += "      slips = "
         for subfault in self.fault.subfaults:
             output += "%s " % subfault.slip
@@ -153,14 +162,15 @@ class FaultJob(batch.Job):
         dtopo = self.fault.create_dtopography(x, y)
         dtopo.write(path=self.dtopo_path, dtopo_type=3)
 
-        # Also write out fault so that we can plot it later
-        # column_list = ['latitude', 'longitude', 'depth', 'slip', 'rake', 
-        #                'strike', 'dip', 'rupture_initial_time', 
-        #                'rise_time_starting', 'rise_time_ending', 'rigidity']
-        # output_units={'slip':'cm'}
-        # Does not work yet
-        # self.fault.write("./fault_params.txt", column_list=column_list,
-        #                                        output_units=output_units)
+        # Plot fault here
+        fig = plt.figure()
+        axes = fig.add_subplot(1, 1, 1)
+
+        cmap = plt.get_cmap("YlOrRd")
+        self.fault.plot_subfaults(axes=axes, slip_color=True, cmap_slip=cmap, 
+                                  cmin_slip=FaultJob.cmin_slip, cmax_slip=FaultJob.cmax_slip,
+                                  plot_rake=True)
+        fig.savefig("fault_slip.png")
 
         # Write other data files
         super(FaultJob, self).write_data_objects()
@@ -174,16 +184,27 @@ if __name__ == '__main__':
         path = sys.argv[1]
 
         # Load fault parameters
-        slips = numpy.loadtxst(path)
+        slips = numpy.loadtxt(path)
     else:
         slips = numpy.loadtxt("./slip_quads.txt")
         # slip_range = (0.0, 120.0)
         # slips = calculate_quadrature(slip_range)
     
     # Create all jobs
-    jobs = []
-    for slip in slips:
-        jobs.append(FaultJob(slip))
+    path = os.path.join(os.environ.get('DATA_PATH', os.getcwd()), 
+                "tohoku", "okada-fault-PC-analysis",
+                    "run_log.txt")
+
+    # Find minimum and maximum slips for plotting of the faults
+    FaultJob.cmin_slip = numpy.min(slips)
+    FaultJob.cmax_slip = numpy.max(slips)
+
+    with open(path, 'w') as run_log_file: 
+        jobs = []
+        for (n, slip) in enumerate(slips):
+            run_log_file.write("%s %s\n" % (n, ' '.join([str(x) for x in slip])))
+            jobs.append(FaultJob(slip, run_number=n))
+            break
 
     controller = batch.BatchController(jobs)
     print(controller)
