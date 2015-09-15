@@ -20,7 +20,6 @@ import clawpack.visclaw.gaugetools as gaugetools
 
 import clawpack.clawutil.data as data
 import clawpack.geoclaw.data
-import clawpack.geoclaw.surge.data
 import clawpack.geoclaw.dtopotools as dtopotools
 
 # Grab dart data
@@ -71,7 +70,7 @@ def setplot(plotdata):
     clawdata.read(os.path.join(plotdata.outdir, 'claw.data'))
     dtopo_data = clawpack.geoclaw.data.DTopoData()
     dtopo_data.read(os.path.join(plotdata.outdir, 'dtopo.data'))
-    friction_data = clawpack.geoclaw.surge.data.FrictionData()
+    friction_data = clawpack.geoclaw.data.FrictionData()
     friction_data.read(os.path.join(plotdata.outdir, 'friction.data'))
 
     # To plot gauge locations on pcolor or contour plot, use this as

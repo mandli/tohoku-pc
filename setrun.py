@@ -11,8 +11,7 @@ import os
 import numpy
 
 import clawpack.clawutil.data as data
-import clawpack.geoclaw.surge.data as surge
-import clawpack.geoclaw.data
+import clawpack.geoclaw.data as geodata
 
 #------------------------------
 def setrun(claw_pkg='geoclaw'):
@@ -38,7 +37,7 @@ def setrun(claw_pkg='geoclaw'):
     # Problem-specific parameters to be written to setprob.data:
     #------------------------------------------------------------------
 
-    rundata.add_data(surge.FrictionData(),'friction_data')
+    rundata.add_data(geodata.FrictionData(),'friction_data')
 
     #------------------------------------------------------------------
     # GeoClaw specific parameters:
@@ -123,7 +122,8 @@ def setrun(claw_pkg='geoclaw'):
 
     if clawdata.output_style == 1:
         # Output nout frames at equally spaced times up to tfinal:
-        clawdata.num_output_times = 16
+        # clawdata.num_output_times = 16
+        clawdata.num_output_times = 1
         clawdata.tfinal = 4 * 3600.
         clawdata.output_t0 = True
 

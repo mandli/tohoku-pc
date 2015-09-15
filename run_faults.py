@@ -130,7 +130,7 @@ class FaultJob(batch.Job):
             subfault.slip = slips[k]
 
         self.type = "tohoku"
-        self.name = "okada-fault-PC-analysis"
+        self.name = "okada-fault-random"
         self.prefix = "fault_%s" % self.run_number
         self.executable = 'xgeoclaw'
 
@@ -180,7 +180,7 @@ class FaultJob(batch.Job):
 
 
 if __name__ == '__main__':
-    
+
     # If a file is found on the command line, use that to calculate the 
     # quadrature points, otherwise calculate it given a default range
     if len(sys.argv) > 1:
@@ -189,14 +189,16 @@ if __name__ == '__main__':
         # Load fault parameters
         slips = numpy.loadtxt(path)
     else:
-        slips = numpy.loadtxt("./slip_quads.txt")
+        slips = numpy.loadtxt("./random_sample.txt")
         # slip_range = (0.0, 120.0)
         # slips = calculate_quadrature(slip_range)
     
     # Create all jobs
     path = os.path.join(os.environ.get('DATA_PATH', os.getcwd()), 
-                "tohoku", "okada-fault-PC-analysis",
+                "tohoku", "okada-fault-random",
                     "run_log.txt")
+    if not os.path.exists(path):
+        os.makedirs(os.path.dirname(path))
 
     # Find minimum and maximum slips for plotting of the faults
     FaultJob.cmin_slip = numpy.min(slips)
@@ -207,8 +209,9 @@ if __name__ == '__main__':
         for (n, slip) in enumerate(slips):
             run_log_file.write("%s %s\n" % (n, ' '.join([str(x) for x in slip])))
             jobs.append(FaultJob(slip, run_number=n))
-            break
+
 
     controller = batch.BatchController(jobs)
+    controller.plot = False
     print(controller)
-    controller.run()
+    # controller.run()
