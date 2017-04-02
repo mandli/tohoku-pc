@@ -101,11 +101,13 @@ def setplot(plotdata):
         pylab.yticks(fontsize=15)
         #pylab.plot([205],[19.7],'wo',markersize=10)
         #pylab.text(200,22,'Hilo',color='k',fontsize=25)
-        pylab.plot([139.7],[35.6],'yo',markersize=5)
-        pylab.text(133.3,36.5,'Sendai',color='y',fontsize=15)
-        addgauges(current_data)
+        # pylab.plot([139.7],[35.6],'yo',markersize=5)
+        # pylab.text(133.3,36.5,'Sendai',color='y',fontsize=15)
+        # addgauges(current_data)
 
     plotaxes.afteraxes = fixup
+    plotaxes.xlimits = [clawdata.lower[0], clawdata.upper[0]]
+    plotaxes.ylimits = [clawdata.lower[1], clawdata.upper[1]]
 
     # Water
     plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
@@ -204,7 +206,7 @@ def setplot(plotdata):
     #-----------------------------------------
     plotfigure = plotdata.new_plotfigure(name='Surface & topo', figno=300, \
                     type='each_gauge')
-    plotfigure.clf_each_gauge = True
+    plotfigure.clf_each_gauge = False
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes()

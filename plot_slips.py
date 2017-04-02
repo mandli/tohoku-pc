@@ -46,7 +46,7 @@ def plot_UCSB_fault(path='./UCSB_model3_subfault.txt'):
 
     cmap = plt.get_cmap("YlOrRd")
     fault.plot_subfaults(axes=axes, slip_color=True, cmap_slip=cmap, 
-                              cmin_slip=0.0, cmax_slip=30.0,
+                              cmin_slip=0.0, cmax_slip=60.0,
                               plot_rake=False)
 
     axes.set_title("$M_o = %s$, $M_w = %s$" % (str(fault.Mo()), str(fault.Mw())))

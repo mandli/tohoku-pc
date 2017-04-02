@@ -129,15 +129,15 @@ class FaultJob(batch.Job):
         for (k, subfault) in enumerate(self.fault.subfaults):
             subfault.slip = slips[k]
 
-        self.type = "tohoku"
-        self.name = "okada-fault-random"
+        self.type = "tsunami"
+        self.name = "final-tohoku-inversion"
         self.prefix = "fault_%s" % self.run_number
         self.executable = 'xgeoclaw'
 
         # Data objects
         import setrun
         self.rundata = setrun.setrun()
-        
+
         # No variable friction for the time being
         self.rundata.friction_data.variable_friction = False
 
@@ -188,6 +188,8 @@ if __name__ == '__main__':
 
         # Load fault parameters
         slips = numpy.loadtxt(path)
+        if len(slips.shape) == 1:
+            slips = [slips]
     else:
         slips = numpy.loadtxt("./random_sample.txt")
         # slip_range = (0.0, 120.0)
@@ -210,8 +212,8 @@ if __name__ == '__main__':
             run_log_file.write("%s %s\n" % (n, ' '.join([str(x) for x in slip])))
             jobs.append(FaultJob(slip, run_number=n))
 
-
     controller = batch.BatchController(jobs)
-    controller.plot = False
+    controller.wait = False
+    controller.plot = True
     print(controller)
-    # controller.run()
+    controller.run()

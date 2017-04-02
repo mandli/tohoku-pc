@@ -65,16 +65,18 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.num_dim = ndim
 
     # Lower and upper edge of computational domain:
-    clawdata.lower[0] = 130.
-    clawdata.upper[0] = 170.
+    clawdata.lower[0] = 130.0
+    clawdata.upper[0] = 240.0
 
-    clawdata.lower[1] = 20.
+    clawdata.lower[1] = 10.
     clawdata.upper[1] = 60.
 
 
     # Number of grid cells:
-    clawdata.num_cells[0] = 20
-    clawdata.num_cells[1] = 20
+    degree_res = 2
+    for i in xrange(2):
+        clawdata.num_cells[i] = int(clawdata.upper[i]
+                                               - clawdata.lower[i]) * degree_res
 
 
     # ---------------
@@ -123,8 +125,8 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.output_style == 1:
         # Output nout frames at equally spaced times up to tfinal:
         # clawdata.num_output_times = 16
-        clawdata.num_output_times = 1
-        clawdata.tfinal = 4 * 3600.
+        clawdata.num_output_times = 16
+        clawdata.tfinal = 16 * 3600.
         clawdata.output_t0 = True
 
     elif clawdata.output_style == 2:
@@ -340,28 +342,29 @@ def setrun(claw_pkg='geoclaw'):
     # ---------------
     rundata.gaugedata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
-    rundata.gaugedata.gauges.append([21401, 152.583, 42.617,  1800., 1.e10])   
-    rundata.gaugedata.gauges.append([21413, 152.1167, 30.5153,  1800., 1.e10])   
-    # rundata.gaugedata.gauges.append([21414, 178.281, 48.938,  1800., 1.e10])
-    # rundata.gaugedata.gauges.append([21415, 171.849, 50.183,  1800., 1.e10])
+    rundata.gaugedata.gauges.append([21401, 152.583, 42.617,  1800., 1.e10])
+    rundata.gaugedata.gauges.append([21413, 152.1167, 30.5153,  1800., 1.e10])
+    rundata.gaugedata.gauges.append([21414, 178.281, 48.938,  1800., 1.e10])
+    rundata.gaugedata.gauges.append([21415, 171.849, 50.183,  1800., 1.e10])
     # rundata.gaugedata.gauges.append([21416, 163.505, 48.052,  1800., 1.e10])
-    rundata.gaugedata.gauges.append([21418, 148.694, 38.711,     0., 1.e10])   
-    rundata.gaugedata.gauges.append([21419, 155.736, 44.455,  1800., 1.e10])  
-    # rundata.gaugedata.gauges.append([51407, 203.484, 19.642, 22000., 1.e10])
-    # rundata.gaugedata.gauges.append([52402, 154.116, 11.883, 10000., 1.e10])
-    rundata.gaugedata.gauges.append([1,  140.846971, 36.351141, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([2,  141.115000, 37.420000, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([3,  141.100000, 38.160000, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([4,  141.328223, 38.325000, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([5,  141.510000, 38.425000, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([6,  141.525000, 38.575000, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([7,  141.545000, 38.660000, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([8,  141.730000, 38.880000, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([9,  142.115489, 39.752675, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([10, 142.140317, 39.752675, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([11, 141.626825, 40.989026, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([12, 141.133576, 42.133955, 0.0, 1e10])
-    rundata.gaugedata.gauges.append([13, 143.739806, 42.535828, 0.0, 1e10])
+    rundata.gaugedata.gauges.append([21418, 148.694, 38.711,     0., 1.e10])
+    rundata.gaugedata.gauges.append([21419, 155.736, 44.455,  1800., 1.e10])
+    rundata.gaugedata.gauges.append([46411, 232.918, 39.333,      0, 1e10])
+    rundata.gaugedata.gauges.append([51407, 203.484, 19.642, 22000., 1.e10])
+    rundata.gaugedata.gauges.append([52402, 154.116, 11.883, 10000., 1.e10])
+    # rundata.gaugedata.gauges.append([1,  140.846971, 36.351141, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([2,  141.115000, 37.420000, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([3,  141.100000, 38.160000, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([4,  141.328223, 38.325000, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([5,  141.510000, 38.425000, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([6,  141.525000, 38.575000, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([7,  141.545000, 38.660000, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([8,  141.730000, 38.880000, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([9,  142.115489, 39.752675, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([10, 142.140317, 39.752675, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([11, 141.626825, 40.989026, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([12, 141.133576, 42.133955, 0.0, 1e10])
+    # rundata.gaugedata.gauges.append([13, 143.739806, 42.535828, 0.0, 1e10])
       
      
 
@@ -416,17 +419,18 @@ def setgeo(rundata):
     topo_data = rundata.topo_data
     # for topography, append lines of the form
     #   [topotype, minlevel, maxlevel, t1, t2, fname]
-    topodir = os.path.expandvars('$SRC/2011tohoku_paper/topo')
+    topodir = os.path.expandvars('$SRC/tohoku2011-paper1/topo')
     topo_data.topofiles.append([3, 1, 4, 0., 1.e10,
                            os.path.join(topodir,'etopo1min139E147E34N41N.asc')])
     topo_data.topofiles.append([3, 1, 4, 0., 1.e10,
                             os.path.join(topodir,'etopo4min120E72W40S60N.asc')])
 
+
     # == setdtopo.data values ==
     dtopo_data = rundata.dtopo_data
     # for moving topography, append lines of the form:  (<= 1 allowed for now!)
     #   [topotype, minlevel,maxlevel,fname]
-    dtopodir = os.path.expandvars('$SRC/2011tohoku_paper/sources/')
+    dtopodir = os.path.expandvars('$SRC/tohoku2011-paper1/sources/')
     dtopo_data.dtopofiles.append([1, 4, 4,
                                        os.path.join(dtopodir, 'Ammon.txydz')])
     # dtopodir = os.getcwd()
