@@ -102,7 +102,7 @@ if __name__ == '__main__':
     if len(sys.argv) == 7:
         slips = [float(slip) for slip in sys.argv[1:]]
     else:
-        slips = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0]
+        slips = [2.7, 23, 0.3, 6.5,  21.5, 0.3]
 
     fault = create_fault(slips)
     fig = plot_fault(fault)

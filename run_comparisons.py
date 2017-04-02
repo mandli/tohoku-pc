@@ -17,22 +17,30 @@ import clawpack.geoclaw.dtopotools as dtopotools
 import clawpack.pyclaw.gauges as gauges
 
 
-def plot_gauge_comparisons(jobs):
+def plot_gauge_comparisons(jobs, save=False):
     r"""Plot the gauge comparisons for all of the jobs listed"""
 
-    gauge_ids = [21401, 21413, 21414, 21415, 21418, 21419, 52402] # 51407, 46411
+    gauge_ids = [21401, 21413, 21414, 21415, 21419, 52402] # 21418
     time_limits = {}
-    time_limits[21401] = [0, 28800]
-    time_limits[21413] = [0, 28800]
-    time_limits[21414] = [8000, 28800]
-    time_limits[21415] = [7200, 28800]
-    # time_limits[21416] = [0, 14400]
-    time_limits[21418] = [0, 28800]
-    time_limits[21419] = [0, 28800]
-    time_limits[51407] = [8000, 28800]
-    time_limits[52402] = [8000, 28800]
-    time_limits[51407] = [8000, 28800]
-    time_limits[46411] = [0, 28000]
+    tfinal = 6 * 3600.0
+    time_limits[21401] = [0, tfinal]
+    time_limits[21413] = [0, tfinal]
+    time_limits[21414] = [2 * 3600.0, tfinal]
+    time_limits[21415] = [2 * 3600.0, tfinal]
+    # time_limits[21418] = [0, tfinal]
+    time_limits[21419] = [0, 20000.0]
+    time_limits[46411] = [7 * 3600.0, tfinal]
+    time_limits[52402] = [2 * 3600.0, tfinal]
+
+    offsets = {}
+    offsets[21401] = 0.0
+    offsets[21413] = 0.0
+    offsets[21414] = 0.0
+    offsets[21415] = 0.01
+    # offsets[21418] = 0.0 # Not found
+    offsets[21419] = 0.0
+    offsets[46411] = 0.0
+    offsets[52402] = 0.0
 
     # Paths to data
     dart_data_path = os.path.join(os.getcwd(), "dart")
@@ -65,38 +73,41 @@ def plot_gauge_comparisons(jobs):
 
     # Plot data
     figures = []
-    for gauge_id in gauge_ids:
+    for (n, gauge_id) in enumerate(gauge_ids):
         fig = plt.figure()
+        fig.set_figwidth(fig.get_figwidth() * 2.0)
         axes = fig.add_subplot(1, 1, 1)
 
         sift_gauge = gauges.GaugeSolution(gauge_id, path=sift_path)
         inv_gauge = gauges.GaugeSolution(gauge_id, path=inv_path)
         print("Loaded gauge %s." % gauge_id)
-        if sift_gauge is None:
-            import pdb; pdb.set_trace()
 
         # Add model data
-        axes.plot(sift_gauge.t, sift_gauge.q[-1, :], 'b', label="SIFT")
-        axes.plot(inv_gauge.t, inv_gauge.q[-1, :], 'r', label="Inversion")
+        axes.plot(sift_gauge.t / 3600.0, sift_gauge.q[-1, :], 'b', label="SIFT")
+        axes.plot(inv_gauge.t / 3600.0, inv_gauge.q[-1, :], 'r', label="Inversion")
 
         # Add DART data
-        axes.plot(dart_gauges[gauge_id][:, 0],
-                  dart_gauges[gauge_id][:, 1], 'k', label="Observed")
+        axes.plot(dart_gauges[gauge_id][:, 0] / 3600.0,
+                  dart_gauges[gauge_id][:, 1] + offsets[gauge_id],
+                  'k', label="Observed")
 
         # Add zero line
-        axes.plot((time_limits[gauge_id][0], time_limits[gauge_id][1]),
+        axes.plot((time_limits[gauge_id][0] / 3600.0, time_limits[gauge_id][1] / 3600.0),
                   [0.0, 0.0], 'k--')
 
         # Constrain time window
-        axes.set_xlim((time_limits[gauge_id][0], time_limits[gauge_id][1]))
+        axes.set_xlim((time_limits[gauge_id][0] / 3600.0, time_limits[gauge_id][1] / 3600.0))
 
         # Add labels
         axes.set_title("Gauge %s" % gauge_id)
-        axes.set_xlabel("t (s)")
+        axes.set_xlabel("t (h)")
         axes.set_ylabel("$\eta$ (m)")
         axes.legend()
 
         figures.append(fig)
+
+        if save:
+            fig.savefig("./gauge_comparisons/gauge%s.pdf" % gauge_id)
 
     return figures
 
@@ -269,5 +280,4 @@ if __name__ == '__main__':
         controller.run()
 
     if plot:
-        figures = plot_gauge_comparisons(jobs)
-        plt.show()
+        figures = plot_gauge_comparisons(jobs, save=True)
