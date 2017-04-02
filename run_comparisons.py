@@ -9,6 +9,25 @@ import os
 import glob
 
 import numpy
+
+# Plot customization
+import matplotlib
+
+# Markers and line widths
+matplotlib.rcParams['lines.linewidth'] = 2.0
+matplotlib.rcParams['lines.markersize'] = 6
+matplotlib.rcParams['lines.markersize'] = 8
+
+# Font Sizes
+matplotlib.rcParams['font.size'] = 16
+matplotlib.rcParams['axes.labelsize'] = 15
+matplotlib.rcParams['legend.fontsize'] = 12
+matplotlib.rcParams['xtick.labelsize'] = 12
+matplotlib.rcParams['ytick.labelsize'] = 12
+
+# DPI of output images
+matplotlib.rcParams['savefig.dpi'] = 300
+
 import matplotlib.pyplot as plt
 
 import batch
@@ -73,9 +92,16 @@ def plot_gauge_comparisons(jobs, save=False):
 
     # Plot data
     figures = []
+    figure_name_map = {21401: "a",
+                       21413: "b",
+                       21414: "c",
+                       21415: "d",
+                       21419: "e",
+                       52402: "f"}
     for (n, gauge_id) in enumerate(gauge_ids):
         fig = plt.figure()
-        fig.set_figwidth(fig.get_figwidth() * 2.0)
+        fig.set_figwidth(fig.get_figwidth() * 3.0)
+        fig.set_figheight(fig.get_figheight() * 1.0)
         axes = fig.add_subplot(1, 1, 1)
 
         sift_gauge = gauges.GaugeSolution(gauge_id, path=sift_path)
@@ -83,8 +109,8 @@ def plot_gauge_comparisons(jobs, save=False):
         print("Loaded gauge %s." % gauge_id)
 
         # Add model data
-        axes.plot(sift_gauge.t / 3600.0, sift_gauge.q[-1, :], 'b', label="SIFT")
         axes.plot(inv_gauge.t / 3600.0, inv_gauge.q[-1, :], 'r', label="Inversion")
+        axes.plot(sift_gauge.t / 3600.0, sift_gauge.q[-1, :], 'b', label="SIFT")
 
         # Add DART data
         axes.plot(dart_gauges[gauge_id][:, 0] / 3600.0,
@@ -94,6 +120,8 @@ def plot_gauge_comparisons(jobs, save=False):
         # Add zero line
         axes.plot((time_limits[gauge_id][0] / 3600.0, time_limits[gauge_id][1] / 3600.0),
                   [0.0, 0.0], 'k--')
+        
+        plt.xticks(range(1, 8), range(1, 8))
 
         # Constrain time window
         axes.set_xlim((time_limits[gauge_id][0] / 3600.0, time_limits[gauge_id][1] / 3600.0))
@@ -102,12 +130,14 @@ def plot_gauge_comparisons(jobs, save=False):
         axes.set_title("Gauge %s" % gauge_id)
         axes.set_xlabel("t (h)")
         axes.set_ylabel("$\eta$ (m)")
-        axes.legend()
+        if n == 0:
+            axes.legend(fontsize=15)
 
         figures.append(fig)
 
         if save:
-            fig.savefig("./gauge_comparisons/gauge%s.pdf" % gauge_id)
+            fig.savefig("./gauge_comparisons/Figure20%s.pdf" 
+                                        % figure_name_map[gauge_id])
 
     return figures
 
